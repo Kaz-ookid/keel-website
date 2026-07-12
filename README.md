@@ -24,5 +24,4 @@ GitHub Pages, serving `main` at the repository root
   hero screenshot, harbor teaser, maker photo, `assets/og.png`.
 - Swap the styled store badge for the official App Store badge asset and
   the real listing URL (`TODO(launch)` markers).
-- Point the updates form at the real newsletter endpoint (`TODO(launch)`).
 - Add the custom domain: a `CNAME` file here + DNS at the registrar.
