@@ -94,6 +94,72 @@
     });
   }
 
+  // Step 2: the Upcoming replica. Folds, account filter (the hero follows),
+  // and mark-paid that settles the row in place.
+  var HERO = {
+    all: ["Due this month", "≈ CHF 1962", "then ≈ CHF 3244 in September"],
+    cic: ["CIC needs", "€0", "nothing left this month, by Aug 31"],
+    bcv: ["BCV needs", "≈ CHF 1933", "by Aug 31"],
+    rev: ["Revolut needs", "€29.49", "by Aug 31"]
+  };
+
+  document.querySelectorAll(".fold-bar").forEach(function (bar) {
+    bar.addEventListener("click", function () {
+      var body = document.querySelector('[data-fold-body="' + bar.dataset.fold + '"]');
+      if (!body) return;
+      var open = !body.hidden;
+      body.hidden = open;
+      bar.classList.toggle("open", !open);
+    });
+  });
+
+  var chips = document.querySelectorAll(".acct-chip");
+  chips.forEach(function (chip) {
+    chip.addEventListener("click", function () {
+      chips.forEach(function (c) { c.classList.remove("active"); });
+      chip.classList.add("active");
+      var acct = chip.dataset.acct;
+      var hero = HERO[acct];
+      var l = document.getElementById("t-hero-label");
+      var a = document.getElementById("t-hero-amount");
+      var s = document.getElementById("t-hero-sub");
+      if (l && hero) { l.textContent = hero[0]; a.textContent = hero[1]; s.textContent = hero[2]; }
+      document.querySelectorAll("#t-upcoming [data-acct]").forEach(function (row) {
+        row.style.display = acct === "all" || row.dataset.acct === acct || row.dataset.acct === "all" ? "" : "none";
+      });
+      // A day section with every row filtered out hides entirely.
+      document.querySelectorAll("#t-upcoming [data-section]").forEach(function (section) {
+        var visible = Array.prototype.some.call(
+          section.querySelectorAll("[data-acct]"),
+          function (row) { return row.style.display !== "none"; }
+        );
+        section.style.display = visible ? "" : "none";
+      });
+    });
+  });
+
+  document.querySelectorAll("[data-mark]").forEach(function (btn) {
+    btn.addEventListener("click", function () {
+      var row = btn.closest(".up-row");
+      var settledNow = row.classList.toggle("settled");
+      row.classList.toggle("just-paid", settledNow);
+      btn.textContent = settledNow ? "Undo" : "Mark paid";
+      btn.classList.toggle("undo-btn", settledNow);
+      var tag = row.querySelector(".up-tag");
+      if (tag) {
+        if (settledNow) {
+          tag.dataset.was = tag.textContent;
+          tag.dataset.over = tag.classList.contains("up-tag-over") ? "1" : "";
+          tag.textContent = "paid ✓";
+          tag.classList.remove("up-tag-over");
+        } else if (tag.dataset.was) {
+          tag.textContent = tag.dataset.was;
+          if (tag.dataset.over === "1") tag.classList.add("up-tag-over");
+        }
+      }
+    });
+  });
+
   // Step 3: the year of months
   var MONTHS = ["Jul", "Aug", "Sep", "Oct", "Nov", "Dec", "Jan", "Feb", "Mar", "Apr", "May", "Jun"];
   var TOTALS = [3254, 3219, 3189, 3189, 3189, 3388, 3189, 3189, 4283, 3189, 3189, 3189];

@@ -187,24 +187,67 @@ revolut (chf): cloud 1/month the 4th. sneakers pay-in-4 117.94&euro; via paypal 
           </div>
         </div>
 
-        <!-- STEP 2: Upcoming -->
+        <!-- STEP 2: Upcoming (live replica: filter, folds, mark paid) -->
         <div class="tour-panel" data-panel="1">
-          <p class="tour-label">The same list, as your timeline</p>
-          <div class="upcoming">
-            <div class="up-day">Sat 26 Jul</div>
-            <div class="up-row"><span class="mini-dot" style="background:#4E79A7"></span><span class="mini-name">Rent</span><span class="up-tag">manual</span><span class="mini-amount">CHF 1470 · Alpine</span></div>
-            <div class="up-row"><span class="mini-dot" style="background:#B56576"></span><span class="mini-name">Health insurance</span><span class="up-tag">manual</span><span class="mini-amount">CHF 372.95 · Alpine</span></div>
-            <div class="up-day">Tue 29 Jul</div>
-            <div class="up-row"><span class="mini-dot" style="background:#C9A66B"></span><span class="mini-name">Gadget · pay-in-4</span><span class="up-tag up-tag-last">4 of 4 · last</span><span class="mini-amount">&euro;35.15 · Revolut</span></div>
-            <div class="up-day">Mon 4 Aug</div>
-            <div class="up-row"><span class="mini-dot" style="background:#3693F3"></span><span class="mini-name">Cloud storage</span><span class="up-tag">auto</span><span class="mini-amount">&euro;1 · Nova</span></div>
-            <div class="up-row"><span class="mini-dot" style="background:#3693F3"></span><span class="mini-name">Cloud storage</span><span class="up-tag">auto</span><span class="mini-amount">CHF 1 · Revolut</span></div>
-            <div class="up-day">Wed 6 Aug</div>
-            <div class="up-row"><span class="mini-dot" style="background:#6C8EBF"></span><span class="mini-name">Car loan</span><span class="up-tag">auto</span><span class="mini-amount">&euro;689.55 · Nova</span></div>
-            <div class="up-day">Thu 7 Aug</div>
-            <div class="up-row"><span class="mini-dot" style="background:#7FB8B0"></span><span class="mini-name">Club membership</span><span class="up-tag up-tag-anchor">first Thursday</span><span class="mini-amount">&euro;2 · Nova</span></div>
+          <p class="tour-label">The same list, as your timeline · it's Thursday, August 13th</p>
+
+          <div class="t-hero" id="t-hero">
+            <span class="t-hero-label" id="t-hero-label">Due this month</span>
+            <strong class="t-hero-amount" id="t-hero-amount">&asymp; CHF 1962</strong>
+            <span class="t-hero-sub" id="t-hero-sub">then &asymp; CHF 3244 in September</span>
           </div>
-          <p class="tour-foot">Same cloud subscription, two accounts, two currencies: each one knows where it leaves from. The first-Thursday rule survived the import too.</p>
+
+          <div class="acct-chips" id="acct-chips">
+            <button class="acct-chip active" data-acct="all">All</button>
+            <button class="acct-chip" data-acct="cic"><i style="background:#6C8EBF"></i>CIC</button>
+            <button class="acct-chip" data-acct="bcv"><i style="background:#7FB8B0"></i>BCV</button>
+            <button class="acct-chip" data-acct="rev"><i style="background:#C9A66B"></i>Revolut</button>
+          </div>
+
+          <div class="upcoming" id="t-upcoming">
+            <!-- Paid this month: folded away at the top, like in the app. -->
+            <button class="fold-bar" data-fold="paid">
+              <span>Paid this month · &asymp; CHF 1311</span><span class="fold-chevron">&#8964;</span>
+            </button>
+            <div class="fold-body" data-fold-body="paid" hidden>
+              <div class="up-row settled" data-acct="bcv"><span class="mini-dot" style="background:#7FB8B0"></span><span class="mini-name">3e pilier BCV</span><span class="up-tag">Aug 1 · manual</span><span class="mini-amount">CHF 600</span><button class="mark-btn undo-btn">Undo</button></div>
+              <div class="up-row settled" data-acct="cic"><span class="mini-dot" style="background:#6C8EBF"></span><span class="mini-name">Prêt étudiant</span><span class="up-tag">Aug 6 · auto</span><span class="mini-amount">&euro;689.55</span></div>
+              <div class="up-row settled" data-acct="bcv"><span class="mini-dot" style="background:#D97757"></span><span class="mini-name">Claude Pro</span><span class="up-tag">today · auto</span><span class="mini-amount">CHF 17.60</span></div>
+            </div>
+
+            <!-- Overdue: manual payments that slipped. Mark them paid here. -->
+            <div class="up-section" data-section>
+              <div class="up-day up-overdue">Overdue <span class="up-day-total">CHF 90</span></div>
+              <div class="up-row" data-acct="bcv"><span class="mini-dot" style="background:#8FBC94"></span><span class="mini-name">Salle d'escalade</span><span class="up-tag up-tag-over">due Aug 5</span><span class="mini-amount">CHF 55 · BCV</span><button class="mark-btn" data-mark>Mark paid</button></div>
+              <div class="up-row" data-acct="bcv"><span class="mini-dot" style="background:#7AB51D"></span><span class="mini-name">green Internet</span><span class="up-tag up-tag-over">due Aug 10</span><span class="mini-amount">CHF 35 · BCV</span><button class="mark-btn" data-mark>Mark paid</button></div>
+            </div>
+
+            <div class="up-section" data-section>
+              <div class="up-day">Thu Aug 20 <span class="up-day-total">&euro;29.49</span></div>
+              <div class="up-row" data-acct="rev"><span class="mini-dot" style="background:#E8735A"></span><span class="mini-name">OPS Store</span><span class="up-tag up-tag-last">4 of 4 · last</span><span class="mini-amount">&euro;29.49 · Revolut</span></div>
+            </div>
+
+            <div class="up-section" data-section>
+              <div class="up-day">Wed Aug 26 <span class="up-day-total">CHF 1842.95</span></div>
+              <div class="up-row" data-acct="bcv"><span class="mini-dot" style="background:#4E79A7"></span><span class="mini-name">Loyer</span><span class="up-tag">manual</span><span class="mini-amount">CHF 1470 · BCV</span><button class="mark-btn" data-mark>Mark paid</button></div>
+              <div class="up-row" data-acct="bcv"><span class="mini-dot" style="background:#B56576"></span><span class="mini-name">SWICA</span><span class="up-tag">manual</span><span class="mini-amount">CHF 372.95 · BCV</span><button class="mark-btn" data-mark>Mark paid</button></div>
+            </div>
+
+            <!-- Next month stays one tap away, with its total on the fold. -->
+            <button class="fold-bar" data-fold="next">
+              <span>September 2026 · &asymp; CHF 3244</span><span class="fold-chevron">&#8964;</span>
+            </button>
+            <div class="fold-body" data-fold-body="next" hidden>
+              <div class="up-day">Tue Sep 1</div>
+              <div class="up-row" data-acct="bcv"><span class="mini-dot" style="background:#7FB8B0"></span><span class="mini-name">3e pilier BCV</span><span class="up-tag">manual</span><span class="mini-amount">CHF 600</span></div>
+              <div class="up-day">Fri Sep 4</div>
+              <div class="up-row" data-acct="cic"><span class="mini-dot" style="background:#3693F3"></span><span class="mini-name">iCloud</span><span class="up-tag">auto</span><span class="mini-amount">&euro;1 · CIC</span></div>
+              <div class="up-row" data-acct="rev"><span class="mini-dot" style="background:#3693F3"></span><span class="mini-name">iCloud</span><span class="up-tag">auto</span><span class="mini-amount">CHF 1 · Revolut</span></div>
+              <div class="up-day">More that month</div>
+              <div class="up-more" data-acct="all">Cotisation (first Thursday), Prêt étudiant, escalade, green, Claude Pro, Loyer, SWICA&hellip;</div>
+            </div>
+          </div>
+          <p class="tour-foot">All working: filter by account (the hero follows), open the paid fold, mark the overdue ones paid. Same iCloud on two accounts, in two currencies.</p>
         </div>
 
         <!-- STEP 3: months bar chart -->
