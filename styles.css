@@ -765,34 +765,17 @@ a { color: inherit; text-decoration: none; }
 .updates-card h2 { font-size: 32px; letter-spacing: -0.7px; margin-bottom: 10px; }
 .updates-card > p { color: var(--muted); margin-bottom: 26px; }
 
-.updates-form {
-  display: flex; justify-content: center; gap: 10px; flex-wrap: wrap;
-}
-
-.updates-form input {
-  width: min(340px, 100%);
-  background: rgba(7, 12, 24, 0.8);
-  border: 1px solid var(--hairline);
-  border-radius: 999px;
-  color: var(--ink);
-  font-size: 16px;
-  padding: 13px 20px;
-  outline: none;
-  transition: border-color 0.2s ease;
-}
-.updates-form input:focus { border-color: rgba(127, 184, 176, 0.5); }
-
-.updates-form button {
+.updates-linkedin {
+  display: inline-block;
   background: rgba(127, 184, 176, 0.18);
   color: var(--sea-bright);
   border: 1px solid rgba(127, 184, 176, 0.45);
   border-radius: 999px;
   font-size: 16px; font-weight: 700;
-  padding: 13px 26px;
-  cursor: pointer;
+  padding: 13px 28px;
   transition: background 0.2s ease, transform 0.2s ease;
 }
-.updates-form button:hover { background: rgba(127, 184, 176, 0.28); transform: translateY(-1px); }
+.updates-linkedin:hover { background: rgba(127, 184, 176, 0.28); transform: translateY(-1px); }
 
 .updates-note { margin-top: 16px; font-size: 13px; color: var(--muted); }
 
