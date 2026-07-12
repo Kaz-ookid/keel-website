@@ -20,8 +20,12 @@ GitHub Pages, serving `main` at the repository root
 
 ## Before launch
 
-- Replace every `.ph` placeholder (marked `TODO(assets)` in `index.html`):
-  hero screenshot, harbor teaser, maker photo, `assets/og.png`.
+- Drop the real images into `assets/` with these exact names (the pages
+  pick them up automatically; until then a labelled placeholder shows):
+  - `screen-upcoming.png` — the Payments/Upcoming screenshot (hero device)
+  - `screen-harbor.png` — the harbor screenshot (feature card)
+  - `maker.jpg` — the maker photo (About section)
+  - `og.png` — the social card (a generated one exists; replace at will)
 - Swap the styled store badge for the official App Store badge asset and
   the real listing URL (`TODO(launch)` markers).
 - Add the custom domain: a `CNAME` file here + DNS at the registrar.

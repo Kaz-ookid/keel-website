@@ -53,8 +53,9 @@
       <div class="hero-device" data-reveal data-reveal-delay="1">
         <div class="device" id="tilt-device">
           <div class="device-notch" aria-hidden="true"></div>
-          <!-- TODO(assets): real screenshot, Payments/Upcoming screen. -->
+          <!-- Drop assets/screen-upcoming.png to fill this (label = fallback). -->
           <div class="device-screen ph">
+            <img src="assets/screen-upcoming.png" alt="Keel's Upcoming timeline" onerror="this.remove()" />
             <span class="ph-label">screenshot<br/>Payments · Upcoming</span>
           </div>
         </div>
@@ -189,12 +190,12 @@ neon (chf): google one 1.99 the 4th. airpods pay-in-4 179&euro; via paypal from 
 
         <!-- STEP 2: Upcoming (live replica: filter, folds, mark paid) -->
         <div class="tour-panel" data-panel="1">
-          <p class="tour-label">The same list, as your timeline · it's Thursday, August 13th</p>
+          <p class="tour-label">The same list, as your timeline · it's Sunday, July 12th</p>
 
           <div class="t-hero" id="t-hero">
             <span class="t-hero-label" id="t-hero-label">Due this month</span>
-            <strong class="t-hero-amount" id="t-hero-amount">&asymp; CHF 2075</strong>
-            <span class="t-hero-sub" id="t-hero-sub">then &asymp; CHF 3231 in September</span>
+            <strong class="t-hero-amount" id="t-hero-amount">CHF 1991.64</strong>
+            <span class="t-hero-sub" id="t-hero-sub">then CHF 3222.00 in August</span>
           </div>
 
           <div class="acct-chips" id="acct-chips">
@@ -207,52 +208,47 @@ neon (chf): google one 1.99 the 4th. airpods pay-in-4 179&euro; via paypal from 
           <div class="upcoming" id="t-upcoming">
             <!-- Paid this month: folded away at the top, like in the app. -->
             <button class="fold-bar" data-fold="paid">
-              <span>Paid this month · &asymp; CHF 1201</span><span class="fold-chevron">&#8964;</span>
+              <span>Paid this month · CHF 39.95</span><span class="fold-chevron">&#8964;</span>
             </button>
             <div class="fold-body" data-fold-body="paid" hidden>
-              <div class="up-row settled" data-acct="post"><span class="mini-dot" style="background:#7FB8B0"></span><span class="mini-name">Frankly 3a</span><span class="up-tag">Aug 1 · manual</span><span class="mini-amount">CHF 550</span><button class="mark-btn undo-btn">Undo</button></div>
-              <div class="up-row settled" data-acct="bour"><span class="mini-dot" style="background:#4285F4"></span><span class="mini-name">Google One</span><span class="up-tag">Aug 4 · auto</span><span class="mini-amount">&euro;1.99</span></div>
-              <div class="up-row settled" data-acct="bour"><span class="mini-dot" style="background:#6C8EBF"></span><span class="mini-name">Crédit auto</span><span class="up-tag">Aug 7 · auto</span><span class="mini-amount">&euro;645.30</span></div>
+              <div class="up-row settled" data-acct="post"><span class="mini-dot" style="background:#9C8FC7"></span><span class="mini-name">Salt Home</span><span class="up-tag">Jul 9 · manual</span><span class="mini-amount">CHF 39.95</span><button class="mark-btn undo-btn">Undo</button></div>
             </div>
 
-            <!-- Overdue: manual payments that slipped. Mark them paid here. -->
+            <!-- Overdue: a manual payment that slipped. Mark it paid here. -->
             <div class="up-section" data-section>
-              <div class="up-day up-overdue">Overdue <span class="up-day-total">&asymp; CHF 99</span></div>
-              <div class="up-row" data-acct="post"><span class="mini-dot" style="background:#8FBC94"></span><span class="mini-name">Basefit</span><span class="up-tag up-tag-over">due Aug 4</span><span class="mini-amount">CHF 59 · PostFinance</span><button class="mark-btn" data-mark>Mark paid</button></div>
-              <div class="up-row" data-acct="post"><span class="mini-dot" style="background:#9C8FC7"></span><span class="mini-name">Salt Home</span><span class="up-tag up-tag-over">due Aug 9</span><span class="mini-amount">CHF 39.95 · PostFinance</span><button class="mark-btn" data-mark>Mark paid</button></div>
+              <div class="up-day up-overdue">Overdue <span class="up-day-total">CHF 289.40</span></div>
+              <div class="up-row" data-acct="post"><span class="mini-dot" style="background:#B56576"></span><span class="mini-name">CSS Assurance</span><span class="up-tag up-tag-over">due Jul 9</span><span class="mini-amount">CHF 289.40 · PostFinance</span><button class="mark-btn" data-mark>Mark paid</button></div>
             </div>
 
             <div class="up-section" data-section>
-              <div class="up-day">Sat Aug 15 <span class="up-day-total">CHF 21.55</span></div>
-              <div class="up-row" data-acct="post"><span class="mini-dot" style="background:#74AA9C"></span><span class="mini-name">ChatGPT Plus</span><span class="up-tag">auto</span><span class="mini-amount">CHF 21.55 · PostFinance</span></div>
+              <div class="up-day">Mon Jul 20 <span class="up-day-total">&euro;44.75</span></div>
+              <div class="up-row" data-acct="neon"><span class="mini-dot" style="background:#E8735A"></span><span class="mini-name">AirPods · PayPal</span><span class="up-tag">3 of 4</span><span class="mini-amount">&euro;44.75 · Neon</span></div>
             </div>
 
             <div class="up-section" data-section>
-              <div class="up-day">Thu Aug 20 <span class="up-day-total">&euro;44.75</span></div>
-              <div class="up-row" data-acct="neon"><span class="mini-dot" style="background:#E8735A"></span><span class="mini-name">AirPods · PayPal</span><span class="up-tag up-tag-last">4 of 4 · last</span><span class="mini-amount">&euro;44.75 · Neon</span></div>
-            </div>
-
-            <div class="up-section" data-section>
-              <div class="up-day">Tue Aug 25 <span class="up-day-total">CHF 1909.40</span></div>
+              <div class="up-day">Sat Jul 25 <span class="up-day-total">CHF 1620</span></div>
               <div class="up-row" data-acct="post"><span class="mini-dot" style="background:#4E79A7"></span><span class="mini-name">Rent</span><span class="up-tag">manual</span><span class="mini-amount">CHF 1620 · PostFinance</span><button class="mark-btn" data-mark>Mark paid</button></div>
-              <div class="up-row" data-acct="post"><span class="mini-dot" style="background:#B56576"></span><span class="mini-name">CSS Assurance</span><span class="up-tag">manual</span><span class="mini-amount">CHF 289.40 · PostFinance</span><button class="mark-btn" data-mark>Mark paid</button></div>
+            </div>
+
+            <div class="up-section" data-section>
+              <div class="up-day">Wed Jul 29 <span class="up-day-total">&euro;44.42</span></div>
+              <div class="up-row" data-acct="neon"><span class="mini-dot" style="background:#C9A66B"></span><span class="mini-name">Custom keyboard</span><span class="up-tag up-tag-last">4 of 4 · last</span><span class="mini-amount">&euro;44.42 · Neon</span></div>
             </div>
 
             <!-- Next month stays one tap away, with its total on the fold. -->
             <button class="fold-bar" data-fold="next">
-              <span>September 2026 · &asymp; CHF 3231</span><span class="fold-chevron">&#8964;</span>
+              <span>August 2026 · CHF 3222.00</span><span class="fold-chevron">&#8964;</span>
             </button>
             <div class="fold-body" data-fold-body="next" hidden>
-              <div class="up-day">Tue Sep 1</div>
-              <div class="up-row" data-acct="post"><span class="mini-dot" style="background:#7FB8B0"></span><span class="mini-name">Frankly 3a</span><span class="up-tag">manual</span><span class="mini-amount">CHF 550</span></div>
-              <div class="up-day">Fri Sep 4</div>
+              <div class="up-day">Tue Aug 4</div>
               <div class="up-row" data-acct="bour"><span class="mini-dot" style="background:#4285F4"></span><span class="mini-name">Google One</span><span class="up-tag">auto</span><span class="mini-amount">&euro;1.99 · Boursorama</span></div>
               <div class="up-row" data-acct="neon"><span class="mini-dot" style="background:#4285F4"></span><span class="mini-name">Google One</span><span class="up-tag">auto</span><span class="mini-amount">CHF 1.99 · Neon</span></div>
+              <div class="up-row" data-acct="post"><span class="mini-dot" style="background:#8FBC94"></span><span class="mini-name">Basefit</span><span class="up-tag">manual</span><span class="mini-amount">CHF 59 · PostFinance</span></div>
               <div class="up-day">More that month</div>
-              <div class="up-more" data-acct="all">Account fee (first Thursday), car loan, Basefit, Salt, ChatGPT Plus, rent, CSS&hellip;</div>
+              <div class="up-more" data-acct="all">Account fee (first Thursday), car loan, ChatGPT Plus, AirPods (last one), rent, CSS&hellip;</div>
             </div>
           </div>
-          <p class="tour-foot">All working: filter by account (the hero follows), open the paid fold, mark the overdue ones paid. Same Google One on two accounts, in two currencies.</p>
+          <p class="tour-foot">All working: filter by account (the hero follows), open the paid fold, mark the overdue CSS paid. A paused commitment (the 3a savings) counts nowhere until it resumes.</p>
         </div>
 
         <!-- STEP 3: months bar chart -->
@@ -357,8 +353,11 @@ neon (chf): google one 1.99 the 4th. airpods pay-in-4 179&euro; via paypal from 
             <h3>There's a harbor inside.</h3>
             <p>Your year of payments, sailing. Found behind the calendar, when you're ready.</p>
           </div>
-          <!-- TODO(assets): harbor screenshot or short loop. -->
-          <div class="ph ph-harbor"><span class="ph-label">harbor teaser<br/>screenshot / loop</span></div>
+          <!-- Drop assets/screen-harbor.png to fill this (label = fallback). -->
+          <div class="ph ph-harbor">
+            <img src="assets/screen-harbor.png" alt="The harbor: a year of payments as vessels" onerror="this.remove()" />
+            <span class="ph-label">harbor teaser<br/>screenshot / loop</span>
+          </div>
         </article>
 
       </div>
@@ -398,8 +397,11 @@ neon (chf): google one 1.99 the 4th. airpods pay-in-4 179&euro; via paypal from 
 
     <!-- ============================= MAKER ============================= -->
     <section class="maker">
-      <!-- TODO(assets): real photo, or keep the mark. -->
-      <div class="maker-avatar ph" data-reveal><span class="ph-label">photo</span></div>
+      <!-- Drop assets/maker.jpg to fill this (label = fallback). -->
+      <div class="maker-avatar ph" data-reveal>
+        <img src="assets/maker.jpg" alt="" onerror="this.remove()" />
+        <span class="ph-label">photo</span>
+      </div>
       <h2 data-reveal>Hi, I'm Maxime &#128075;</h2>
       <p class="maker-copy" data-reveal>
         I build Keel because I wanted one calm place where every subscription,
