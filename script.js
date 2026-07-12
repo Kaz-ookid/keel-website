@@ -97,10 +97,10 @@
   // Step 2: the Upcoming replica. Folds, account filter (the hero follows),
   // and mark-paid that settles the row in place.
   var HERO = {
-    all: ["Due this month", "≈ CHF 2075", "then ≈ CHF 3231 in September"],
-    bour: ["Boursorama needs", "€0", "nothing left this month, by Aug 31"],
-    post: ["PostFinance needs", "≈ CHF 2030", "by Aug 31"],
-    neon: ["Neon needs", "€44.75", "by Aug 31"]
+    all: ["Due this month", "CHF 1991.64", "then CHF 3222.00 in August"],
+    bour: ["Boursorama needs", "€0", "nothing left this month, by Jul 31"],
+    post: ["PostFinance needs", "CHF 1909.40", "by Jul 31"],
+    neon: ["Neon needs", "€89.17", "by Jul 31"]
   };
 
   document.querySelectorAll(".fold-bar").forEach(function (bar) {
@@ -162,12 +162,12 @@
 
   // Step 3: the year of months
   var MONTHS = ["Jul", "Aug", "Sep", "Oct", "Nov", "Dec", "Jan", "Feb", "Mar", "Apr", "May", "Jun"];
-  var TOTALS = [3320, 3276, 3231, 3231, 3231, 3750, 3231, 3231, 4349, 3231, 3231, 3231];
+  var TOTALS = [2841, 2797, 2752, 2752, 2752, 3271, 2752, 2752, 3870, 2752, 2752, 2752];
   var SPIKES = { 5: true, 8: true };
   var DETAILS = {
     0: {
       title: "July 2026",
-      rows: [["AirPods · pay-in-4", "€44.75 · 3 of 4"], ["Custom keyboard · pay-in-4", "€44.43 · 4 of 4, last"]],
+      rows: [["AirPods · pay-in-4", "€44.75 · 3 of 4"], ["Custom keyboard · pay-in-4", "€44.42 · 4 of 4, last"]],
       note: "Two split payments riding on top of the baseline."
     },
     5: {
@@ -181,7 +181,7 @@
       note: "Three yearly renewals land together, and every price change was already on file."
     }
   };
-  var BASELINE = [["Rent", "CHF 1620"], ["Car loan", "€645.30"], ["Frankly 3a", "CHF 550"], ["CSS Assurance", "CHF 289.40"], ["Internet + digital", "≈ CHF 63"]];
+  var BASELINE = [["Rent", "CHF 1620"], ["Car loan", "€645.30"], ["CSS Assurance", "CHF 289.40"], ["Basefit + Salt", "CHF 98.95"], ["Digital bits", "≈ CHF 28"]];
 
   var tbars = document.getElementById("tbars");
   var tdetail = document.getElementById("tbar-detail");
@@ -223,7 +223,6 @@
   var SLICES = [
     ["Housing", 1660, "#7FB8B0"],
     ["Loans", 645, "#6C8EBF"],
-    ["Savings", 550, "#8FBC94"],
     ["Insurance & fees", 315, "#B56576"],
     ["Transport", 95, "#C9A66B"],
     ["Digital & sport", 86, "#9C8FC7"]
