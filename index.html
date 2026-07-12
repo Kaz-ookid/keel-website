@@ -131,6 +131,107 @@
       </div>
     </section>
 
+    <!-- ========================= INTERACTIVE TOUR ======================== -->
+    <section class="tour" id="tour">
+      <p class="eyebrow" data-reveal>See it work</p>
+      <h2 class="section-title tour-title" data-reveal>One messy list,<br />four screens later.</h2>
+      <p class="tour-disclaimer" data-reveal>
+        A working illustration, right here on the page: simplified web
+        recreations, not the app's exact UI.
+      </p>
+
+      <div class="tour-shell" data-reveal>
+        <div class="tour-tabs" role="tablist">
+          <button class="tour-tab active" data-step="0" role="tab">1 · Import</button>
+          <button class="tour-tab" data-step="1" role="tab">2 · Upcoming</button>
+          <button class="tour-tab" data-step="2" role="tab">3 · Months</button>
+          <button class="tour-tab" data-step="3" role="tab">4 · Categories</button>
+        </div>
+
+        <!-- STEP 1: the AI import -->
+        <div class="tour-panel active" data-panel="0">
+          <div class="tour-import">
+            <div class="tour-import-in">
+              <p class="tour-label">You write (or screenshot) something like</p>
+              <div class="rough">nova bank (eur): club membership 2&euro; first thursday of the month. car loan 689.55 the 6th. cloud 1&euro; the 4th.<br /><br />
+alpine bank (chf): rent 1470 manual the 26th. health insurance 372.95 manual 26th. pension 600 monthly manual. ai assistant 17.60 the 13th. tv licence 329.25 yearly since 31 march, becomes 312 next year. half-fare card 100 every 26 december, goes to 170 in 2027 (pay before jan 1). night pass 99 per year since dec 2025, last one dec 2026. transit pass 495 since 25 march, 702 from 2027. tenants assoc 110/year then 80. internet 35/month manual since 13 april.<br /><br />
+revolut (chf): cloud 1/month the 4th. sneakers pay-in-4 117.94&euro; via paypal from 20 may. gadget pay-in-4 1234.80 hkd from 29 april.</div>
+              <button class="tour-read" id="tour-read">Read my list</button>
+            </div>
+            <div class="tour-import-out" id="tour-out" aria-live="polite">
+              <p class="tour-label">Keel reads back <span class="tour-count" id="tour-count"></span></p>
+              <div class="parsed" id="parsed-cards">
+                <div class="parsed-card">
+                  <div class="mini-row"><span class="mini-dot" style="background:#4E79A7"></span><span class="mini-name">Rent</span><span class="mini-amount">CHF 1470</span></div>
+                  <div class="field-chips"><span>manual</span><span>the 26th</span><span>Alpine Bank</span></div>
+                </div>
+                <div class="parsed-card">
+                  <div class="mini-row"><span class="mini-dot" style="background:#B56576"></span><span class="mini-name">TV licence</span><span class="mini-amount">CHF 329.25 / yr</span></div>
+                  <div class="field-chips"><span>yearly · 31 Mar</span><span class="chip-change">312 from 2027</span></div>
+                </div>
+                <div class="parsed-card">
+                  <div class="mini-row"><span class="mini-dot" style="background:#E8735A"></span><span class="mini-name">Sneakers · PayPal</span><span class="mini-amount">4 &times; &euro;29.49</span></div>
+                  <div class="field-chips"><span>split payment</span><span>from 20 May</span><span>Revolut</span></div>
+                </div>
+                <div class="parsed-card">
+                  <div class="mini-row"><span class="mini-dot" style="background:#C9A66B"></span><span class="mini-name">Gadget · pay-in-4</span><span class="mini-amount">HKD 1234.80</span></div>
+                  <div class="field-chips"><span class="chip-change">&asymp; &euro;35.15 / payment</span><span>from 29 Apr</span></div>
+                </div>
+                <div class="parsed-card">
+                  <div class="mini-row"><span class="mini-dot" style="background:#8FBC94"></span><span class="mini-name">Half-fare card</span><span class="mini-amount">CHF 100 / yr</span></div>
+                  <div class="field-chips"><span>26 Dec</span><span class="chip-change">170 from 2027</span><span>note: pay before Jan 1</span></div>
+                </div>
+              </div>
+              <p class="tour-foot">Every item lands on a review screen before it's saved. Highlighted chips came straight from the text.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- STEP 2: Upcoming -->
+        <div class="tour-panel" data-panel="1">
+          <p class="tour-label">The same list, as your timeline</p>
+          <div class="upcoming">
+            <div class="up-day">Sat 26 Jul</div>
+            <div class="up-row"><span class="mini-dot" style="background:#4E79A7"></span><span class="mini-name">Rent</span><span class="up-tag">manual</span><span class="mini-amount">CHF 1470 · Alpine</span></div>
+            <div class="up-row"><span class="mini-dot" style="background:#B56576"></span><span class="mini-name">Health insurance</span><span class="up-tag">manual</span><span class="mini-amount">CHF 372.95 · Alpine</span></div>
+            <div class="up-day">Tue 29 Jul</div>
+            <div class="up-row"><span class="mini-dot" style="background:#C9A66B"></span><span class="mini-name">Gadget · pay-in-4</span><span class="up-tag up-tag-last">4 of 4 · last</span><span class="mini-amount">&euro;35.15 · Revolut</span></div>
+            <div class="up-day">Mon 4 Aug</div>
+            <div class="up-row"><span class="mini-dot" style="background:#3693F3"></span><span class="mini-name">Cloud storage</span><span class="up-tag">auto</span><span class="mini-amount">&euro;1 · Nova</span></div>
+            <div class="up-row"><span class="mini-dot" style="background:#3693F3"></span><span class="mini-name">Cloud storage</span><span class="up-tag">auto</span><span class="mini-amount">CHF 1 · Revolut</span></div>
+            <div class="up-day">Wed 6 Aug</div>
+            <div class="up-row"><span class="mini-dot" style="background:#6C8EBF"></span><span class="mini-name">Car loan</span><span class="up-tag">auto</span><span class="mini-amount">&euro;689.55 · Nova</span></div>
+            <div class="up-day">Thu 7 Aug</div>
+            <div class="up-row"><span class="mini-dot" style="background:#7FB8B0"></span><span class="mini-name">Club membership</span><span class="up-tag up-tag-anchor">first Thursday</span><span class="mini-amount">&euro;2 · Nova</span></div>
+          </div>
+          <p class="tour-foot">Same cloud subscription, two accounts, two currencies: each one knows where it leaves from. The first-Thursday rule survived the import too.</p>
+        </div>
+
+        <!-- STEP 3: months bar chart -->
+        <div class="tour-panel" data-panel="2">
+          <p class="tour-label">A year of months. Tap the spikes.</p>
+          <div class="tour-chart">
+            <div class="tbars" id="tbars"></div>
+            <div class="tbar-detail" id="tbar-detail">
+              <p class="tour-foot">Tap a bar: December and March are the ones that usually ambush people.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- STEP 4: donut -->
+        <div class="tour-panel" data-panel="3">
+          <p class="tour-label">Where a month really goes</p>
+          <div class="tour-donut">
+            <div class="donut" id="donut">
+              <div class="donut-center" id="donut-center"><strong>CHF 3316</strong><span>per month, smoothed</span></div>
+            </div>
+            <ul class="donut-legend" id="donut-legend"></ul>
+          </div>
+          <p class="tour-foot">Yearly costs are smoothed into the monthly picture, so the December passes and the March licences count all year long.</p>
+        </div>
+      </div>
+    </section>
+
     <!-- =========================== BENTO GRID =========================== -->
     <section class="features">
       <h2 class="section-title" data-reveal>Built for the payments<br />other trackers skip.</h2>
