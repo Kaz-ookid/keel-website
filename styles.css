@@ -246,16 +246,58 @@ a { color: inherit; text-decoration: none; }
   border-top: 1px solid var(--hairline);
   border-bottom: 1px solid var(--hairline);
   padding: 56px 24px;
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 40px;
-  max-width: 100%;
 }
 
-.trust-item { max-width: 330px; margin: 0 auto; }
+/* The content stays at the page's measure even on ultrawide screens. */
+.trust-inner {
+  max-width: var(--wrap);
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 36px;
+}
+
+.trust-item { max-width: 320px; }
 .trust-icon { font-size: 22px; color: var(--sea); margin-bottom: 12px; }
 .trust-item h3 { font-size: 19px; letter-spacing: -0.2px; margin-bottom: 6px; }
 .trust-item p { font-size: 15px; color: var(--muted); }
+
+/* ------------------------------ Name note ------------------------------ */
+/* A dictionary entry: the name explained before the sea imagery starts. */
+
+.name-note {
+  max-width: 620px;
+  margin: 0 auto;
+  padding: 88px 24px 0;
+  text-align: center;
+  font-size: 17px;
+  line-height: 1.65;
+}
+
+.name-word { font-weight: 800; color: var(--sea-bright); letter-spacing: 0.3px; }
+.name-pron { color: var(--muted); font-style: italic; margin: 0 4px; }
+.name-def { color: var(--muted); }
+
+/* ------------------------------- Story --------------------------------- */
+
+.story {
+  max-width: var(--wrap);
+  margin: 0 auto;
+  padding: 72px 24px 0;
+}
+
+.story .eyebrow { text-align: center; margin-bottom: 30px; }
+
+.story-cols {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 44px;
+  max-width: 940px;
+  margin: 0 auto;
+}
+
+.story-cols h3 { font-size: 23px; letter-spacing: -0.4px; margin-bottom: 10px; }
+.story-cols p { font-size: 16px; color: var(--muted); line-height: 1.65; }
 
 /* ------------------------------ Features ------------------------------ */
 
@@ -586,7 +628,9 @@ a { color: inherit; text-decoration: none; }
 @media (max-width: 880px) {
   .hero { grid-template-columns: 1fr; padding-top: 32px; text-align: center; }
   .hero-copy { display: flex; flex-direction: column; align-items: center; }
-  .trust { grid-template-columns: 1fr; gap: 30px; text-align: center; }
+  .trust-inner { grid-template-columns: 1fr; gap: 30px; text-align: center; }
+  .trust-item { margin: 0 auto; }
+  .story-cols { grid-template-columns: 1fr; gap: 34px; }
   .bento { grid-template-columns: 1fr; }
   .card-wide, .card-full { grid-column: span 1; grid-template-columns: 1fr; }
 }

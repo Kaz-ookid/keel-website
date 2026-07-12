@@ -73,20 +73,61 @@
 
     <!-- ========================== TRUST STRIP =========================== -->
     <section class="trust">
-      <div class="trust-item" data-reveal>
-        <div class="trust-icon" aria-hidden="true">&#128274;</div>
-        <h3>Private by architecture</h3>
-        <p>No account, no server, no tracking. Your data never leaves your phone.</p>
+      <div class="trust-inner">
+        <div class="trust-item" data-reveal>
+          <div class="trust-icon" aria-hidden="true">&#128274;</div>
+          <h3>Private by architecture</h3>
+          <p>No account, no server, no tracking. Your data never leaves your phone.</p>
+        </div>
+        <div class="trust-item" data-reveal data-reveal-delay="1">
+          <div class="trust-icon" aria-hidden="true">&#10003;</div>
+          <h3>One price, once. Or never.</h3>
+          <p>Keel is free, all of it. The one purchase is optional, and nothing ever renews.</p>
+        </div>
+        <div class="trust-item" data-reveal data-reveal-delay="2">
+          <div class="trust-icon" aria-hidden="true">&#63743;</div>
+          <h3>Made for iOS</h3>
+          <p>Native design, widgets, Face ID, and Apple Intelligence on supported iPhones.</p>
+        </div>
       </div>
-      <div class="trust-item" data-reveal data-reveal-delay="1">
-        <div class="trust-icon" aria-hidden="true">&#10003;</div>
-        <h3>One price, once. Or never.</h3>
-        <p>Keel is free. The one purchase is optional, and nothing ever renews.</p>
-      </div>
-      <div class="trust-item" data-reveal data-reveal-delay="2">
-        <div class="trust-icon" aria-hidden="true">&#63743;</div>
-        <h3>Made for iOS</h3>
-        <p>Native design, widgets, Face ID, and Apple Intelligence on supported iPhones.</p>
+    </section>
+
+    <!-- The name, explained before the sea imagery starts. -->
+    <section class="name-note" data-reveal>
+      <p>
+        <span class="name-word">keel</span> <span class="name-pron">/ki&#720;l/</span>
+        <span class="name-def">the spine along the bottom of a boat: the part that keeps it
+        steady and upright, whatever the weather. That's the job here.</span>
+      </p>
+    </section>
+
+    <!-- ============================ THE STORY ============================ -->
+    <section class="story">
+      <p class="eyebrow" data-reveal>Why Keel exists</p>
+      <div class="story-cols">
+        <article data-reveal>
+          <h3>The setup always killed it.</h3>
+          <p>
+            Subscription trackers never survived on my phone. Not because they
+            were bad, but because starting one meant an afternoon: sit down,
+            try to remember every subscription, dig through emails and bank
+            statements, then type each one in by hand. Keel removes that wall.
+            Pick from known services and get everything pre-filled, queue the
+            rest for later, or hand a rough list or screenshots to AI: your
+            own, or Apple Intelligence right on the phone. Minutes, not an
+            afternoon.
+          </p>
+        </article>
+        <article data-reveal data-reveal-delay="1">
+          <h3>The scary payment was never Netflix.</h3>
+          <p>
+            It was the pay-in-4. Which account does it hit, when, and for how
+            many more months? Split purchases have quietly become a freeway to
+            debt precisely because nothing tracks them, and apps built for
+            subscriptions can only fake them. In Keel they're first-class:
+            every installment, its account, its provider, its end date.
+          </p>
+        </article>
       </div>
     </section>
 
@@ -101,9 +142,9 @@
           <div class="card-copy">
             <h3>The pay-in-4 finally has a home.</h3>
             <p>
-              Split purchases are real things in Keel: every installment tracked,
-              provider and progress included. Enter the total or the per-payment
-              price; it computes the other.
+              Split purchases are real things in Keel: every installment
+              tracked, with its provider, its progress, its end date, and the
+              account it leaves from.
             </p>
           </div>
           <!-- A hand-built vignette: an installment plan mid-flight. -->
@@ -131,12 +172,13 @@
         <!-- AI import -->
         <article class="card" data-reveal data-reveal-delay="1">
           <h3>Your whole list,<br />imported in one read.</h3>
-          <p>Hand AI a rough list or screenshots. Commitments come out pre-filled, and you review everything.</p>
+          <p>Hand AI a rough list or screenshots. Commitments come out pre-filled, accounts included, and you review everything.</p>
           <div class="vignette ai-vignette" aria-hidden="true">
-            <div class="ai-in">"netflix 12.90 around the 3rd, gym i pay myself, sofa klarna 3x240&hellip;"</div>
+            <div class="ai-in">"main account: netflix 12.90 the 3rd. revolut: spotify 11.99, sofa klarna 3x240&hellip;"</div>
             <div class="ai-arrow">&#8595;</div>
-            <div class="mini-row"><span class="mini-dot" style="background:#E50914"></span><span class="mini-name">Netflix</span><span class="mini-amount">12.90 / mo</span></div>
-            <div class="mini-row"><span class="mini-dot" style="background:#E8735A"></span><span class="mini-name">Sofa · Klarna</span><span class="mini-amount">3 × 240</span></div>
+            <div class="mini-row"><span class="mini-dot" style="background:#E50914"></span><span class="mini-name">Netflix</span><span class="mini-amount">12.90 &middot; Main</span></div>
+            <div class="mini-row"><span class="mini-dot" style="background:#1DB954"></span><span class="mini-name">Spotify</span><span class="mini-amount">11.99 &middot; Revolut</span></div>
+            <div class="mini-row"><span class="mini-dot" style="background:#E8735A"></span><span class="mini-name">Sofa · Klarna</span><span class="mini-amount">3 &times; 240 &middot; Revolut</span></div>
           </div>
         </article>
 
@@ -178,15 +220,18 @@
       <p class="eyebrow" data-reveal>The deal, plainly</p>
       <h2 data-reveal>Free forever.<br />One price if you want it all.</h2>
       <p class="promise-copy" data-reveal>
-        Unlimited commitments, accounts, insights, reminders and backups: free,
-        for everyone, forever. The AI import comes with 2 reads, enough to bring
-        your whole life in. <strong>Full Keel</strong> unlocks unlimited AI and
-        every future premium feature for <strong>10 CHF, once</strong>: the early
-        supporter price, moving to 15 CHF when development costs are covered.
+        Everything you just scrolled through <strong>is the free app</strong>:
+        unlimited commitments, accounts, insights, reminders and backups. Not a
+        trial, not a teaser, and the AI import includes 2 free reads, enough to
+        bring your whole life in. The one optional purchase,
+        <strong>Full Keel</strong>, adds unlimited AI reads and every future
+        premium feature for <strong>10 CHF, once</strong>: the early supporter
+        price, moving to 15 CHF when development costs are covered. It never
+        blocks anything you saw above.
       </p>
       <ul class="chips" data-reveal>
-        <li>&#10003; Free forever</li>
-        <li>&#10003; Pay once, if ever</li>
+        <li>&#10003; The whole tracker, free</li>
+        <li>&#10003; Purchase optional</li>
         <li>&#10003; Nothing renews</li>
         <li>&#10003; Family Sharing included</li>
       </ul>
