@@ -1,0 +1,265 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Keel: subscriptions, bills and split payments in one calm place</title>
+  <meta name="description" content="Keel tracks subscriptions, bills and split payments: what leaves, from which account, and what it really costs. Private by architecture. Free to use, one price if you want more." />
+  <meta property="og:title" content="Keel" />
+  <meta property="og:description" content="Every payment, one calm place. Private by architecture." />
+  <meta property="og:image" content="assets/og.png" />
+  <link rel="icon" href="assets/icon.png" />
+  <link rel="apple-touch-icon" href="assets/icon.png" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+  <!-- Ambient stage: the app's aura, in CSS. -->
+  <div class="aura" aria-hidden="true">
+    <div class="glow glow-a"></div>
+    <div class="glow glow-b"></div>
+    <div class="glow glow-c"></div>
+  </div>
+
+  <header class="top">
+    <a class="brand" href="#top">
+      <img src="assets/icon.png" alt="" width="34" height="34" />
+      <span>Keel</span>
+    </a>
+    <a class="top-cta" href="#get">Get the app</a>
+  </header>
+
+  <main id="top">
+
+    <!-- ============================== HERO ============================== -->
+    <section class="hero">
+      <div class="hero-copy" data-reveal>
+        <p class="eyebrow">For iPhone</p>
+        <h1>Every payment,<br />one calm place.</h1>
+        <p class="lede">
+          Subscriptions, bills and the pay-in-4 you forgot about. Keel knows
+          what leaves, from which account, and what it really costs.
+        </p>
+        <div class="hero-actions">
+          <!-- TODO(launch): replace with the official App Store badge asset + real link. -->
+          <a class="store-badge" href="#get" aria-label="Download on the App Store, coming soon">
+            <span class="store-badge-mark" aria-hidden="true">&#63743;</span>
+            <span class="store-badge-text"><small>Coming soon to the</small>App Store</span>
+          </a>
+          <span class="hero-note">Free to use. One price if you want more.</span>
+        </div>
+      </div>
+
+      <div class="hero-device" data-reveal data-reveal-delay="1">
+        <div class="device" id="tilt-device">
+          <div class="device-notch" aria-hidden="true"></div>
+          <!-- TODO(assets): real screenshot, Payments/Upcoming screen. -->
+          <div class="device-screen ph">
+            <span class="ph-label">screenshot<br/>Payments · Upcoming</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Waterline: the brand's signature line, quietly moving. -->
+    <div class="waterline" aria-hidden="true">
+      <svg viewBox="0 0 1440 90" preserveAspectRatio="none">
+        <path class="wave wave-back"
+          d="M0,52 C120,38 240,66 360,52 C480,38 600,66 720,52 C840,38 960,66 1080,52 C1200,38 1320,66 1440,52 L1440,90 L0,90 Z" />
+        <path class="wave wave-front"
+          d="M0,60 C160,48 320,72 480,60 C640,48 800,72 960,60 C1120,48 1280,72 1440,60 L1440,90 L0,90 Z" />
+      </svg>
+    </div>
+
+    <!-- ========================== TRUST STRIP =========================== -->
+    <section class="trust">
+      <div class="trust-item" data-reveal>
+        <div class="trust-icon" aria-hidden="true">&#128274;</div>
+        <h3>Private by architecture</h3>
+        <p>No account, no server, no tracking. Your data never leaves your phone.</p>
+      </div>
+      <div class="trust-item" data-reveal data-reveal-delay="1">
+        <div class="trust-icon" aria-hidden="true">&#10003;</div>
+        <h3>One price, once. Or never.</h3>
+        <p>Keel is free. The one purchase is optional, and nothing ever renews.</p>
+      </div>
+      <div class="trust-item" data-reveal data-reveal-delay="2">
+        <div class="trust-icon" aria-hidden="true">&#63743;</div>
+        <h3>Made for iOS</h3>
+        <p>Native design, widgets, Face ID, and Apple Intelligence on supported iPhones.</p>
+      </div>
+    </section>
+
+    <!-- =========================== BENTO GRID =========================== -->
+    <section class="features">
+      <h2 class="section-title" data-reveal>Built for the payments<br />other trackers skip.</h2>
+
+      <div class="bento">
+
+        <!-- Split payments: the flagship card. -->
+        <article class="card card-wide" data-reveal>
+          <div class="card-copy">
+            <h3>The pay-in-4 finally has a home.</h3>
+            <p>
+              Split purchases are real things in Keel: every installment tracked,
+              provider and progress included. Enter the total or the per-payment
+              price; it computes the other.
+            </p>
+          </div>
+          <!-- A hand-built vignette: an installment plan mid-flight. -->
+          <div class="vignette split-vignette" aria-hidden="true">
+            <div class="mini-row">
+              <span class="mini-dot" style="background:#E8735A"></span>
+              <span class="mini-name">Sofa · Klarna</span>
+              <span class="mini-amount">240.00</span>
+            </div>
+            <div class="mini-progress"><i style="width:66%"></i></div>
+            <div class="mini-sub">2 of 3 paid · next on Aug 10</div>
+          </div>
+        </article>
+
+        <!-- Accounts -->
+        <article class="card" data-reveal>
+          <h3>The right money,<br />on the right card.</h3>
+          <p>Every payment belongs to a bank account: what leaves where, before it does.</p>
+          <div class="vignette" aria-hidden="true">
+            <div class="mini-row"><span class="mini-dot" style="background:#4E79A7"></span><span class="mini-name">Main account</span><span class="mini-amount">needs 364.40</span></div>
+            <div class="mini-row"><span class="mini-dot" style="background:#7FB8B0"></span><span class="mini-name">Revolut</span><span class="mini-amount">needs 28.98</span></div>
+          </div>
+        </article>
+
+        <!-- AI import -->
+        <article class="card" data-reveal data-reveal-delay="1">
+          <h3>Your whole list,<br />imported in one read.</h3>
+          <p>Hand AI a rough list or screenshots. Commitments come out pre-filled, and you review everything.</p>
+          <div class="vignette ai-vignette" aria-hidden="true">
+            <div class="ai-in">"netflix 12.90 around the 3rd, gym i pay myself, sofa klarna 3x240&hellip;"</div>
+            <div class="ai-arrow">&#8595;</div>
+            <div class="mini-row"><span class="mini-dot" style="background:#E50914"></span><span class="mini-name">Netflix</span><span class="mini-amount">12.90 / mo</span></div>
+            <div class="mini-row"><span class="mini-dot" style="background:#E8735A"></span><span class="mini-name">Sofa · Klarna</span><span class="mini-amount">3 × 240</span></div>
+          </div>
+        </article>
+
+        <!-- Analytics: animated bars. -->
+        <article class="card card-wide" data-reveal>
+          <div class="card-copy">
+            <h3>The real cost, not a guess.</h3>
+            <p>
+              Past and future, by month, account and category. Yearly costs become
+              one monthly number, and price rises get tracked instead of forgotten.
+            </p>
+          </div>
+          <div class="vignette chart-vignette" aria-hidden="true">
+            <div class="bars">
+              <i style="--h:42%"></i><i style="--h:58%"></i><i style="--h:36%"></i>
+              <i style="--h:74%"></i><i style="--h:52%"></i><i class="bar-now" style="--h:64%"></i>
+              <i class="bar-ghost" style="--h:48%"></i><i class="bar-ghost" style="--h:56%"></i>
+            </div>
+            <div class="mini-sub">paid &middot; and what's coming</div>
+          </div>
+        </article>
+
+        <!-- Harbor: the delight card. -->
+        <article class="card card-full harbor-card" data-reveal>
+          <div class="card-copy">
+            <p class="eyebrow">And one secret</p>
+            <h3>There's a harbor inside.</h3>
+            <p>Your year of payments, sailing. Found behind the calendar, when you're ready.</p>
+          </div>
+          <!-- TODO(assets): harbor screenshot or short loop. -->
+          <div class="ph ph-harbor"><span class="ph-label">harbor teaser<br/>screenshot / loop</span></div>
+        </article>
+
+      </div>
+    </section>
+
+    <!-- ============================ PROMISE ============================ -->
+    <section class="promise" id="get">
+      <p class="eyebrow" data-reveal>The deal, plainly</p>
+      <h2 data-reveal>Free forever.<br />One price if you want it all.</h2>
+      <p class="promise-copy" data-reveal>
+        Unlimited commitments, accounts, insights, reminders and backups: free,
+        for everyone, forever. The AI import comes with 2 reads, enough to bring
+        your whole life in. <strong>Full Keel</strong> unlocks unlimited AI and
+        every future premium feature for <strong>10 CHF, once</strong>: the early
+        supporter price, moving to 15 CHF when development costs are covered.
+      </p>
+      <ul class="chips" data-reveal>
+        <li>&#10003; Free forever</li>
+        <li>&#10003; Pay once, if ever</li>
+        <li>&#10003; Nothing renews</li>
+        <li>&#10003; Family Sharing included</li>
+      </ul>
+      <div class="price-card" data-reveal>
+        <div class="price-sheen" aria-hidden="true"></div>
+        <div class="price-amount">10 CHF</div>
+        <div class="price-tag">Full Keel · early supporter price</div>
+        <!-- TODO(launch): real App Store link. -->
+        <a class="store-badge" href="#updates">
+          <span class="store-badge-mark" aria-hidden="true">&#63743;</span>
+          <span class="store-badge-text"><small>Coming soon to the</small>App Store</span>
+        </a>
+      </div>
+    </section>
+
+    <!-- ============================= MAKER ============================= -->
+    <section class="maker">
+      <!-- TODO(assets): real photo, or keep the mark. -->
+      <div class="maker-avatar ph" data-reveal><span class="ph-label">photo</span></div>
+      <h2 data-reveal>Hi, I'm Maxime &#128075;</h2>
+      <p class="maker-copy" data-reveal>
+        I build Keel because I wanted one calm place where every subscription,
+        bill and split payment behaves. It's made by one person, with care:
+        no account, no ads, no tracking. If Keel helps you, or if something
+        feels off, I genuinely want to hear it.
+      </p>
+    </section>
+
+    <!-- ========================= EMAIL CAPTURE ========================= -->
+    <section class="updates" id="updates">
+      <div class="updates-card" data-reveal>
+        <div class="updates-glow" aria-hidden="true"></div>
+        <h2>Be there when Keel ships.</h2>
+        <p>One email when it's out, big updates after. Nothing else.</p>
+        <!-- TODO(launch): point to the real Buttondown/Formspark endpoint. -->
+        <form class="updates-form" action="#" method="post" onsubmit="return false">
+          <label class="visually-hidden" for="email">Email address</label>
+          <input id="email" type="email" name="email" placeholder="you@example.com" required />
+          <button type="submit">Notify me</button>
+        </form>
+        <p class="updates-note">Occasional emails only. No spam, no sharing.</p>
+      </div>
+    </section>
+
+    <!-- ============================ CLOSING ============================ -->
+    <section class="closing">
+      <h2 data-reveal>Every payment,<br />one calm place.</h2>
+      <a class="store-badge" href="#updates" data-reveal>
+        <span class="store-badge-mark" aria-hidden="true">&#63743;</span>
+        <span class="store-badge-text"><small>Coming soon to the</small>App Store</span>
+      </a>
+    </section>
+
+  </main>
+
+  <footer class="footer">
+    <div class="footer-brand">
+      <img src="assets/icon.png" alt="" width="28" height="28" />
+      <span>Keel</span>
+    </div>
+    <nav class="footer-links">
+      <a href="privacy.html">Privacy policy</a>
+      <a href="terms.html">Terms of use</a>
+      <a href="mailto:maxime.teuber@proton.me">Contact</a>
+    </nav>
+    <p class="footer-note">
+      All product names, logos and brands referenced in Keel belong to their
+      respective owners. Keel is independent and is not affiliated with,
+      endorsed or sponsored by any of them.
+    </p>
+    <p class="footer-fine">Made in Switzerland &middot; &copy; <span id="year">2026</span> Keel</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
