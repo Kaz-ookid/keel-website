@@ -97,10 +97,10 @@
   // Step 2: the Upcoming replica. Folds, account filter (the hero follows),
   // and mark-paid that settles the row in place.
   var HERO = {
-    all: ["Due this month", "≈ CHF 1962", "then ≈ CHF 3244 in September"],
-    cic: ["CIC needs", "€0", "nothing left this month, by Aug 31"],
-    bcv: ["BCV needs", "≈ CHF 1933", "by Aug 31"],
-    rev: ["Revolut needs", "€29.49", "by Aug 31"]
+    all: ["Due this month", "≈ CHF 2075", "then ≈ CHF 3231 in September"],
+    bour: ["Boursorama needs", "€0", "nothing left this month, by Aug 31"],
+    post: ["PostFinance needs", "≈ CHF 2030", "by Aug 31"],
+    neon: ["Neon needs", "€44.75", "by Aug 31"]
   };
 
   document.querySelectorAll(".fold-bar").forEach(function (bar) {
@@ -162,26 +162,26 @@
 
   // Step 3: the year of months
   var MONTHS = ["Jul", "Aug", "Sep", "Oct", "Nov", "Dec", "Jan", "Feb", "Mar", "Apr", "May", "Jun"];
-  var TOTALS = [3254, 3219, 3189, 3189, 3189, 3388, 3189, 3189, 4283, 3189, 3189, 3189];
+  var TOTALS = [3320, 3276, 3231, 3231, 3231, 3750, 3231, 3231, 4349, 3231, 3231, 3231];
   var SPIKES = { 5: true, 8: true };
   var DETAILS = {
     0: {
       title: "July 2026",
-      rows: [["Sneakers · pay-in-4", "€29.49 · 2 of 4"], ["Gadget · pay-in-4", "€35.15 · 3 of 4"]],
+      rows: [["AirPods · pay-in-4", "€44.75 · 3 of 4"], ["Custom keyboard · pay-in-4", "€44.43 · 4 of 4, last"]],
       note: "Two split payments riding on top of the baseline."
     },
     5: {
       title: "December 2026",
-      rows: [["Half-fare card", "CHF 100 · yearly"], ["Night pass", "CHF 99 · last payment"]],
+      rows: [["Half-fare card", "CHF 120 · yearly"], ["MagicPass", "CHF 399 · last payment"]],
       note: "The December ambush, visible from July."
     },
     8: {
       title: "March 2027",
-      rows: [["TV licence", "CHF 312 · price dropped"], ["Transit pass", "CHF 702 · price rose"], ["Tenants assoc.", "CHF 80 · price dropped"]],
+      rows: [["SERAFE", "CHF 312 · price dropped"], ["TPG annual pass", "CHF 730 · price rose"], ["TCS", "CHF 76 · price dropped"]],
       note: "Three yearly renewals land together, and every price change was already on file."
     }
   };
-  var BASELINE = [["Rent", "CHF 1470"], ["Car loan", "€689.55"], ["Pension", "CHF 600"], ["Health insurance", "CHF 372.95"], ["Internet + digital", "≈ CHF 57"]];
+  var BASELINE = [["Rent", "CHF 1620"], ["Car loan", "€645.30"], ["Frankly 3a", "CHF 550"], ["CSS Assurance", "CHF 289.40"], ["Internet + digital", "≈ CHF 63"]];
 
   var tbars = document.getElementById("tbars");
   var tdetail = document.getElementById("tbar-detail");
@@ -221,12 +221,12 @@
 
   // Step 4: donut
   var SLICES = [
-    ["Housing", 1505, "#7FB8B0"],
-    ["Loans", 690, "#6C8EBF"],
-    ["Savings", 600, "#8FBC94"],
-    ["Insurance & fees", 429, "#B56576"],
-    ["Transport", 75, "#C9A66B"],
-    ["Digital", 22, "#9C8FC7"]
+    ["Housing", 1660, "#7FB8B0"],
+    ["Loans", 645, "#6C8EBF"],
+    ["Savings", 550, "#8FBC94"],
+    ["Insurance & fees", 315, "#B56576"],
+    ["Transport", 95, "#C9A66B"],
+    ["Digital & sport", 86, "#9C8FC7"]
   ];
   var donut = document.getElementById("donut");
   var legend = document.getElementById("donut-legend");
