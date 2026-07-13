@@ -14,11 +14,14 @@
 </head>
 <body>
 
-  <!-- Ambient stage: the app's aura, in CSS. -->
+  <!-- Ambient stage: the app's aura, in CSS. Scrolling down is diving:
+       the surface light recedes, the floor appears near the bottom. -->
   <div class="aura" aria-hidden="true">
+    <div class="glow glow-surface"></div>
     <div class="glow glow-a"></div>
     <div class="glow glow-b"></div>
     <div class="glow glow-c"></div>
+    <div class="glow glow-floor"></div>
   </div>
 
   <header class="top">
@@ -294,11 +297,14 @@ neon (chf): google one 1.99 the 4th. airpods pay-in-4 179&euro; via paypal from 
           <p class="tour-label">Where a month really goes</p>
           <div class="tour-donut">
             <div class="donut" id="donut">
-              <div class="donut-center" id="donut-center"><strong>CHF 3316</strong><span>per month, smoothed</span></div>
+              <div class="donut-center" id="donut-center"><strong>CHF 2753</strong><span>per month, smoothed</span></div>
             </div>
             <ul class="donut-legend" id="donut-legend"></ul>
+            <div class="donut-detail" id="donut-detail">
+              <p class="tour-foot">Tap a slice or its legend row to see what's inside it.</p>
+            </div>
           </div>
-          <p class="tour-foot">Yearly costs are split into twelfths here, so a once-a-year renewal still shows its true weight in every month. Tap a slice or its legend row.</p>
+          <p class="tour-foot">Yearly costs are split into twelfths here, so a once-a-year renewal still shows its true weight in every month. The finite splits and the paused 3a are left out: this is the committed monthly.</p>
         </div>
       </div>
     </section>

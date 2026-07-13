@@ -63,6 +63,24 @@
     });
   }
 
+  // The aura follows the dive: each glow lags the scroll at its own depth
+  // (via --scrolly), and the sea floor fades in near the bottom of the
+  // page (via --scrollp, 0 at the top, 1 at the end).
+  if (!reduced) {
+    var auraTick = false;
+    var setAura = function () {
+      var doc = document.documentElement;
+      var range = Math.max(1, doc.scrollHeight - window.innerHeight);
+      doc.style.setProperty("--scrolly", window.scrollY + "px");
+      doc.style.setProperty("--scrollp", String(Math.min(1, window.scrollY / range)));
+      auraTick = false;
+    };
+    window.addEventListener("scroll", function () {
+      if (!auraTick) { auraTick = true; requestAnimationFrame(setAura); }
+    }, { passive: true });
+    setAura();
+  }
+
   var year = document.getElementById("year");
   if (year) year.textContent = String(new Date().getFullYear());
 
@@ -385,19 +403,61 @@
     renderWindow();
   }
 
-  // Step 4: donut
+  // Step 4: donut. Slice totals are the demo list's committed monthly,
+  // smoothed: yearlies in twelfths, EUR converted, splits and the paused
+  // 3a excluded. Each slice knows the payments inside it for the detail
+  // card on the right.
   var SLICES = [
-    ["Housing", 1660, "#7FB8B0"],
-    ["Loans", 645, "#6C8EBF"],
-    ["Insurance & fees", 315, "#B56576"],
-    ["Transport", 95, "#C9A66B"],
-    ["Digital & sport", 86, "#9C8FC7"]
+    ["Housing & utilities", 1648, "#7FB8B0", [
+      ["Rent", "", "CHF 1620"],
+      ["SERAFE", "CHF 335 a year", "CHF 28"]
+    ]],
+    ["Finance", 599, "#6C8EBF", [
+      ["Car loan", "€645.30 monthly", "CHF 597"],
+      ["Account fee", "€2 · first Thursday", "CHF 1.85"]
+    ]],
+    ["Insurance", 289, "#B56576", [
+      ["CSS Assurance", "", "CHF 289.40"]
+    ]],
+    ["Comms & sport", 99, "#8FBC94", [
+      ["Basefit", "", "CHF 59"],
+      ["Salt Home", "", "CHF 39.95"]
+    ]],
+    ["Transport & passes", 93, "#C9A66B", [
+      ["TPG annual", "CHF 500 a year", "CHF 42"],
+      ["MagicPass", "CHF 399 a year", "CHF 33"],
+      ["Half-fare card", "CHF 120 a year", "CHF 10"],
+      ["TCS", "CHF 96 a year", "CHF 8"]
+    ]],
+    ["Software", 25, "#9C8FC7", [
+      ["ChatGPT Plus", "", "CHF 21.55"],
+      ["Google One", "two accounts", "CHF 3.83"]
+    ]]
   ];
   var donut = document.getElementById("donut");
   var legend = document.getElementById("donut-legend");
   var center = document.getElementById("donut-center");
+  var ddetail = document.getElementById("donut-detail");
   var donutTotal = SLICES.reduce(function (sum, s) { return sum + s[1]; }, 0);
   var donutSel = -1;
+
+  function renderSliceDetail() {
+    if (!ddetail) return;
+    if (donutSel === -1) {
+      ddetail.innerHTML =
+        '<p class="tour-foot">Tap a slice or its legend row to see what’s inside it.</p>';
+      return;
+    }
+    var s = SLICES[donutSel];
+    var html = '<h4><span class="swatch" style="background:' + s[2] + '"></span>' +
+      s[0] + " · CHF " + s[1] + " /mo</h4>";
+    s[3].forEach(function (r) {
+      html += '<div class="mini-row"><span class="mini-name">' + r[0] + "</span>" +
+        (r[1] ? '<span class="dd-sub">' + r[1] + "</span>" : "") +
+        '<span class="mini-amount">' + r[2] + "</span></div>";
+    });
+    ddetail.innerHTML = html;
+  }
 
   function hexA(hex, a) {
     var n = parseInt(hex.slice(1), 16);
@@ -429,6 +489,7 @@
       x.classList.toggle("sel", j === donutSel);
     });
     paintDonut();
+    renderSliceDetail();
   }
 
   if (donut && legend) {
