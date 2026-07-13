@@ -768,12 +768,12 @@ a { color: inherit; text-decoration: none; }
 .donut-legend .pct { color: var(--sea-bright); font-weight: 700; margin-left: auto; padding-left: 12px; font-variant-numeric: tabular-nums; }
 .donut-legend button { width: 100%; }
 
-/* The 15 that became 10. */
+/* The 15 that became 10: quietly crossed out, not shouting. */
 .price-was {
-  font-size: 22px; font-weight: 700;
-  color: var(--muted);
+  font-size: 19px; font-weight: 500;
+  color: rgba(147, 160, 180, 0.7);
   text-decoration: line-through;
-  text-decoration-thickness: 2px;
+  text-decoration-thickness: 1.5px;
   margin-bottom: -8px;
 }
 
