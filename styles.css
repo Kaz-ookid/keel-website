@@ -226,12 +226,19 @@ a { color: inherit; text-decoration: none; }
   text-wrap: balance;
 }
 
-/* Longer words in FR/DE/PL/IT: headlines step down a notch so the two
-   intended lines stay two lines instead of raining single words. */
+/* Longer words in FR/DE/PL/IT: the headline is sized against its own
+   column (cqi), tuned per language to its longest intended line, so it
+   physically fits in two lines at any width. The vw clamp is the
+   fallback for browsers without container-query units. */
+.hero-copy { container-type: inline-size; }
 :lang(fr) .hero h1, :lang(de) .hero h1, :lang(pl) .hero h1, :lang(it) .hero h1 {
-  font-size: clamp(34px, 4.8vw, 54px);
+  font-size: clamp(30px, 4.2vw, 50px);
   letter-spacing: -1px;
 }
+:lang(fr) .hero h1 { font-size: clamp(30px, 10cqi, 54px); }
+:lang(de) .hero h1 { font-size: clamp(30px, 10.6cqi, 54px); }
+:lang(it) .hero h1 { font-size: clamp(28px, 8.8cqi, 52px); }
+:lang(pl) .hero h1 { font-size: clamp(26px, 7.6cqi, 48px); }
 
 .lede {
   margin-top: 22px;
@@ -1153,7 +1160,7 @@ a { color: inherit; text-decoration: none; }
   background-clip: text;
   color: transparent;
   text-wrap: balance;
-  max-width: 18ch;
+  max-width: 22ch;
 }
 :lang(fr) .closing h2, :lang(de) .closing h2, :lang(pl) .closing h2, :lang(it) .closing h2 {
   font-size: clamp(30px, 4.2vw, 46px);
