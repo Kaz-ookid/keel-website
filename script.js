@@ -90,7 +90,7 @@
       out.classList.add("played");
       readBtn.classList.add("done");
       readBtn.textContent = "Read";
-      if (count) count.textContent = "· 16 items, 5 shown";
+      if (count) count.textContent = "· 17 items read";
     });
   }
 
@@ -138,6 +138,10 @@
     });
   });
 
+  // Mark paid: the row settles, then MOVES up into the "Paid this month"
+  // fold (which opens so you see it land). Undo sends it home again.
+  var paidFold = document.querySelector('[data-fold-body="paid"]');
+  var paidBar = document.querySelector('[data-fold="paid"]');
   document.querySelectorAll("[data-mark]").forEach(function (btn) {
     btn.addEventListener("click", function () {
       var row = btn.closest(".up-row");
@@ -157,66 +161,132 @@
           if (tag.dataset.over === "1") tag.classList.add("up-tag-over");
         }
       }
+      if (!paidFold || !paidBar) return;
+      if (settledNow) {
+        // Remember where home is, then travel to the settled zone.
+        row._home = { parent: row.parentElement, next: row.nextElementSibling };
+        setTimeout(function () {
+          paidFold.appendChild(row);
+          paidFold.hidden = false;
+          paidBar.classList.add("open");
+        }, 550);
+      } else if (row._home) {
+        row._home.parent.insertBefore(row, row._home.next);
+        row._home = null;
+      }
     });
   });
 
-  // Step 3: the year of months
+  // Step 3: months, three year-windows deep. Rows carry a payment status
+  // (✓ paid, ○ still due, ! overdue), exactly the states the app shows.
   var MONTHS = ["Jul", "Aug", "Sep", "Oct", "Nov", "Dec", "Jan", "Feb", "Mar", "Apr", "May", "Jun"];
-  var TOTALS = [2841, 2797, 2752, 2752, 2752, 3271, 2752, 2752, 3870, 2752, 2752, 2752];
-  var SPIKES = { 5: true, 8: true };
-  var DETAILS = {
-    0: {
-      title: "July 2026",
-      rows: [["AirPods · pay-in-4", "€44.75 · 3 of 4"], ["Custom keyboard · pay-in-4", "€44.42 · 4 of 4, last"]],
-      note: "Two split payments riding on top of the baseline."
-    },
-    5: {
-      title: "December 2026",
-      rows: [["Half-fare card", "CHF 120 · yearly"], ["MagicPass", "CHF 399 · last payment"]],
-      note: "The December ambush, visible from July."
-    },
-    8: {
-      title: "March 2027",
-      rows: [["SERAFE", "CHF 312 · price dropped"], ["TPG annual pass", "CHF 730 · price rose"], ["TCS", "CHF 76 · price dropped"]],
-      note: "Three yearly renewals land together, and every price change was already on file."
-    }
-  };
-  var BASELINE = [["Rent", "CHF 1620"], ["Car loan", "€645.30"], ["CSS Assurance", "CHF 289.40"], ["Basefit + Salt", "CHF 98.95"], ["Digital bits", "≈ CHF 28"]];
+  var ST = { paid: ["✓", "st-paid"], due: ["○", "st-due"], over: ["!", "st-over"] };
+  var BASE_NOW = [["Rent", "CHF 1620", "due"], ["Car loan", "€645.30", "due"], ["CSS Assurance", "CHF 289.40", "due"], ["Basefit + Salt", "CHF 98.95", "due"], ["Digital bits", "≈ CHF 28", "due"]];
 
+  var WINDOWS = [
+    {
+      label: "Jul 2025 · Jun 2026",
+      totals: [651, 651, 651, 651, 651, 1170, 651, 651, 3491, 2645, 2734, 2734],
+      spikes: { 5: true, 8: true },
+      now: -1,
+      details: {
+        5: { title: "December 2025", rows: [["Half-fare card", "CHF 120", "paid"], ["MagicPass", "CHF 399", "paid"]], note: "The first December: both passes bought." },
+        8: { title: "March 2026", rows: [["Rent begins", "CHF 1620", "paid"], ["CSS, SERAFE, TPG, TCS", "≈ CHF 1220", "paid"]], note: "The move-in month: five commitments started at once." }
+      },
+      fallback: { rows: [["The early baseline", "loan, fees, cloud", "paid"]], note: "Before March 2026, not much was recurring yet." }
+    },
+    {
+      label: "Jul 2026 · Jun 2027",
+      totals: [2841, 2797, 2752, 2752, 2752, 3271, 2752, 2752, 3870, 2752, 2752, 2752],
+      spikes: { 5: true, 8: true },
+      now: 0,
+      details: {
+        0: {
+          title: "July 2026 · now",
+          rows: [["Salt Home", "CHF 39.95", "paid"], ["CSS Assurance", "CHF 289.40", "over"], ["AirPods · 3 of 4", "€44.75", "due"], ["Rent", "CHF 1620", "due"], ["Keyboard · last", "€44.42", "due"]],
+          note: "The current month: one paid, one overdue, the rest on their way."
+        },
+        5: { title: "December 2026", rows: [["Half-fare card", "CHF 120", "due"], ["MagicPass", "CHF 399", "due"]], note: "The December ambush, visible from July. MagicPass's last ride." },
+        8: { title: "March 2027", rows: [["SERAFE", "CHF 312", "due"], ["TPG annual", "CHF 730", "due"], ["TCS", "CHF 76", "due"]], note: "Three renewals land together, every price change already on file." }
+      },
+      fallback: { rows: BASE_NOW, note: "The steady month: the recurring baseline, nothing else." }
+    },
+    {
+      label: "Jul 2027 · Jun 2028",
+      totals: [2681, 2681, 2681, 2681, 2681, 2871, 2681, 2681, 3799, 2681, 2681, 2681],
+      spikes: { 5: true, 8: true },
+      now: -1,
+      details: {
+        5: { title: "December 2027", rows: [["Half-fare card", "CHF 190", "due"]], note: "The new price, known since day one. No MagicPass: it ended in 2026." },
+        8: { title: "March 2028", rows: [["SERAFE", "CHF 312", "due"], ["TPG annual", "CHF 730", "due"], ["TCS", "CHF 76", "due"]], note: "Next year's March, already priced in." }
+      },
+      fallback: { rows: [["The settled baseline", "≈ CHF 2681 / month", "due"]], note: "The splits are done; the yearly spikes are all that's left to watch." }
+    }
+  ];
+
+  var windowIndex = 1;
   var tbars = document.getElementById("tbars");
   var tdetail = document.getElementById("tbar-detail");
-  if (tbars && tdetail) {
-    var max = Math.max.apply(null, TOTALS);
-    TOTALS.forEach(function (value, i) {
+  var tprev = document.getElementById("tbar-prev");
+  var tnext = document.getElementById("tbar-next");
+  var twindow = document.getElementById("tbar-window");
+
+  function statusRow(r) {
+    var st = ST[r[2]] || ST.due;
+    return '<div class="mini-row"><span class="st ' + st[1] + '">' + st[0] +
+      '</span><span class="mini-name">' + r[0] +
+      '</span><span class="mini-amount">' + r[1] + "</span></div>";
+  }
+
+  function renderWindow() {
+    if (!tbars) return;
+    var w = WINDOWS[windowIndex];
+    twindow.textContent = w.label;
+    tprev.disabled = windowIndex === 0;
+    tnext.disabled = windowIndex === WINDOWS.length - 1;
+    tbars.innerHTML = "";
+    tbars.classList.remove("has-sel");
+    var max = Math.max.apply(null, w.totals);
+    // The dashed average line, like the app's.
+    var mean = w.totals.reduce(function (s, v) { return s + v; }, 0) / 12;
+    var meanLine = document.createElement("div");
+    meanLine.className = "tbar-mean";
+    meanLine.style.bottom = Math.round(((mean / max) * 82 + 8) * 2.2 + 10) + "px";
+    meanLine.innerHTML = "<span>avg ≈ CHF " + Math.round(mean) + "</span>";
+    tbars.appendChild(meanLine);
+    w.totals.forEach(function (value, i) {
       var b = document.createElement("button");
-      b.className = "tbar" + (SPIKES[i] ? " spike" : "");
+      b.className = "tbar" + (w.spikes[i] ? " spike" : "") + (w.now === i ? " now" : "");
       b.setAttribute("aria-label", MONTHS[i] + ", about " + value + " francs");
       var bar = document.createElement("i");
       bar.style.height = Math.round((value / max) * 82 + 8) + "%";
       var label = document.createElement("span");
-      label.textContent = MONTHS[i];
+      label.textContent = w.now === i ? MONTHS[i] + " · now" : MONTHS[i];
       b.appendChild(bar);
       b.appendChild(label);
       b.addEventListener("click", function () { selectMonth(i, b); });
       tbars.appendChild(b);
     });
+    tdetail.innerHTML =
+      '<p class="tour-foot">Tap a bar to see its payments: paid, still due, or overdue. The dashed line is the monthly average.</p>';
   }
 
   function selectMonth(i, btn) {
+    var w = WINDOWS[windowIndex];
     tbars.classList.add("has-sel");
     tbars.querySelectorAll(".tbar").forEach(function (t) { t.classList.remove("sel"); });
     btn.classList.add("sel");
-    var d = DETAILS[i];
-    var rows = d ? d.rows : BASELINE;
-    var title = d ? d.title : MONTHS[i] + " · the steady month";
-    var note = d ? d.note : "No surprises: the recurring baseline, nothing else.";
-    var html = "<h4>" + title + " · ≈ CHF " + TOTALS[i] + "</h4>";
-    rows.forEach(function (r) {
-      html += '<div class="mini-row"><span class="mini-name">' + r[0] +
-        '</span><span class="mini-amount">' + r[1] + "</span></div>";
-    });
-    html += '<p class="note">' + note + "</p>";
+    var d = w.details[i] || { title: MONTHS[i] + " · " + w.label.slice(-4), rows: w.fallback.rows, note: w.fallback.note };
+    var html = "<h4>" + d.title + " · ≈ CHF " + w.totals[i] + "</h4>";
+    d.rows.forEach(function (r) { html += statusRow(r); });
+    html += '<p class="note">' + d.note + "</p>";
     tdetail.innerHTML = html;
+  }
+
+  if (tbars && tdetail && tprev && tnext) {
+    tprev.addEventListener("click", function () { if (windowIndex > 0) { windowIndex--; renderWindow(); } });
+    tnext.addEventListener("click", function () { if (windowIndex < WINDOWS.length - 1) { windowIndex++; renderWindow(); } });
+    renderWindow();
   }
 
   // Step 4: donut
@@ -256,22 +326,42 @@
     }
   }
 
+  function selectSlice(i) {
+    donutSel = donutSel === i ? -1 : i;
+    legend.classList.toggle("has-sel", donutSel !== -1);
+    legend.querySelectorAll("button").forEach(function (x, j) {
+      x.classList.toggle("sel", j === donutSel);
+    });
+    paintDonut();
+  }
+
   if (donut && legend) {
     SLICES.forEach(function (s, i) {
       var li = document.createElement("li");
       var b = document.createElement("button");
+      var pct = Math.max(1, Math.round((s[1] / donutTotal) * 100));
       b.innerHTML = '<span class="swatch" style="background:' + s[2] + '"></span>' +
-        s[0] + '<span class="amt">CHF ' + s[1] + "</span>";
-      b.addEventListener("click", function () {
-        donutSel = donutSel === i ? -1 : i;
-        legend.classList.toggle("has-sel", donutSel !== -1);
-        legend.querySelectorAll("button").forEach(function (x) { x.classList.remove("sel"); });
-        if (donutSel !== -1) b.classList.add("sel");
-        paintDonut();
-      });
+        s[0] + '<span class="amt">CHF ' + s[1] + '</span><span class="pct">' + pct + "%</span>";
+      b.addEventListener("click", function () { selectSlice(i); });
       li.appendChild(b);
       legend.appendChild(li);
     });
+
+    // The ring itself is tappable: angle from 12 o'clock picks the slice.
+    donut.addEventListener("click", function (e) {
+      var rect = donut.getBoundingClientRect();
+      var x = e.clientX - rect.left - rect.width / 2;
+      var y = e.clientY - rect.top - rect.height / 2;
+      var r = Math.hypot(x, y);
+      if (r < 60 || r > rect.width / 2) return; // the hole and outside miss
+      var angle = (Math.atan2(y, x) * 180 / Math.PI + 90 + 360) % 360;
+      var acc = 0;
+      for (var i = 0; i < SLICES.length; i++) {
+        acc += (SLICES[i][1] / donutTotal) * 360;
+        if (angle <= acc) { selectSlice(i); return; }
+      }
+    });
+
     paintDonut();
   }
 })();
