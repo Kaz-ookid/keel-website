@@ -638,6 +638,9 @@ a { color: inherit; text-decoration: none; }
 .mark-btn:hover { background: rgba(127, 184, 176, 0.28); }
 .undo-btn { color: var(--muted); background: none; border-color: var(--hairline); }
 
+/* Automatic payments have nothing to press: the button slot says why. */
+.auto-note { flex: none; font-size: 12px; font-style: italic; color: rgba(147, 160, 180, 0.8); }
+
 .up-row.settled { opacity: 0.55; }
 .up-row.settled .mini-name { text-decoration: none; }
 .up-row.just-paid { border-color: rgba(127, 184, 176, 0.45); }
@@ -1206,6 +1209,7 @@ a { color: inherit; text-decoration: none; }
   .up-row .mini-amount { grid-area: amount; margin-left: 0; justify-self: end; }
   .up-row .up-tag { grid-area: tag; justify-self: start; }
   .up-row .mark-btn { grid-area: btn; justify-self: end; padding: 7px 14px; }
+  .up-row .auto-note { grid-area: btn; justify-self: end; }
   .t-hero-amount { font-size: 26px; }
 
   /* Twelve bars on a phone: tighter gaps, smaller labels, same geometry
