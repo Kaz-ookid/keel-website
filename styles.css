@@ -397,23 +397,39 @@ a { color: inherit; text-decoration: none; }
 .tour-read:hover { background: rgba(127, 184, 176, 0.28); transform: translateY(-1px); }
 .tour-read.done { opacity: 0.5; cursor: default; transform: none; }
 
-.parsed { display: flex; flex-direction: column; gap: 10px; }
+/* Nothing shows before the read: the results EXIST only once read. */
+.parsed { display: none; flex-direction: column; gap: 10px; }
+.played .parsed { display: flex; }
+.tour-import-out .tour-foot { display: none; }
+.played .tour-foot { display: block; }
 
 .parsed-card {
   background: rgba(7, 12, 24, 0.6);
   border: 1px solid var(--hairline);
   border-radius: var(--radius-sm);
   padding: 12px 14px;
-  opacity: 0.25;
+  opacity: 0;
   transform: translateY(8px);
-  transition: opacity 0.5s ease, transform 0.5s cubic-bezier(0.2, 0.7, 0.2, 1);
+  animation: parsed-in 0.5s cubic-bezier(0.2, 0.7, 0.2, 1) forwards;
 }
 
-.played .parsed-card { opacity: 1; transform: none; }
-.played .parsed-card:nth-child(2) { transition-delay: 0.1s; }
-.played .parsed-card:nth-child(3) { transition-delay: 0.2s; }
-.played .parsed-card:nth-child(4) { transition-delay: 0.3s; }
-.played .parsed-card:nth-child(5) { transition-delay: 0.4s; }
+.parsed-card:nth-child(2) { animation-delay: 0.1s; }
+.parsed-card:nth-child(3) { animation-delay: 0.2s; }
+.parsed-card:nth-child(4) { animation-delay: 0.3s; }
+.parsed-card:nth-child(5) { animation-delay: 0.4s; }
+.parsed-card:nth-child(6) { animation-delay: 0.5s; }
+
+@keyframes parsed-in { to { opacity: 1; transform: none; } }
+
+/* The "this is a subset" card. */
+.parsed-more {
+  text-align: center;
+  color: var(--muted);
+  font-size: 13px;
+  border-style: dashed;
+  border-color: rgba(147, 160, 180, 0.3);
+  background: none;
+}
 
 .field-chips { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px; }
 .field-chips span {
@@ -484,6 +500,14 @@ a { color: inherit; text-decoration: none; }
 .fold-chevron { transition: transform 0.25s ease; }
 .fold-bar.open .fold-chevron { transform: rotate(180deg); }
 .fold-body { display: flex; flex-direction: column; gap: 8px; }
+/* The hidden attribute must WIN over display:flex, or folds never close. */
+.fold-body[hidden] { display: none; }
+
+/* Extra air between the settled zone and what still needs attention, so a
+   row marked paid visibly crosses a boundary when it moves up. */
+.fold-bar[data-fold="paid"] { margin-bottom: 18px; }
+.fold-body[data-fold-body="paid"] { margin-bottom: 22px; }
+.fold-bar[data-fold="next"] { margin-top: 18px; }
 
 .up-day-total { float: right; font-weight: 600; color: var(--muted); text-transform: none; letter-spacing: 0; }
 .up-day { display: flex; justify-content: space-between; align-items: baseline; }
@@ -543,7 +567,26 @@ a { color: inherit; text-decoration: none; }
 /* Step 3: months */
 .tour-chart { display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 26px; align-items: start; }
 
+.tbar-nav {
+  display: flex; align-items: center; justify-content: space-between;
+  margin-bottom: 10px;
+}
+.tbar-nav strong { font-size: 15px; letter-spacing: -0.2px; }
+.tbar-nav button {
+  background: rgba(7, 12, 24, 0.6);
+  border: 1px solid var(--hairline);
+  border-radius: 999px;
+  color: var(--ink);
+  font: inherit; font-size: 14px; font-weight: 700;
+  width: 34px; height: 34px;
+  cursor: pointer;
+  transition: border-color 0.2s ease;
+}
+.tbar-nav button:hover { border-color: rgba(127, 184, 176, 0.45); }
+.tbar-nav button:disabled { opacity: 0.3; cursor: default; }
+
 .tbars {
+  position: relative;
   display: flex; align-items: flex-end; gap: 8px;
   height: 240px;
   padding: 10px;
@@ -551,6 +594,19 @@ a { color: inherit; text-decoration: none; }
   border: 1px solid var(--hairline);
   border-radius: var(--radius-sm);
 }
+
+/* The average, drawn as the app draws it: a quiet dashed line. */
+.tbar-mean {
+  position: absolute; left: 10px; right: 10px;
+  border-top: 2px dashed rgba(237, 241, 245, 0.28);
+  pointer-events: none;
+}
+.tbar-mean span {
+  position: absolute; right: 0; top: -18px;
+  font-size: 10.5px; color: var(--muted);
+}
+
+.tbar.now span { color: var(--sea-bright); font-weight: 700; }
 
 .tbar {
   flex: 1;
@@ -581,6 +637,29 @@ a { color: inherit; text-decoration: none; }
 .tbar-detail h4 { font-size: 16px; margin-bottom: 12px; }
 .tbar-detail .mini-row { padding: 6px 0; }
 .tbar-detail .note { font-size: 12.5px; color: #f0b35c; margin-top: 10px; }
+
+/* Payment status marks in the month detail. */
+.st { flex: none; width: 16px; text-align: center; font-size: 12px; }
+.st-paid { color: #4bc98a; }
+.st-due { color: var(--muted); }
+.st-over { color: #f2766b; }
+
+.tour-hint-note { margin-top: 10px; font-size: 12.5px; color: var(--muted); }
+.tour-hint-note em { color: #f0b35c; font-style: normal; }
+
+/* Step 4 additions: the ring itself is clickable. */
+.donut { cursor: pointer; }
+.donut-legend .pct { color: var(--sea-bright); font-weight: 700; margin-left: auto; padding-left: 12px; font-variant-numeric: tabular-nums; }
+.donut-legend button { width: 100%; }
+
+/* The 15 that became 10. */
+.price-was {
+  font-size: 22px; font-weight: 700;
+  color: var(--muted);
+  text-decoration: line-through;
+  text-decoration-thickness: 2px;
+  margin-bottom: -8px;
+}
 
 /* Step 4: donut */
 .tour-donut { display: flex; gap: 40px; align-items: center; flex-wrap: wrap; }
