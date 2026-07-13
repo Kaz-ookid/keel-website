@@ -1111,7 +1111,7 @@ a { color: inherit; text-decoration: none; }
 .footer-brand { display: flex; align-items: center; gap: 10px; font-weight: 700; }
 .footer-brand img { border-radius: 7px; }
 
-.footer-links { display: flex; gap: 26px; font-size: 14.5px; color: var(--muted); }
+.footer-links { display: flex; flex-wrap: wrap; justify-content: center; gap: 12px 26px; font-size: 14.5px; color: var(--muted); }
 .footer-links a:hover { color: var(--ink); }
 
 .footer-note { max-width: 560px; font-size: 12.5px; color: rgba(147, 160, 180, 0.7); line-height: 1.6; }
@@ -1160,6 +1160,60 @@ a { color: inherit; text-decoration: none; }
     0%, 100% { transform: translateY(0); }
     50% { transform: translateY(-5px); }
   }
+}
+
+/* Phones: the demo restructures instead of shrinking. */
+@media (max-width: 640px) {
+  /* The tour gets the full width it can; the shell keeps its own padding. */
+  .tour { padding-left: 14px; padding-right: 14px; }
+  .tour-shell { padding: 16px 14px; border-radius: 22px; }
+
+  /* Four tabs become a 2 x 2 grid instead of an overflow scroller. */
+  .tour-tabs {
+    display: grid; grid-template-columns: 1fr 1fr;
+    border-radius: 18px;
+  }
+  .tour-tab { min-width: 0; padding: 10px 6px; font-size: 13.5px; }
+
+  /* Upcoming rows: two lines instead of one long one. Name and amount on
+     top, tag and button below; the dot spans both. */
+  .up-row {
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr) auto;
+    grid-template-areas:
+      "dot name amount"
+      "dot tag  btn";
+    column-gap: 10px; row-gap: 8px;
+    align-items: center;
+    padding: 10px 12px;
+    font-size: 14px;
+  }
+  .up-row .mini-dot { grid-area: dot; }
+  .up-row .mini-name {
+    grid-area: name;
+    white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+  }
+  .up-row .mini-amount { grid-area: amount; margin-left: 0; justify-self: end; }
+  .up-row .up-tag { grid-area: tag; justify-self: start; }
+  .up-row .mark-btn { grid-area: btn; justify-self: end; padding: 7px 14px; }
+  .t-hero-amount { font-size: 26px; }
+
+  /* Twelve bars on a phone: tighter gaps, smaller labels, same geometry
+     (script.js positions bars and the average line in fixed pixels). */
+  .tbars { gap: 4px; padding: 10px 8px; }
+  .tbar-mean { left: 8px; right: 8px; }
+  .tbar span { font-size: 9px; letter-spacing: -0.2px; }
+  .tbar-detail { min-height: 0; }
+
+  /* The donut detail rows may need two lines too. */
+  .donut-detail .mini-row { flex-wrap: wrap; }
+  .donut-detail .dd-sub { white-space: normal; }
+
+  /* General air on small screens. */
+  .card { padding: 24px 20px; }
+  .card h3 { font-size: 21px; }
+  .updates-card { padding: 48px 22px; }
+  .promise { padding-top: 90px; }
 }
 
 /* --------------------------- Reduced motion ---------------------------- */
