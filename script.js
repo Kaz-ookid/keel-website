@@ -96,6 +96,12 @@
 
   /* ------------------------------ Tour ------------------------------- */
 
+  // Localized pages (fr/, de/, pl/, it/) define window.KEEL_I18N before
+  // this script loads; every generated string below falls back to English.
+  var I18N = window.KEEL_I18N || {};
+  var STR = I18N.strings || {};
+  function str(key, fallback) { return STR[key] || fallback; }
+
   // Tabs: locked until the read has been played (the tour's data has to
   // exist before the screens that show it).
   var tourUnlocked = false;
@@ -128,8 +134,8 @@
     readBtn.addEventListener("click", function () {
       out.classList.add("played");
       readBtn.classList.add("done");
-      readBtn.textContent = "Read";
-      if (count) count.textContent = "· 17 items read";
+      readBtn.textContent = str("readDone", "Read");
+      if (count) count.textContent = str("itemsRead", "· 17 items read");
       tourUnlocked = true;
       tabs.forEach(function (t) { t.classList.remove("locked"); });
     });
@@ -139,7 +145,7 @@
   // currency, and every total on screen (hero, fold bars, day sections)
   // is recomputed from the rows' current state, the way the app does it.
   var RATE = 0.9253; // EUR to CHF, frozen for the demo
-  var HERO = {
+  var HERO = I18N.hero || {
     all: ["Due this month", "then CHF 2674.09 in August"],
     bour: ["Boursorama needs", "nothing left this month, by Jul 31"],
     post: ["PostFinance needs", "by Jul 31"],
@@ -206,9 +212,9 @@
     if (paidBar && paidFold) {
       paidBar.style.display = paid.n ? "" : "none";
       if (!paid.n) { paidFold.hidden = true; paidBar.classList.remove("open"); }
-      paidBar.querySelector("span").textContent = "Paid this month · " + fmtSum(paid);
+      paidBar.querySelector("span").textContent = str("paidFold", "Paid this month") + " · " + fmtSum(paid);
     }
-    if (nextBar) nextBar.querySelector("span").textContent = "August 2026 · " + fmtSum(aug);
+    if (nextBar) nextBar.querySelector("span").textContent = str("nextFold", "August 2026") + " · " + fmtSum(aug);
   }
 
   document.querySelectorAll(".fold-bar").forEach(function (bar) {
@@ -243,14 +249,14 @@
       var row = btn.closest(".up-row");
       var settledNow = row.classList.toggle("settled");
       row.classList.toggle("just-paid", settledNow);
-      btn.textContent = settledNow ? "Undo" : "Mark paid";
+      btn.textContent = settledNow ? str("undo", "Undo") : str("markPaid", "Mark paid");
       btn.classList.toggle("undo-btn", settledNow);
       var tag = row.querySelector(".up-tag");
       if (tag) {
         if (settledNow) {
           tag.dataset.was = tag.textContent;
           tag.dataset.over = tag.classList.contains("up-tag-over") ? "1" : "";
-          tag.textContent = "paid ✓";
+          tag.textContent = str("paidTag", "paid ✓");
           tag.classList.remove("up-tag-over");
         } else if (tag.dataset.was) {
           tag.textContent = tag.dataset.was;
@@ -284,11 +290,11 @@
 
   // Step 3: months, three year-windows deep. Rows carry a payment status
   // (✓ paid, ○ still due, ! overdue), exactly the states the app shows.
-  var MONTHS = ["Jul", "Aug", "Sep", "Oct", "Nov", "Dec", "Jan", "Feb", "Mar", "Apr", "May", "Jun"];
+  var MONTHS = I18N.months || ["Jul", "Aug", "Sep", "Oct", "Nov", "Dec", "Jan", "Feb", "Mar", "Apr", "May", "Jun"];
   var ST = { paid: ["✓", "st-paid"], due: ["○", "st-due"], over: ["!", "st-over"] };
   var BASE_NOW = [["Rent", "CHF 1620", "due"], ["Car loan", "€645.30", "due"], ["CSS Assurance", "CHF 289.40", "due"], ["Basefit + Salt", "CHF 98.95", "due"], ["Digital bits", "≈ CHF 28", "due"]];
 
-  var WINDOWS = [
+  var WINDOWS = I18N.windows || [
     {
       label: "Jul 2025 · Jun 2026",
       totals: [651, 651, 651, 651, 651, 1170, 651, 651, 3491, 2645, 2734, 2734],
@@ -347,7 +353,9 @@
   }
 
   var TBAR_HINT =
-    '<p class="tour-foot">Tap a bar to see its payments: paid, still due, or overdue. Tap it again to step back. The dashed line is the monthly average.</p>';
+    '<p class="tour-foot">' +
+    str("tbarHint", "Tap a bar to see its payments: paid, still due, or overdue. Tap it again to step back. The dashed line is the monthly average.") +
+    "</p>";
 
   function statusRow(r) {
     var st = ST[r[2]] || ST.due;
@@ -375,16 +383,16 @@
     var meanLine = document.createElement("div");
     meanLine.className = "tbar-mean";
     meanLine.style.bottom = BAR_FLOOR + barPx(mean, max) + "px";
-    meanLine.innerHTML = "<span>avg ≈ CHF " + Math.round(mean) + "</span>";
+    meanLine.innerHTML = "<span>" + str("avg", "avg ≈ CHF ") + Math.round(mean) + "</span>";
     tbars.appendChild(meanLine);
     w.totals.forEach(function (value, i) {
       var b = document.createElement("button");
       b.className = "tbar" + (w.spikes[i] ? " spike" : "") + (w.now === i ? " now" : "");
-      b.setAttribute("aria-label", MONTHS[i] + ", about " + value + " francs");
+      b.setAttribute("aria-label", MONTHS[i] + str("aboutFrancs", ", about {v} francs").replace("{v}", value));
       var bar = document.createElement("i");
       bar.style.height = barPx(value, max) + "px";
       var label = document.createElement("span");
-      label.innerHTML = w.now === i ? MONTHS[i] + "<em>now</em>" : MONTHS[i];
+      label.innerHTML = w.now === i ? MONTHS[i] + "<em>" + str("now", "now") + "</em>" : MONTHS[i];
       b.appendChild(bar);
       b.appendChild(label);
       b.addEventListener("click", function () { selectMonth(i, b); });
@@ -417,7 +425,7 @@
   // smoothed: yearlies in twelfths, EUR converted, splits and the paused
   // 3a excluded. Each slice knows the payments inside it for the detail
   // card on the right.
-  var SLICES = [
+  var SLICES = I18N.slices || [
     ["Housing & utilities", 1648, "#7FB8B0", [
       ["Rent", "", "CHF 1620"],
       ["SERAFE", "CHF 335 a year", "CHF 28"]
@@ -455,12 +463,14 @@
     if (!ddetail) return;
     if (donutSel === -1) {
       ddetail.innerHTML =
-        '<p class="tour-foot">Tap a slice or its legend row to see what’s inside it.</p>';
+        '<p class="tour-foot">' +
+        str("donutHint", "Tap a slice or its legend row to see what’s inside it.") +
+        "</p>";
       return;
     }
     var s = SLICES[donutSel];
     var html = '<h4><span class="swatch" style="background:' + s[2] + '"></span>' +
-      s[0] + " · CHF " + s[1] + " /mo</h4>";
+      s[0] + " · CHF " + s[1] + str("perMo", " /mo") + "</h4>";
     s[3].forEach(function (r) {
       html += '<div class="mini-row"><span class="mini-name">' + r[0] + "</span>" +
         (r[1] ? '<span class="dd-sub">' + r[1] + "</span>" : "") +
@@ -487,8 +497,8 @@
     donut.style.background = "conic-gradient(" + stops.join(",") + ")";
     if (center) {
       center.innerHTML = donutSel === -1
-        ? "<strong>CHF " + donutTotal + "</strong><span>per month, smoothed</span>"
-        : "<strong>CHF " + SLICES[donutSel][1] + "</strong><span>" + SLICES[donutSel][0] + " / month</span>";
+        ? "<strong>CHF " + donutTotal + "</strong><span>" + str("smoothed", "per month, smoothed") + "</span>"
+        : "<strong>CHF " + SLICES[donutSel][1] + "</strong><span>" + SLICES[donutSel][0] + str("perMonth", " / month") + "</span>";
     }
   }
 

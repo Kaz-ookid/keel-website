@@ -4,6 +4,18 @@ The one-page site for Keel, the subscription and split-payment tracker for
 iPhone. Plain HTML, CSS and a little vanilla JS: no framework, no build
 step, nothing to maintain.
 
+## Languages
+
+English lives at the root; full localized pages live in `fr/`, `de/`,
+`pl/` and `it/` (linked via the header switcher + `hreflang` tags). All
+pages share `styles.css` and `script.js`; the strings that script.js
+GENERATES (tour totals, chart windows, donut slices…) come from an inline
+`window.KEEL_I18N` object each localized page defines before loading the
+script — English is the built-in fallback. When copy changes at the root,
+carry the change into the four localized pages (and their `KEEL_I18N`
+block if it's a generated string). Legal pages stay English for now; the
+localized footers label them "(EN)".
+
 ## Run locally
 
 Open `index.html` in a browser, or serve the folder:
