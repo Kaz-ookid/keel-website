@@ -107,14 +107,81 @@
     });
   }
 
-  // Step 2: the Upcoming replica. Folds, account filter (the hero follows),
-  // and mark-paid that settles the row in place.
+  // Step 2: the Upcoming replica. Every row carries its amount and
+  // currency, and every total on screen (hero, fold bars, day sections)
+  // is recomputed from the rows' current state, the way the app does it.
+  var RATE = 0.9253; // EUR to CHF, frozen for the demo
   var HERO = {
-    all: ["Due this month", "CHF 1991.64", "then CHF 3222.00 in August"],
-    bour: ["Boursorama needs", "€0", "nothing left this month, by Jul 31"],
-    post: ["PostFinance needs", "CHF 1909.40", "by Jul 31"],
-    neon: ["Neon needs", "€89.17", "by Jul 31"]
+    all: ["Due this month", "then CHF 2674.09 in August"],
+    bour: ["Boursorama needs", "nothing left this month, by Jul 31"],
+    post: ["PostFinance needs", "by Jul 31"],
+    neon: ["Neon needs", "by Jul 31"]
   };
+  var ZERO = { all: "CHF 0", bour: "€0", post: "CHF 0", neon: "€0" };
+  var currentAcct = "all";
+
+  var upRoot = document.getElementById("t-upcoming");
+  var paidFold = document.querySelector('[data-fold-body="paid"]');
+  var paidBar = document.querySelector('[data-fold="paid"]');
+  var nextFold = document.querySelector('[data-fold-body="next"]');
+  var nextBar = document.querySelector('[data-fold="next"]');
+
+  function money(n) { return n.toFixed(2).replace(/\.00$/, ""); }
+  function fmtSum(s, acct) {
+    if (s.eur > 0 && s.chf > 0) return "CHF " + money(s.chf + s.eur * RATE);
+    if (s.eur > 0) return "€" + money(s.eur);
+    if (s.chf > 0) return "CHF " + money(s.chf);
+    return ZERO[acct || "all"];
+  }
+  function inFilter(row) { return currentAcct === "all" || row.dataset.acct === currentAcct; }
+  function sumRows(rows) {
+    var s = { chf: 0, eur: 0, n: 0 };
+    rows.forEach(function (row) {
+      if (!inFilter(row)) return;
+      s.n++;
+      if (row.dataset.cur === "eur") s.eur += parseFloat(row.dataset.amt);
+      else s.chf += parseFloat(row.dataset.amt);
+    });
+    return s;
+  }
+
+  function recompute() {
+    if (!upRoot) return;
+    var rows = Array.prototype.slice.call(upRoot.querySelectorAll(".up-row[data-amt]"));
+    var due = sumRows(rows.filter(function (r) {
+      return !r.classList.contains("settled") && !nextFold.contains(r);
+    }));
+    var paid = sumRows(rows.filter(function (r) { return r.classList.contains("settled"); }));
+    var aug = sumRows(rows.filter(function (r) { return nextFold.contains(r); }));
+
+    var hero = HERO[currentAcct];
+    document.getElementById("t-hero-label").textContent = hero[0];
+    document.getElementById("t-hero-amount").textContent = fmtSum(due, currentAcct);
+    document.getElementById("t-hero-sub").textContent = hero[1];
+
+    // Rows follow the filter; a section with nothing left hides entirely,
+    // and each day's total re-adds from what is still unpaid in it.
+    rows.forEach(function (row) { row.style.display = inFilter(row) ? "" : "none"; });
+    upRoot.querySelectorAll("[data-section]").forEach(function (section) {
+      var sectionRows = Array.prototype.slice.call(section.querySelectorAll(".up-row"));
+      var shown = sectionRows.filter(inFilter);
+      section.style.display = shown.length ? "" : "none";
+      var total = section.querySelector(".up-day-total");
+      if (total) {
+        var open = sumRows(sectionRows.filter(function (r) { return !r.classList.contains("settled"); }));
+        total.textContent = open.n ? fmtSum(open) : "";
+      }
+    });
+
+    // The two folds carry their totals on the bar. No paid payments under
+    // the current filter: no paid fold at all.
+    if (paidBar && paidFold) {
+      paidBar.style.display = paid.n ? "" : "none";
+      if (!paid.n) { paidFold.hidden = true; paidBar.classList.remove("open"); }
+      paidBar.querySelector("span").textContent = "Paid this month · " + fmtSum(paid);
+    }
+    if (nextBar) nextBar.querySelector("span").textContent = "August 2026 · " + fmtSum(aug);
+  }
 
   document.querySelectorAll(".fold-bar").forEach(function (bar) {
     bar.addEventListener("click", function () {
@@ -131,30 +198,18 @@
     chip.addEventListener("click", function () {
       chips.forEach(function (c) { c.classList.remove("active"); });
       chip.classList.add("active");
-      var acct = chip.dataset.acct;
-      var hero = HERO[acct];
-      var l = document.getElementById("t-hero-label");
-      var a = document.getElementById("t-hero-amount");
-      var s = document.getElementById("t-hero-sub");
-      if (l && hero) { l.textContent = hero[0]; a.textContent = hero[1]; s.textContent = hero[2]; }
-      document.querySelectorAll("#t-upcoming [data-acct]").forEach(function (row) {
-        row.style.display = acct === "all" || row.dataset.acct === acct || row.dataset.acct === "all" ? "" : "none";
-      });
-      // A day section with every row filtered out hides entirely.
-      document.querySelectorAll("#t-upcoming [data-section]").forEach(function (section) {
-        var visible = Array.prototype.some.call(
-          section.querySelectorAll("[data-acct]"),
-          function (row) { return row.style.display !== "none"; }
-        );
-        section.style.display = visible ? "" : "none";
-      });
+      currentAcct = chip.dataset.acct;
+      recompute();
     });
   });
 
   // Mark paid: the row settles, then MOVES up into the "Paid this month"
-  // fold (which opens so you see it land). Undo sends it home again.
-  var paidFold = document.querySelector('[data-fold-body="paid"]');
-  var paidBar = document.querySelector('[data-fold="paid"]');
+  // fold (which opens so you see it land). Undo sends it home again. Salt
+  // Home arrives already paid; undoing it lands in Overdue (it was due
+  // July 9th), exactly what the app would do.
+  var saltRow = document.getElementById("row-salt");
+  var overdueSection = document.getElementById("sec-overdue");
+  if (saltRow && overdueSection) saltRow._home = { parent: overdueSection, next: null };
   document.querySelectorAll("[data-mark]").forEach(function (btn) {
     btn.addEventListener("click", function () {
       var row = btn.closest(".up-row");
@@ -174,21 +229,30 @@
           if (tag.dataset.over === "1") tag.classList.add("up-tag-over");
         }
       }
-      if (!paidFold || !paidBar) return;
-      if (settledNow) {
-        // Remember where home is, then travel to the settled zone.
-        row._home = { parent: row.parentElement, next: row.nextElementSibling };
-        setTimeout(function () {
-          paidFold.appendChild(row);
-          paidFold.hidden = false;
-          paidBar.classList.add("open");
-        }, 550);
-      } else if (row._home) {
-        row._home.parent.insertBefore(row, row._home.next);
-        row._home = null;
+      // Overdue rows show their amount in orange until they are settled.
+      if (settledNow) row.classList.remove("overdue");
+      else if (tag && tag.dataset.over === "1") row.classList.add("overdue");
+      if (paidFold && paidBar) {
+        if (settledNow) {
+          // Remember where home is, then travel to the settled zone.
+          row._home = { parent: row.parentElement, next: row.nextElementSibling };
+          setTimeout(function () {
+            if (!row.classList.contains("settled")) return; // undone mid-flight
+            paidFold.appendChild(row);
+            paidFold.hidden = false;
+            paidBar.classList.add("open");
+            recompute();
+          }, 550);
+        } else if (row._home) {
+          row._home.parent.insertBefore(row, row._home.next);
+          row._home = null;
+        }
       }
+      recompute();
     });
   });
+
+  recompute();
 
   // Step 3: months, three year-windows deep. Rows carry a payment status
   // (✓ paid, ○ still due, ! overdue), exactly the states the app shows.
@@ -244,11 +308,30 @@
   var tnext = document.getElementById("tbar-next");
   var twindow = document.getElementById("tbar-window");
 
+  // The chart box is 240px tall: 10px padding top and bottom, a 24px label
+  // strip (fixed, so a two-line "now" label can't push its bar up) and a
+  // 6px gap leave 190px of bar room. Everything below is placed in pixels
+  // from the same numbers, so bars and the average line agree.
+  var BAR_ROOM = 190;
+  var BAR_FLOOR = 10 + 24 + 6; // padding + label strip + gap
+  function barPx(value, max) {
+    return Math.round(((value / max) * 0.82 + 0.08) * BAR_ROOM);
+  }
+
+  var TBAR_HINT =
+    '<p class="tour-foot">Tap a bar to see its payments: paid, still due, or overdue. Tap it again to step back. The dashed line is the monthly average.</p>';
+
   function statusRow(r) {
     var st = ST[r[2]] || ST.due;
     return '<div class="mini-row"><span class="st ' + st[1] + '">' + st[0] +
       '</span><span class="mini-name">' + r[0] +
       '</span><span class="mini-amount">' + r[1] + "</span></div>";
+  }
+
+  function clearMonth() {
+    tbars.classList.remove("has-sel");
+    tbars.querySelectorAll(".tbar").forEach(function (t) { t.classList.remove("sel"); });
+    tdetail.innerHTML = TBAR_HINT;
   }
 
   function renderWindow() {
@@ -258,13 +341,12 @@
     tprev.disabled = windowIndex === 0;
     tnext.disabled = windowIndex === WINDOWS.length - 1;
     tbars.innerHTML = "";
-    tbars.classList.remove("has-sel");
     var max = Math.max.apply(null, w.totals);
     // The dashed average line, like the app's.
     var mean = w.totals.reduce(function (s, v) { return s + v; }, 0) / 12;
     var meanLine = document.createElement("div");
     meanLine.className = "tbar-mean";
-    meanLine.style.bottom = Math.round(((mean / max) * 82 + 8) * 2.2 + 10) + "px";
+    meanLine.style.bottom = BAR_FLOOR + barPx(mean, max) + "px";
     meanLine.innerHTML = "<span>avg ≈ CHF " + Math.round(mean) + "</span>";
     tbars.appendChild(meanLine);
     w.totals.forEach(function (value, i) {
@@ -272,19 +354,20 @@
       b.className = "tbar" + (w.spikes[i] ? " spike" : "") + (w.now === i ? " now" : "");
       b.setAttribute("aria-label", MONTHS[i] + ", about " + value + " francs");
       var bar = document.createElement("i");
-      bar.style.height = Math.round((value / max) * 82 + 8) + "%";
+      bar.style.height = barPx(value, max) + "px";
       var label = document.createElement("span");
-      label.textContent = w.now === i ? MONTHS[i] + " · now" : MONTHS[i];
+      label.innerHTML = w.now === i ? MONTHS[i] + "<em>now</em>" : MONTHS[i];
       b.appendChild(bar);
       b.appendChild(label);
       b.addEventListener("click", function () { selectMonth(i, b); });
       tbars.appendChild(b);
     });
-    tdetail.innerHTML =
-      '<p class="tour-foot">Tap a bar to see its payments: paid, still due, or overdue. The dashed line is the monthly average.</p>';
+    clearMonth();
   }
 
   function selectMonth(i, btn) {
+    // A second tap on the selected bar steps back out.
+    if (btn.classList.contains("sel")) { clearMonth(); return; }
     var w = WINDOWS[windowIndex];
     tbars.classList.add("has-sel");
     tbars.querySelectorAll(".tbar").forEach(function (t) { t.classList.remove("sel"); });
