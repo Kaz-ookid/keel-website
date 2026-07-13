@@ -63,22 +63,32 @@
     });
   }
 
-  // The aura follows the dive: each glow lags the scroll at its own depth
-  // (via --scrolly), and the sea floor fades in near the bottom of the
-  // page (via --scrollp, 0 at the top, 1 at the end).
+  // Scrolling stirs the water: the glows get dragged a touch with the
+  // flow (each at its own --f factor, some against it), then ease back
+  // to rest. The loop only runs while there is motion to settle.
   if (!reduced) {
-    var auraTick = false;
-    var setAura = function () {
-      var doc = document.documentElement;
-      var range = Math.max(1, doc.scrollHeight - window.innerHeight);
-      doc.style.setProperty("--scrolly", window.scrollY + "px");
-      doc.style.setProperty("--scrollp", String(Math.min(1, window.scrollY / range)));
-      auraTick = false;
+    var sway = 0;
+    var swayTarget = 0;
+    var swayRaf = null;
+    var lastY = window.scrollY;
+    var swayStep = function () {
+      swayTarget *= 0.88; // the stir dies down on its own
+      sway += (swayTarget - sway) * 0.1;
+      if (Math.abs(sway) < 0.05 && Math.abs(swayTarget) < 0.05) {
+        sway = 0;
+        swayRaf = null;
+        document.documentElement.style.setProperty("--sway", "0px");
+        return;
+      }
+      document.documentElement.style.setProperty("--sway", sway.toFixed(2) + "px");
+      swayRaf = requestAnimationFrame(swayStep);
     };
     window.addEventListener("scroll", function () {
-      if (!auraTick) { auraTick = true; requestAnimationFrame(setAura); }
+      var y = window.scrollY;
+      swayTarget = Math.max(-26, Math.min(26, swayTarget + (y - lastY) * 0.35));
+      lastY = y;
+      if (!swayRaf) swayRaf = requestAnimationFrame(swayStep);
     }, { passive: true });
-    setAura();
   }
 
   var year = document.getElementById("year");

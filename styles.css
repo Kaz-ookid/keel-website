@@ -23,6 +23,7 @@
 html { scroll-behavior: smooth; }
 
 body {
+  position: relative; /* the aura sizes itself to the whole document */
   background: var(--bg);
   color: var(--ink);
   font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI",
@@ -41,24 +42,28 @@ a { color: inherit; text-decoration: none; }
 }
 
 /* ------------------------------- Aura -------------------------------- */
-/* The ambient stage: light through water. Each glow is a plane at its own
-   depth: it lags the scroll a little (the deeper, the slower), while its
-   light wanders a long lopsided path, changes shape softly, and breathes
-   on slow, unsynchronized periods. Scrolling down reads as diving: the
-   surface sheet recedes early, the sea floor fades in near the bottom. */
+/* The ambient stage: light through water. The layer spans the whole
+   document, glows scattered all the way down, so scrolling moves past
+   them like features on the sea (no fixed layer, no parallax tricks).
+   Each light wanders a long lopsided path, changes shape softly, and
+   breathes on slow, unsynchronized periods. Scrolling stirs the water:
+   script.js eases --sway from the scroll's velocity, and each glow takes
+   it at its own factor (--f), some against the flow. The page-length
+   gradient does the diving: lighter at the surface, darkest at the
+   bottom, where the sea floor waits. */
 
 .aura {
-  position: fixed; inset: 0;
+  position: absolute; inset: 0;
   z-index: -1;
   background:
-    linear-gradient(180deg, #0c1830 0%, var(--bg) 45%, #050a16 100%);
+    linear-gradient(180deg, #0c1830 0%, var(--bg) 16%, #081226 55%, #050a16 100%);
   overflow: hidden;
 }
 
 .glow {
   position: absolute;
   will-change: transform;
-  transform: translate3d(0, calc(var(--scrolly, 0px) * var(--depth, -0.05)), 0);
+  transform: translate3d(0, calc(var(--sway, 0px) * var(--f, 1)), 0);
 }
 .glow::before {
   content: "";
@@ -69,38 +74,58 @@ a { color: inherit; text-decoration: none; }
   will-change: transform, opacity;
 }
 
-.glow-a { --depth: -0.07; width: 620px; height: 620px; left: 55%; top: -220px; }
-.glow-a::before {
-  background: radial-gradient(circle, rgba(127, 184, 176, 0.32), transparent 65%);
-  animation: wander-a 38s ease-in-out infinite alternate, breathe-a 9s ease-in-out infinite;
-}
-
-.glow-b { --depth: -0.035; width: 460px; height: 460px; left: -160px; top: 42%; }
-.glow-b::before {
-  background: radial-gradient(circle, rgba(127, 184, 176, 0.18), transparent 65%);
-  animation: wander-b 46s ease-in-out infinite alternate, breathe-b 13s ease-in-out infinite;
-}
-
-.glow-c { --depth: -0.11; width: 380px; height: 380px; right: -120px; top: 72%; }
-.glow-c::before {
-  background: radial-gradient(circle, rgba(232, 115, 90, 0.10), transparent 65%);
-  animation: wander-c 52s ease-in-out infinite alternate, breathe-c 17s ease-in-out infinite;
-}
-
-/* The surface: a wide sheet of light overhead that recedes as you dive. */
-.glow-surface { --depth: -0.22; left: -20vw; top: -150px; width: 140vw; height: 300px; }
+/* The surface: a wide sheet of light at the very top of the page. */
+.glow-surface { --f: 0.4; left: -20vw; top: -150px; width: 140vw; height: 300px; }
 .glow-surface::before {
   background: radial-gradient(ellipse at 50% 50%, rgba(127, 184, 176, 0.20), transparent 70%);
   filter: blur(55px);
   animation: sway-surface 21s ease-in-out infinite alternate, breathe-surface 8s ease-in-out infinite;
 }
 
-/* The sea floor: only there once you are deep enough into the page. */
-.glow-floor {
-  --depth: 0;
-  left: 8vw; bottom: -280px; width: 84vw; height: 460px;
-  opacity: calc((var(--scrollp, 0) - 0.45) * 1.5);
+.g1 { --f: 1; width: 620px; height: 620px; left: 55%; top: 2%; }
+.g1::before {
+  background: radial-gradient(circle, rgba(127, 184, 176, 0.30), transparent 65%);
+  animation: wander-a 38s ease-in-out infinite alternate, breathe-a 9s ease-in-out infinite;
 }
+
+.g2 { --f: -0.6; width: 460px; height: 460px; left: -160px; top: 14%; }
+.g2::before {
+  background: radial-gradient(circle, rgba(127, 184, 176, 0.18), transparent 65%);
+  animation: wander-b 46s ease-in-out infinite alternate, breathe-b 13s ease-in-out infinite;
+}
+
+.g3 { --f: 1.3; width: 380px; height: 380px; right: -120px; top: 28%; }
+.g3::before {
+  background: radial-gradient(circle, rgba(232, 115, 90, 0.10), transparent 65%);
+  animation: wander-c 52s ease-in-out infinite alternate, breathe-c 17s ease-in-out infinite;
+}
+
+.g4 { --f: -0.8; width: 520px; height: 520px; left: 58%; top: 42%; }
+.g4::before {
+  background: radial-gradient(circle, rgba(127, 184, 176, 0.22), transparent 65%);
+  animation: wander-b 41s ease-in-out infinite alternate-reverse, breathe-c 11s ease-in-out -4s infinite;
+}
+
+.g5 { --f: 1.1; width: 440px; height: 440px; left: -150px; top: 57%; }
+.g5::before {
+  background: radial-gradient(circle, rgba(127, 184, 176, 0.16), transparent 65%);
+  animation: wander-a 49s ease-in-out -20s infinite alternate, breathe-b 15s ease-in-out -7s infinite;
+}
+
+.g6 { --f: -0.5; width: 360px; height: 360px; right: -110px; top: 70%; }
+.g6::before {
+  background: radial-gradient(circle, rgba(232, 115, 90, 0.08), transparent 65%);
+  animation: wander-c 44s ease-in-out -15s infinite alternate-reverse, breathe-a 12s ease-in-out -3s infinite;
+}
+
+.g7 { --f: 0.9; width: 540px; height: 540px; left: 30%; top: 84%; }
+.g7::before {
+  background: radial-gradient(circle, rgba(127, 184, 176, 0.20), transparent 65%);
+  animation: wander-b 36s ease-in-out -9s infinite alternate, breathe-c 10s ease-in-out -5s infinite;
+}
+
+/* The sea floor, at the actual bottom of the page. */
+.glow-floor { --f: 0.3; left: 8vw; bottom: -280px; width: 84vw; height: 460px; }
 .glow-floor::before {
   background: radial-gradient(ellipse at 50% 50%, rgba(84, 130, 158, 0.24), transparent 70%);
   animation: breathe-floor 15s ease-in-out infinite;
