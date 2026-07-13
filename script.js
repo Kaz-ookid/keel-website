@@ -68,11 +68,23 @@
 
   /* ------------------------------ Tour ------------------------------- */
 
-  // Tabs
+  // Tabs: locked until the read has been played (the tour's data has to
+  // exist before the screens that show it).
+  var tourUnlocked = false;
   var tabs = document.querySelectorAll(".tour-tab");
   var panels = document.querySelectorAll(".tour-panel");
+  var readBtn = document.getElementById("tour-read");
   tabs.forEach(function (tab) {
     tab.addEventListener("click", function () {
+      if (!tourUnlocked && tab.dataset.step !== "0") {
+        // Wave from the button instead: that's the way in.
+        if (readBtn) {
+          readBtn.classList.remove("nudge");
+          void readBtn.offsetWidth; // restart the animation
+          readBtn.classList.add("nudge");
+        }
+        return;
+      }
       tabs.forEach(function (t) { t.classList.remove("active"); });
       panels.forEach(function (p) { p.classList.remove("active"); });
       tab.classList.add("active");
@@ -81,8 +93,7 @@
     });
   });
 
-  // Step 1: play the read
-  var readBtn = document.getElementById("tour-read");
+  // Step 1: play the read, which unlocks the rest of the tour.
   var out = document.getElementById("tour-out");
   var count = document.getElementById("tour-count");
   if (readBtn && out) {
@@ -91,6 +102,8 @@
       readBtn.classList.add("done");
       readBtn.textContent = "Read";
       if (count) count.textContent = "· 17 items read";
+      tourUnlocked = true;
+      tabs.forEach(function (t) { t.classList.remove("locked"); });
     });
   }
 

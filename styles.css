@@ -349,6 +349,35 @@ a { color: inherit; text-decoration: none; }
   transition: background 0.2s ease, color 0.2s ease;
 }
 .tour-tab.active { background: rgba(127, 184, 176, 0.18); color: var(--sea-bright); }
+.tour-tab.locked { opacity: 0.35; cursor: not-allowed; }
+
+/* The empty result column points at the button until the read happens. */
+.tour-waiting {
+  display: flex; align-items: center; gap: 10px;
+  border: 1.5px dashed rgba(147, 160, 180, 0.35);
+  border-radius: var(--radius-sm);
+  padding: 26px 18px;
+  color: var(--muted);
+  font-size: 14.5px;
+  line-height: 1.5;
+}
+.played .tour-waiting { display: none; }
+.tw-arrow {
+  font-size: 20px; color: var(--sea-bright); flex: none;
+  animation: tw-nudge 1.6s ease-in-out infinite;
+}
+.tw-up { display: none; }
+@keyframes tw-nudge {
+  0%, 100% { transform: translateX(0); }
+  50% { transform: translateX(-5px); }
+}
+
+/* When the button gets clicked-at through a locked tab, it waves back. */
+.tour-read.nudge { animation: read-nudge 0.5s ease; }
+@keyframes read-nudge {
+  0%, 100% { transform: scale(1); }
+  40% { transform: scale(1.07); }
+}
 
 .tour-panel { display: none; }
 .tour-panel.active { display: block; animation: panel-in 0.35s ease; }
@@ -1020,6 +1049,13 @@ a { color: inherit; text-decoration: none; }
   .card-wide, .card-full { grid-column: span 1; grid-template-columns: 1fr; }
   .tour-import, .tour-chart { grid-template-columns: 1fr; }
   .tour-donut { justify-content: center; }
+  /* Stacked layout: the button sits above, so the hint points up. */
+  .tw-left { display: none; }
+  .tw-up { display: inline; animation-name: tw-nudge-up; }
+  @keyframes tw-nudge-up {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-5px); }
+  }
 }
 
 /* --------------------------- Reduced motion ---------------------------- */
