@@ -10,6 +10,12 @@
   <meta property="og:image" content="assets/og.png" />
   <link rel="icon" href="assets/icon.png" />
   <link rel="apple-touch-icon" href="assets/icon.png" />
+  <link rel="alternate" hreflang="en" href="https://kaz-ookid.github.io/keel-website/" />
+  <link rel="alternate" hreflang="fr" href="https://kaz-ookid.github.io/keel-website/fr/" />
+  <link rel="alternate" hreflang="de" href="https://kaz-ookid.github.io/keel-website/de/" />
+  <link rel="alternate" hreflang="pl" href="https://kaz-ookid.github.io/keel-website/pl/" />
+  <link rel="alternate" hreflang="it" href="https://kaz-ookid.github.io/keel-website/it/" />
+  <link rel="alternate" hreflang="x-default" href="https://kaz-ookid.github.io/keel-website/" />
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
@@ -34,7 +40,16 @@
       <img src="assets/icon.png" alt="" width="34" height="34" />
       <span>Keel</span>
     </a>
-    <a class="top-cta" href="#get">Get the app</a>
+    <div class="top-right">
+      <nav class="langs" aria-label="Language">
+        <a href="./" class="active" aria-current="page">EN</a>
+        <a href="fr/" lang="fr">FR</a>
+        <a href="de/" lang="de">DE</a>
+        <a href="pl/" lang="pl">PL</a>
+        <a href="it/" lang="it">IT</a>
+      </nav>
+      <a class="top-cta" href="#get">Get the app</a>
+    </div>
   </header>
 
   <main id="top">
@@ -87,7 +102,7 @@
       <div class="trust-inner">
         <p class="vow" data-reveal><span class="vow-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="11" width="16" height="9" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg></span><span><strong>Private by architecture.</strong> No account, no server, no tracking. Built by a cybersecurity engineer who'd rather there be nothing to breach.</span></p>
         <p class="vow" data-reveal data-reveal-delay="1"><span class="vow-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="3"/><path d="M3 10h18"/><path d="M7 15h4"/></svg></span><span><strong>Every payment, not just subscriptions.</strong> Bills, split purchases and once-a-year ambushes are first-class citizens here.</span></p>
-        <p class="vow" data-reveal data-reveal-delay="1"><span class="vow-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20.6 13.4 13.4 20.6a2 2 0 0 1-2.8 0L3 13V3h10l7.6 7.6a2 2 0 0 1 0 2.8Z"/><circle cx="7.5" cy="7.5" r="1.3"/></svg></span><span><strong>Free, honestly.</strong> The whole tracker costs nothing. One optional purchase, once; nothing ever renews.</span></p>
+        <p class="vow" data-reveal data-reveal-delay="1"><span class="vow-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20.6 13.4 13.4 20.6a2 2 0 0 1-2.8 0L3 13V3h10l7.6 7.6a2 2 0 0 1 0 2.8Z"/><circle cx="7.5" cy="7.5" r="1.3"/></svg></span><span><strong>Free, honestly.</strong> The whole tracker costs nothing. One optional purchase, once, for life.</span></p>
         <p class="vow" data-reveal data-reveal-delay="2"><span class="vow-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="7" y="2" width="10" height="20" rx="3"/><path d="M11 18.5h2"/></svg></span><span><strong>Native for iPhone.</strong> Widgets, Face ID, and Apple Intelligence on supported iPhones.</span></p>
       </div>
     </section>
@@ -193,6 +208,12 @@ neon (chf): google one 1.99 the 4th. airpods pay-in-4 179&euro; via paypal from 
               <p class="tour-foot">Every item lands on a review screen before it's saved. Highlighted chips came straight from the text. In the app, 2 reads like this come free; only a successful read counts.</p>
             </div>
           </div>
+          <details class="ai-note">
+            <summary>A note on AI and your data</summary>
+            <p>Keel has no server and never sees your list. Whichever way you import, the app only reads the answer, on your phone, and every item stops at a review screen before anything is saved.</p>
+            <p>With your own AI (ChatGPT, Claude, Gemini…), your list goes to that assistant under its own terms, exactly as if you pasted it into their chat. Use one you already trust with this kind of text, or leave out anything you'd rather keep to yourself.</p>
+            <p>With Apple Intelligence on supported iPhones, the model runs on the device itself. Apple documents this processing as on-device and offline: nothing leaves the phone.</p>
+          </details>
         </div>
 
         <!-- STEP 2: Upcoming (live replica: filter, folds, mark paid) -->
@@ -266,7 +287,6 @@ neon (chf): google one 1.99 the 4th. airpods pay-in-4 179&euro; via paypal from 
               <div class="up-row" data-acct="post" data-amt="289.40" data-cur="chf"><span class="mini-dot" style="background:#B56576"></span><span class="mini-name">CSS Assurance</span><span class="up-tag">manual</span><span class="mini-amount">CHF 289.40 · PostFinance</span></div>
             </div>
           </div>
-          <p class="tour-foot">All working: filter by account (the hero follows), open the paid fold, mark the overdue CSS paid. A paused commitment (the 3a savings) counts nowhere until it resumes.</p>
         </div>
 
         <!-- STEP 3: months bar chart -->

@@ -1,0 +1,635 @@
+<!doctype html>
+<html lang="it">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Keel: abbonamenti, bollette e pagamenti a rate in un posto tranquillo</title>
+  <meta name="description" content="Keel tiene traccia di abbonamenti, bollette e pagamenti a rate: cosa esce, da quale conto, e quanto costa davvero. Privato per architettura. Gratis da usare, un solo prezzo se vuoi di più." />
+  <meta property="og:title" content="Keel" />
+  <meta property="og:description" content="Ogni pagamento, un posto tranquillo. Privato per architettura." />
+  <meta property="og:image" content="../assets/og.png" />
+  <link rel="icon" href="../assets/icon.png" />
+  <link rel="apple-touch-icon" href="../assets/icon.png" />
+  <link rel="alternate" hreflang="en" href="https://kaz-ookid.github.io/keel-website/" />
+  <link rel="alternate" hreflang="fr" href="https://kaz-ookid.github.io/keel-website/fr/" />
+  <link rel="alternate" hreflang="de" href="https://kaz-ookid.github.io/keel-website/de/" />
+  <link rel="alternate" hreflang="pl" href="https://kaz-ookid.github.io/keel-website/pl/" />
+  <link rel="alternate" hreflang="it" href="https://kaz-ookid.github.io/keel-website/it/" />
+  <link rel="alternate" hreflang="x-default" href="https://kaz-ookid.github.io/keel-website/" />
+  <link rel="stylesheet" href="../styles.css" />
+</head>
+<body>
+
+  <!-- Ambient stage: the app's aura, in CSS. -->
+  <div class="aura" aria-hidden="true">
+    <div class="glow glow-surface"></div>
+    <div class="glow g1"></div>
+    <div class="glow g2"></div>
+    <div class="glow g3"></div>
+    <div class="glow g4"></div>
+    <div class="glow g5"></div>
+    <div class="glow g6"></div>
+    <div class="glow g7"></div>
+    <div class="glow glow-floor"></div>
+  </div>
+
+  <header class="top">
+    <a class="brand" href="#top">
+      <img src="../assets/icon.png" alt="" width="34" height="34" />
+      <span>Keel</span>
+    </a>
+    <div class="top-right">
+      <nav class="langs" aria-label="Lingua">
+        <a href="../" lang="en">EN</a>
+        <a href="../fr/" lang="fr">FR</a>
+        <a href="../de/" lang="de">DE</a>
+        <a href="../pl/" lang="pl">PL</a>
+        <a href="./" class="active" aria-current="page">IT</a>
+      </nav>
+      <a class="top-cta" href="#get">Scarica l'app</a>
+    </div>
+  </header>
+
+  <main id="top">
+
+    <!-- ============================== HERO ============================== -->
+    <section class="hero">
+      <div class="hero-copy" data-reveal>
+        <p class="eyebrow">Per iPhone</p>
+        <h1>Ogni pagamento,<br />un posto tranquillo.</h1>
+        <p class="lede">
+          Gli abbonamenti, le bollette e quel pagamento in 4 rate che avevi
+          dimenticato. Keel sa cosa esce, da quale conto, e quanto costa
+          davvero.
+        </p>
+        <div class="hero-actions">
+          <a class="store-badge" href="#get" aria-label="Scarica dall'App Store, in arrivo">
+            <span class="store-badge-mark" aria-hidden="true">&#63743;</span>
+            <span class="store-badge-text"><small>In arrivo sull'</small>App Store</span>
+          </a>
+          <span class="hero-note">Gratis da usare. Un solo prezzo se vuoi di più.</span>
+        </div>
+      </div>
+
+      <div class="hero-device" data-reveal data-reveal-delay="1">
+        <div class="device" id="tilt-device">
+          <div class="device-notch" aria-hidden="true"></div>
+          <div class="device-screen ph">
+            <img src="../assets/screen-upcoming.png" alt="La cronologia In arrivo di Keel" onerror="this.remove()" />
+            <span class="ph-label">screenshot<br/>Pagamenti · In arrivo</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Waterline -->
+    <div class="waterline" aria-hidden="true">
+      <svg viewBox="0 0 1440 90" preserveAspectRatio="none">
+        <path class="wave wave-back"
+          d="M0,52 C120,38 240,66 360,52 C480,38 600,66 720,52 C840,38 960,66 1080,52 C1200,38 1320,66 1440,52 L1440,90 L0,90 Z" />
+        <path class="wave wave-front"
+          d="M0,60 C160,48 320,72 480,60 C640,48 800,72 960,60 C1120,48 1280,72 1440,60 L1440,90 L0,90 Z" />
+      </svg>
+    </div>
+
+    <!-- ========================== TRUST STRIP =========================== -->
+    <section class="trust">
+      <p class="eyebrow trust-kicker" data-reveal>Le regole del gioco</p>
+      <div class="trust-inner">
+        <p class="vow" data-reveal><span class="vow-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="11" width="16" height="9" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg></span><span><strong>Privato per architettura.</strong> Niente account, niente server, niente tracciamento. Costruito da un ingegnere di cybersecurity che preferisce non lasciare nulla da violare.</span></p>
+        <p class="vow" data-reveal data-reveal-delay="1"><span class="vow-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="3"/><path d="M3 10h18"/><path d="M7 15h4"/></svg></span><span><strong>Ogni pagamento, non solo gli abbonamenti.</strong> Bollette, acquisti a rate e imboscate annuali qui sono cittadini di prima classe.</span></p>
+        <p class="vow" data-reveal data-reveal-delay="1"><span class="vow-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20.6 13.4 13.4 20.6a2 2 0 0 1-2.8 0L3 13V3h10l7.6 7.6a2 2 0 0 1 0 2.8Z"/><circle cx="7.5" cy="7.5" r="1.3"/></svg></span><span><strong>Gratis, onestamente.</strong> L'intero tracker non costa nulla. Un solo acquisto opzionale, una volta, per sempre.</span></p>
+        <p class="vow" data-reveal data-reveal-delay="2"><span class="vow-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="7" y="2" width="10" height="20" rx="3"/><path d="M11 18.5h2"/></svg></span><span><strong>Nativo per iPhone.</strong> Widget, Face ID e Apple Intelligence sugli iPhone supportati.</span></p>
+      </div>
+    </section>
+
+    <!-- Il nome, spiegato. -->
+    <section class="name-note" data-reveal>
+      <p>
+        <span class="name-word">keel</span> <span class="name-pron">/ki&#720;l/</span>
+        <span class="name-def">la chiglia: la spina dorsale lungo il fondo di una barca, la parte
+        che la tiene dritta e stabile con qualsiasi tempo. È esattamente il lavoro richiesto qui.</span>
+      </p>
+    </section>
+
+    <!-- ============================ THE STORY ============================ -->
+    <section class="story">
+      <p class="eyebrow" data-reveal>Perché esiste Keel</p>
+      <div class="story-cols">
+        <article data-reveal>
+          <h3>La configurazione uccideva tutto.</h3>
+          <p>
+            I tracker di abbonamenti non sono mai sopravvissuti sul mio
+            telefono. Non perché fossero fatti male, ma perché iniziare
+            significava un pomeriggio intero: sedersi, ricordare ogni
+            abbonamento, scavare tra e-mail ed estratti conto, poi digitare
+            tutto a mano. Keel toglie quel muro. Scegli tra i servizi
+            conosciuti e arriva tutto precompilato, metti da parte il resto
+            per dopo, oppure dai a un'IA una lista buttata giù, degli
+            screenshot, perfino l'export dei dati dell'app che li seguiva
+            prima: la tua IA, o Apple Intelligence direttamente sul telefono.
+            Minuti, non un pomeriggio.
+          </p>
+        </article>
+        <article data-reveal data-reveal-delay="1">
+          <h3>Il pagamento che spaventa non è mai stato Netflix.</h3>
+          <p>
+            Era il pagamento in 4 rate. Su quale conto cade, quando, e per
+            quanti mesi ancora? Gli acquisti a rate sono diventati in silenzio
+            un'autostrada verso i debiti proprio perché nulla li segue, e le
+            app nate per gli abbonamenti possono solo imitarli. In Keel sono
+            di prima classe: ogni rata, il suo conto, il suo fornitore, la
+            sua data di fine.
+          </p>
+        </article>
+      </div>
+    </section>
+
+    <!-- ========================= INTERACTIVE TOUR ======================== -->
+    <section class="tour" id="tour">
+      <p class="eyebrow" data-reveal>Guardalo lavorare</p>
+      <h2 class="section-title tour-title" data-reveal>Una lista disordinata,<br />quattro schermate dopo.</h2>
+      <p class="tour-disclaimer" data-reveal>
+        Un'illustrazione funzionante: ricreazioni web semplificate, non
+        l'interfaccia esatta dell'app. Quattro funzioni mostrate in breve;
+        l'app va oltre su ognuna.
+      </p>
+
+      <div class="tour-shell" data-reveal>
+        <div class="tour-tabs" role="tablist">
+          <button class="tour-tab active" data-step="0" role="tab">1 · Import</button>
+          <button class="tour-tab locked" data-step="1" role="tab">2 · In arrivo</button>
+          <button class="tour-tab locked" data-step="2" role="tab">3 · Mesi</button>
+          <button class="tour-tab locked" data-step="3" role="tab">4 · Categorie</button>
+        </div>
+
+        <!-- STEP 1 -->
+        <div class="tour-panel active" data-panel="0">
+          <div class="tour-import">
+            <div class="tour-import-in">
+              <p class="tour-label">Scrivi (o fotografi, o esporti dal vecchio tracker) qualcosa come</p>
+              <div class="rough">boursorama (eur): canone conto 2&euro; il primo giovedì del mese. prestito auto 645.30 il 7. google one 1.99 il 4.<br /><br />
+postfinance (chf): affitto 1620 manuale il 25. assicurazione css 289.40 manuale il 25. frankly 3a 550 al mese manuale. chatgpt plus 21.55 il 15. serafe 335 all'anno dal 31 marzo, 312 l'anno prossimo. metà-prezzo 120 ogni 26 dicembre, 190 dal 2027 (pagare entro il 1° gennaio). magicpass 399 all'anno da dic 2025, ultimo dic 2026. abbonamento tpg 500 dal 24 marzo, 730 dal 2027. tcs 96/anno poi 76. salt internet 39.95 manuale dal 9 aprile. basefit 59 manuale il 4.<br /><br />
+neon (chf): google one 1.99 il 4. airpods in 4 rate 179&euro; via paypal dal 20 maggio. tastiera custom in 4 rate 1560 hkd dal 29 aprile.</div>
+              <button class="tour-read" id="tour-read">Leggi la mia lista</button>
+            </div>
+            <div class="tour-import-out" id="tour-out" aria-live="polite">
+              <p class="tour-label">Keel restituisce <span class="tour-count" id="tour-count"></span></p>
+              <div class="tour-waiting" id="tour-waiting">
+                <span class="tw-arrow tw-left" aria-hidden="true">&#8592;</span>
+                <span class="tw-arrow tw-up" aria-hidden="true">&#8593;</span>
+                Premi «Leggi la mia lista» e i risultati atterrano qui. Il
+                resto del tour si sblocca con loro.
+              </div>
+              <div class="parsed" id="parsed-cards">
+                <div class="parsed-card">
+                  <div class="mini-row"><span class="mini-dot" style="background:#4E79A7"></span><span class="mini-name">Affitto</span><span class="mini-amount">CHF 1620</span></div>
+                  <div class="field-chips"><span>manuale</span><span>il 25</span><span>PostFinance</span></div>
+                </div>
+                <div class="parsed-card">
+                  <div class="mini-row"><span class="mini-dot" style="background:#B56576"></span><span class="mini-name">SERAFE</span><span class="mini-amount">CHF 335 / anno</span></div>
+                  <div class="field-chips"><span>manuale</span><span>annuale · 31 mar</span><span class="chip-change">312 dal 2027</span></div>
+                </div>
+                <div class="parsed-card">
+                  <div class="mini-row"><span class="mini-dot" style="background:#E8735A"></span><span class="mini-name">AirPods · PayPal</span><span class="mini-amount">4 &times; 44,75 &euro;</span></div>
+                  <div class="field-chips"><span>automatico</span><span>pagamento a rate</span><span>dal 20 mag</span><span>Neon</span></div>
+                </div>
+                <div class="parsed-card">
+                  <div class="mini-row"><span class="mini-dot" style="background:#C9A66B"></span><span class="mini-name">Tastiera custom · 4 rate</span><span class="mini-amount">HKD 1560</span></div>
+                  <div class="field-chips"><span>automatico</span><span class="chip-change">&asymp; 44,43 &euro; / rata</span><span>dal 29 apr</span></div>
+                </div>
+                <div class="parsed-card">
+                  <div class="mini-row"><span class="mini-dot" style="background:#EB0000"></span><span class="mini-name">Metà-prezzo</span><span class="mini-amount">CHF 120 / anno</span></div>
+                  <div class="field-chips"><span>manuale</span><span>26 dic</span><span class="chip-change">190 dal 2027</span><span>nota: pagare entro il 1° gen</span></div>
+                </div>
+                <div class="parsed-card parsed-more">&hellip;e gli altri 12, letti allo stesso modo</div>
+              </div>
+              <p class="tour-foot">Ogni voce atterra su una schermata di verifica prima di essere salvata. Le etichette evidenziate arrivano dritte dal testo. Nell'app, 2 letture come questa sono gratis; conta solo una lettura riuscita.</p>
+            </div>
+          </div>
+          <details class="ai-note">
+            <summary>Una nota su IA e i tuoi dati</summary>
+            <p>Keel non ha server e non vede mai la tua lista. Qualunque strada scegli per importare, l'app legge solo la risposta, sul tuo telefono, e ogni voce si ferma su una schermata di verifica prima che qualcosa venga salvato.</p>
+            <p>Con la tua IA (ChatGPT, Claude, Gemini…) la lista va a quell'assistente alle sue condizioni, esattamente come se l'avessi incollata nella sua chat. Usa quella a cui affidi già testi di questo tipo, oppure ometti ciò che preferisci tenere per te.</p>
+            <p>Con Apple Intelligence sugli iPhone supportati, il modello gira sul dispositivo stesso. Apple documenta questa elaborazione come locale e offline: nulla lascia il telefono.</p>
+          </details>
+        </div>
+
+        <!-- STEP 2 -->
+        <div class="tour-panel" data-panel="1">
+          <p class="tour-label">La stessa lista, come cronologia · è domenica 12 luglio</p>
+
+          <div class="t-hero" id="t-hero">
+            <span class="t-hero-label" id="t-hero-label">In scadenza questo mese</span>
+            <strong class="t-hero-amount" id="t-hero-amount">CHF 1991.91</strong>
+            <span class="t-hero-sub" id="t-hero-sub">poi CHF 2674.09 ad agosto</span>
+          </div>
+
+          <div class="acct-chips" id="acct-chips">
+            <button class="acct-chip active" data-acct="all">Tutti</button>
+            <button class="acct-chip" data-acct="bour"><i style="background:#6C8EBF"></i>Boursorama</button>
+            <button class="acct-chip" data-acct="post"><i style="background:#7FB8B0"></i>PostFinance</button>
+            <button class="acct-chip" data-acct="neon"><i style="background:#C9A66B"></i>Neon</button>
+          </div>
+
+          <div class="upcoming" id="t-upcoming">
+            <button class="fold-bar" data-fold="paid">
+              <span>Pagato questo mese · CHF 39.95</span><span class="fold-chevron">&#8964;</span>
+            </button>
+            <div class="fold-body" data-fold-body="paid" hidden>
+              <div class="up-row settled" id="row-salt" data-acct="post" data-amt="39.95" data-cur="chf"><span class="mini-dot" style="background:#9C8FC7"></span><span class="mini-name">Salt Home</span><span class="up-tag" data-was="scad. 9 lug" data-over="1">pagato ✓</span><span class="mini-amount">CHF 39.95 · PostFinance</span><button class="mark-btn undo-btn" data-mark>Annulla</button></div>
+            </div>
+
+            <div class="up-section" data-section id="sec-overdue">
+              <div class="up-day up-overdue">In ritardo <span class="up-day-total">CHF 289.40</span></div>
+              <div class="up-row overdue" data-acct="post" data-amt="289.40" data-cur="chf"><span class="mini-dot" style="background:#B56576"></span><span class="mini-name">Assicurazione CSS</span><span class="up-tag up-tag-over">scad. 9 lug</span><span class="mini-amount">CHF 289.40 · PostFinance</span><button class="mark-btn" data-mark>Segna pagato</button></div>
+            </div>
+
+            <div class="up-section" data-section>
+              <div class="up-day">lun 20 lug <span class="up-day-total">44,75 &euro;</span></div>
+              <div class="up-row" data-acct="neon" data-amt="44.75" data-cur="eur"><span class="mini-dot" style="background:#E8735A"></span><span class="mini-name">AirPods · PayPal</span><span class="up-tag">3 di 4</span><span class="mini-amount">44,75 &euro; · Neon</span><span class="auto-note">automatico</span></div>
+            </div>
+
+            <div class="up-section" data-section>
+              <div class="up-day">sab 25 lug <span class="up-day-total">CHF 1620</span></div>
+              <div class="up-row" data-acct="post" data-amt="1620" data-cur="chf"><span class="mini-dot" style="background:#4E79A7"></span><span class="mini-name">Affitto</span><span class="up-tag">manuale</span><span class="mini-amount">CHF 1620 · PostFinance</span><button class="mark-btn" data-mark>Segna pagato</button></div>
+            </div>
+
+            <div class="up-section" data-section>
+              <div class="up-day">mer 29 lug <span class="up-day-total">44,42 &euro;</span></div>
+              <div class="up-row" data-acct="neon" data-amt="44.42" data-cur="eur"><span class="mini-dot" style="background:#C9A66B"></span><span class="mini-name">Tastiera custom</span><span class="up-tag up-tag-last">4 di 4 · ultima</span><span class="mini-amount">44,42 &euro; · Neon</span><span class="auto-note">automatico</span></div>
+            </div>
+
+            <button class="fold-bar" data-fold="next">
+              <span>Agosto 2026 · CHF 2674.09</span><span class="fold-chevron">&#8964;</span>
+            </button>
+            <div class="fold-body" data-fold-body="next" hidden>
+              <div class="up-day">mar 4 ago</div>
+              <div class="up-row" data-acct="bour" data-amt="1.99" data-cur="eur"><span class="mini-dot" style="background:#4285F4"></span><span class="mini-name">Google One</span><span class="up-tag">auto</span><span class="mini-amount">1,99 &euro; · Boursorama</span></div>
+              <div class="up-row" data-acct="neon" data-amt="1.99" data-cur="chf"><span class="mini-dot" style="background:#4285F4"></span><span class="mini-name">Google One</span><span class="up-tag">auto</span><span class="mini-amount">CHF 1.99 · Neon</span></div>
+              <div class="up-row" data-acct="post" data-amt="59" data-cur="chf"><span class="mini-dot" style="background:#8FBC94"></span><span class="mini-name">Basefit</span><span class="up-tag">manuale</span><span class="mini-amount">CHF 59 · PostFinance</span></div>
+              <div class="up-day">gio 6 ago</div>
+              <div class="up-row" data-acct="bour" data-amt="2" data-cur="eur"><span class="mini-dot" style="background:#6C8EBF"></span><span class="mini-name">Canone conto</span><span class="up-tag up-tag-anchor">primo giovedì</span><span class="mini-amount">2 &euro; · Boursorama</span></div>
+              <div class="up-day">ven 7 ago</div>
+              <div class="up-row" data-acct="bour" data-amt="645.30" data-cur="eur"><span class="mini-dot" style="background:#6C8EBF"></span><span class="mini-name">Prestito auto</span><span class="up-tag">auto</span><span class="mini-amount">645,30 &euro; · Boursorama</span></div>
+              <div class="up-day">dom 9 ago</div>
+              <div class="up-row" data-acct="post" data-amt="39.95" data-cur="chf"><span class="mini-dot" style="background:#9C8FC7"></span><span class="mini-name">Salt Home</span><span class="up-tag">manuale</span><span class="mini-amount">CHF 39.95 · PostFinance</span></div>
+              <div class="up-day">sab 15 ago</div>
+              <div class="up-row" data-acct="post" data-amt="21.55" data-cur="chf"><span class="mini-dot" style="background:#74AA9C"></span><span class="mini-name">ChatGPT Plus</span><span class="up-tag">auto</span><span class="mini-amount">CHF 21.55 · PostFinance</span></div>
+              <div class="up-day">gio 20 ago</div>
+              <div class="up-row" data-acct="neon" data-amt="44.75" data-cur="eur"><span class="mini-dot" style="background:#E8735A"></span><span class="mini-name">AirPods · PayPal</span><span class="up-tag up-tag-last">4 di 4 · ultima</span><span class="mini-amount">44,75 &euro; · Neon</span></div>
+              <div class="up-day">mar 25 ago</div>
+              <div class="up-row" data-acct="post" data-amt="1620" data-cur="chf"><span class="mini-dot" style="background:#4E79A7"></span><span class="mini-name">Affitto</span><span class="up-tag">manuale</span><span class="mini-amount">CHF 1620 · PostFinance</span></div>
+              <div class="up-row" data-acct="post" data-amt="289.40" data-cur="chf"><span class="mini-dot" style="background:#B56576"></span><span class="mini-name">Assicurazione CSS</span><span class="up-tag">manuale</span><span class="mini-amount">CHF 289.40 · PostFinance</span></div>
+            </div>
+          </div>
+          <p class="tour-foot">Funziona tutto: filtra per conto (il totale segue), apri la sezione dei pagati, segna come pagata la CSS in ritardo. Un impegno in pausa (il risparmio 3a) non conta da nessuna parte finché non riparte.</p>
+        </div>
+
+        <!-- STEP 3 -->
+        <div class="tour-panel" data-panel="2">
+          <p class="tour-label">Ogni mese, passato e futuro. Tocca una barra.</p>
+          <div class="tour-chart">
+            <div>
+              <div class="tbar-nav">
+                <button id="tbar-prev" aria-label="Anno precedente">&#8249;</button>
+                <strong id="tbar-window">lug 2026 · giu 2027</strong>
+                <button id="tbar-next" aria-label="Anno successivo">&#8250;</button>
+              </div>
+              <div class="tbars" id="tbars"></div>
+              <p class="tour-hint-note"><em>Le barre corallo</em> segnalano i mesi di picco, un suggerimento aggiunto solo per questa demo: l'app tiene i grafici puliti e lascia parlare i numeri.</p>
+            </div>
+            <div class="tbar-detail" id="tbar-detail">
+              <p class="tour-foot">Tocca una barra per vedere i suoi pagamenti: pagati, in scadenza o in ritardo. Toccala di nuovo per tornare indietro. La linea tratteggiata è la media mensile.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- STEP 4 -->
+        <div class="tour-panel" data-panel="3">
+          <p class="tour-label">Dove va davvero un mese</p>
+          <div class="tour-donut">
+            <div class="donut" id="donut">
+              <div class="donut-center" id="donut-center"><strong>CHF 2753</strong><span>al mese, spalmato</span></div>
+            </div>
+            <ul class="donut-legend" id="donut-legend"></ul>
+            <div class="donut-detail" id="donut-detail">
+              <p class="tour-foot">Tocca uno spicchio o la sua riga nella legenda per vedere cosa contiene.</p>
+            </div>
+          </div>
+          <p class="tour-foot">I costi annuali qui sono divisi in dodicesimi, così un rinnovo annuale mostra il suo vero peso in ogni mese. Le rate finite e il 3a in pausa restano fuori: questo è l'impegno mensile.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- =========================== BENTO GRID =========================== -->
+    <section class="features">
+      <h2 class="section-title" data-reveal>Costruito per i pagamenti<br />che gli altri tracker saltano.</h2>
+
+      <div class="bento">
+
+        <article class="card card-wide" data-reveal>
+          <div class="card-copy">
+            <h3>Il pagamento in 4 rate ha finalmente una casa.</h3>
+            <p>
+              Gli acquisti a rate sono oggetti reali in Keel: ogni rata
+              seguita, con il suo fornitore, il suo avanzamento, la sua data
+              di fine e il conto da cui esce.
+            </p>
+          </div>
+          <div class="vignette split-vignette" aria-hidden="true">
+            <div class="mini-row">
+              <span class="mini-dot" style="background:#E8735A"></span>
+              <span class="mini-name">AirPods · PayPal</span>
+              <span class="mini-amount">restano 89,50 &euro; · 2 di 4</span>
+            </div>
+            <div class="mini-progress"><i style="width:50%"></i></div>
+            <div class="mini-sub">prossima 20.07 · Neon · finisce a settembre</div>
+            <div class="mini-row" style="margin-top:8px">
+              <span class="mini-dot" style="background:#C9A66B"></span>
+              <span class="mini-name">Tastiera custom</span>
+              <span class="mini-amount">restano 44,42 &euro; · 3 di 4</span>
+            </div>
+            <div class="mini-progress"><i style="width:75%"></i></div>
+            <div class="mini-sub">ultima il 29.07 · Neon · annotati 1560 HKD</div>
+          </div>
+        </article>
+
+        <article class="card" data-reveal>
+          <h3>I cambi di prezzo,<br />messi agli atti.</h3>
+          <p>Un aumento o un ribasso si registra in anticipo, entra nel suo giorno esatto, e le Analisi mostrano quanto è andato alla deriva il tuo mese.</p>
+          <div class="vignette" aria-hidden="true">
+            <div class="mini-row"><span class="mini-dot" style="background:#B56576"></span><span class="mini-name">SERAFE</span><span class="mini-amount">335 &#8594; <b style="color:#4bc98a">312</b> · mar 2027</span></div>
+            <div class="mini-row"><span class="mini-dot" style="background:#C9A66B"></span><span class="mini-name">Abbonamento TPG</span><span class="mini-amount">500 &#8594; <b style="color:#f0b35c">730</b> · mar 2027</span></div>
+            <div class="mini-row"><span class="mini-dot" style="background:#EB0000"></span><span class="mini-name">Metà-prezzo</span><span class="mini-amount">120 &#8594; <b style="color:#f0b35c">190</b> · dic 2027</span></div>
+          </div>
+        </article>
+
+        <article class="card" data-reveal data-reveal-delay="1">
+          <h3>Promemoria<br />che ti rispettano.</h3>
+          <p>Un anticipo e un orario predefiniti per tutto, regolabili per singolo impegno. Prove gratuite e cambi di prezzo avvisano prima dell'addebito.</p>
+          <div class="vignette" aria-hidden="true">
+            <div class="mini-row"><span class="mini-dot" style="background:#B56576"></span><span class="mini-name">Assicurazione CSS</span><span class="mini-amount">CHF 289.40 scade il 25 lug</span></div>
+            <div class="mini-sub">suona il 24 lug alle 09:00 · il tuo predefinito, la sua scelta</div>
+            <div class="mini-row" style="margin-top:8px"><span class="mini-dot" style="background:#EB0000"></span><span class="mini-name">Metà-prezzo</span><span class="mini-amount">190 dal 26 dic</span></div>
+            <div class="mini-sub">cambio di prezzo annunciato in anticipo</div>
+          </div>
+        </article>
+
+        <article class="card card-wide" data-reveal>
+          <div class="card-copy">
+            <h3>Tre valute,<br />un totale sincero.</h3>
+            <p>
+              Ogni impegno viene addebitato nella valuta in cui è davvero
+              addebitato. I totali si fondono ai tassi di riferimento BCE del
+              giorno, invece di fingere che tutto sia un'unica moneta.
+            </p>
+          </div>
+          <div class="vignette" aria-hidden="true">
+            <div class="mini-row"><span class="mini-name">CHF</span><span class="mini-amount">2366,35 CHF</span></div>
+            <div class="mini-row"><span class="mini-name">EUR</span><span class="mini-amount">693,28 &euro;</span></div>
+            <div class="mini-row"><span class="mini-name">HKD</span><span class="mini-amount">annotato a 177,70 &euro;</span></div>
+            <div class="ai-arrow">&#8595;</div>
+            <div class="mini-row"><span class="mini-name"><b>Agosto, unito</b></span><span class="mini-amount"><b>3222,00 CHF</b></span></div>
+          </div>
+        </article>
+
+        <article class="card card-wide" data-reveal>
+          <div class="card-copy">
+            <h3>Il numero annuale<br />ha le sue opinioni.</h3>
+            <p>
+              I prezzi mensili sono progettati per sembrare piccoli. Le
+              Analisi sommano ogni impegno su un anno intero, dividono il tuo
+              mese per categoria, e rendono il superfluo impossibile da non
+              vedere. Dove risparmiare smette di essere una sensazione e
+              diventa un numero.
+            </p>
+          </div>
+          <div class="vignette" aria-hidden="true">
+            <div class="mini-row"><span class="mini-dot" style="background:#74AA9C"></span><span class="mini-name">ChatGPT Plus</span><span class="mini-amount">21.55 /mese · <b style="color:#edf1f5">CHF 258.60 all'anno</b></span></div>
+            <div class="mini-row"><span class="mini-dot" style="background:#8FBC94"></span><span class="mini-name">Basefit</span><span class="mini-amount">59 /mese · <b style="color:#edf1f5">CHF 708 all'anno</b></span></div>
+            <div class="mini-row"><span class="mini-dot" style="background:#9C8FC7"></span><span class="mini-name">Salt Home</span><span class="mini-amount">39.95 /mese · <b style="color:#edf1f5">CHF 479.40 all'anno</b></span></div>
+            <div class="mini-sub">il mensile è il modo in cui restano invisibili; la colonna annuale è dove decidi</div>
+          </div>
+        </article>
+
+        <article class="card card-full harbor-card" data-reveal>
+          <div class="card-copy">
+            <p class="eyebrow">E un segreto</p>
+            <h3>Dentro c'è un porto.</h3>
+            <p>Il tuo anno di pagamenti, a vela. Nascosto dietro il calendario, per quando sarai pronto.</p>
+          </div>
+          <div class="ph ph-harbor">
+            <img src="../assets/screen-harbor.png" alt="Il porto: un anno di pagamenti come navi" onerror="this.remove()" />
+            <span class="ph-label">anteprima del porto<br/>screenshot / loop</span>
+          </div>
+        </article>
+
+      </div>
+    </section>
+
+    <!-- ============================ PROMISE ============================ -->
+    <section class="promise" id="get">
+      <p class="eyebrow" data-reveal>Il patto, in chiaro</p>
+      <h2 data-reveal>Gratis per sempre.<br />Un prezzo se vuoi tutto.</h2>
+      <p class="promise-lead" data-reveal>
+        Sei qui per tenere d'occhio gli abbonamenti. L'ultima cosa che ti
+        serve è un altro.
+      </p>
+      <p class="promise-copy" data-reveal>
+        Keel è <strong>utilizzabile gratis al 100%</strong>: impegni, conti,
+        analisi, promemoria e backup illimitati. Non una prova, non un
+        assaggio. L'unica cosa che l'acquisto sblocca è la
+        <strong>lettura IA illimitata</strong>. Parti con 2 letture gratuite,
+        e una sola lettura può portare tutta la tua lista in una volta.
+        <strong>Full Keel</strong> è comodità permanente, e un modo di dire
+        grazie che ti restituisce qualcosa: <strong>10 CHF, una volta</strong>,
+        il prezzo dei primi sostenitori, che salirà a 15 CHF quando i costi di
+        sviluppo saranno coperti.
+      </p>
+      <ul class="chips" data-reveal>
+        <li>&#10003; L'intero tracker, gratis</li>
+        <li>&#10003; Acquisto opzionale</li>
+        <li>&#10003; Nulla si rinnova</li>
+        <li>&#10003; "In famiglia" incluso</li>
+      </ul>
+      <div class="price-card" data-reveal>
+        <div class="price-sheen" aria-hidden="true"></div>
+        <div class="price-was">15 CHF</div>
+        <div class="price-amount">10 CHF</div>
+        <div class="price-tag">Full Keel · prezzo primi sostenitori</div>
+        <a class="store-badge" href="#updates">
+          <span class="store-badge-mark" aria-hidden="true">&#63743;</span>
+          <span class="store-badge-text"><small>In arrivo sull'</small>App Store</span>
+        </a>
+      </div>
+    </section>
+
+    <!-- ============================= MAKER ============================= -->
+    <section class="maker">
+      <div class="maker-avatar ph" data-reveal>
+        <img src="../assets/maker.jpg" alt="" onerror="this.remove()" />
+        <span class="ph-label">foto</span>
+      </div>
+      <p class="eyebrow" data-reveal>La persona dietro</p>
+      <h2 data-reveal>Ciao, sono Maxime &#128075;</h2>
+      <p class="maker-copy" data-reveal>
+        Sono un ingegnere di cybersecurity, laureato all'EPFL e all'ETH di
+        Zurigo. La sicurezza è il mio campo, ma ho alle spalle un bagaglio
+        pesante di sviluppo di applicazioni. Keel è il mio primo progetto in
+        solitaria arrivato fino in fondo: un prodotto vero, pubblicato, che
+        mantengo e in cui passano i miei soldi, ogni giorno.
+      </p>
+      <p class="maker-copy" data-reveal data-reveal-delay="1">
+        Il background in sicurezza è il motivo per cui Keel funziona così.
+        Le tue finanze restano sul tuo telefono perché ho passato anni a
+        studiare cosa succede ai dati che lo lasciano. Niente account,
+        niente server, niente da violare: non è una funzione che ho
+        aggiunto, è l'architettura da cui sono partito.
+      </p>
+      <p class="maker-copy" data-reveal data-reveal-delay="2">
+        Tutto in questa app è stato fatto da una persona sola. Se Keel ti
+        aiuta, o se qualcosa non ti torna, voglio davvero saperlo.
+      </p>
+    </section>
+
+    <!-- ========================= STAY IN THE LOOP ======================= -->
+    <section class="updates" id="updates">
+      <div class="updates-card" data-reveal>
+        <div class="updates-glow" aria-hidden="true"></div>
+        <h2>Sii lì quando Keel salperà.</h2>
+        <p>Il lancio, e tutta la strada per arrivarci, si racconta in un solo posto.</p>
+        <a class="updates-linkedin" href="https://www.linkedin.com/in/maxime-teuber-ba18732b0/" target="_blank" rel="noopener">
+          Segui su LinkedIn
+        </a>
+        <p class="updates-note">Niente newsletter, niente moduli. Tieni solo gli occhi aperti.</p>
+      </div>
+    </section>
+
+    <!-- ============================ CLOSING ============================ -->
+    <section class="closing">
+      <h2 data-reveal>Ogni pagamento,<br />un posto tranquillo.</h2>
+      <a class="store-badge" href="#updates" data-reveal>
+        <span class="store-badge-mark" aria-hidden="true">&#63743;</span>
+        <span class="store-badge-text"><small>In arrivo sull'</small>App Store</span>
+      </a>
+    </section>
+
+  </main>
+
+  <footer class="footer">
+    <div class="footer-brand">
+      <img src="../assets/icon.png" alt="" width="28" height="28" />
+      <span>Keel</span>
+    </div>
+    <nav class="footer-links">
+      <a href="../privacy.html">Informativa sulla privacy (EN)</a>
+      <a href="../terms.html">Condizioni d'uso (EN)</a>
+      <a href="mailto:maxime.teuber@proton.me">Contatto</a>
+    </nav>
+    <p class="footer-note">
+      Tutti i nomi di prodotti, i loghi e i marchi citati in Keel appartengono
+      ai rispettivi proprietari. Keel è indipendente e non è affiliato,
+      approvato o sponsorizzato da nessuno di essi.
+    </p>
+    <p class="footer-fine">Fatto in Svizzera &middot; &copy; <span id="year">2026</span> Keel</p>
+  </footer>
+
+  <script>
+    window.KEEL_I18N = {
+      strings: {
+        readDone: "Letto",
+        itemsRead: "· 17 voci lette",
+        paidFold: "Pagato questo mese",
+        nextFold: "Agosto 2026",
+        undo: "Annulla",
+        markPaid: "Segna pagato",
+        paidTag: "pagato ✓",
+        tbarHint: "Tocca una barra per vedere i suoi pagamenti: pagati, in scadenza o in ritardo. Toccala di nuovo per tornare indietro. La linea tratteggiata è la media mensile.",
+        avg: "media ≈ CHF ",
+        aboutFrancs: ", circa {v} franchi",
+        now: "ora",
+        donutHint: "Tocca uno spicchio o la sua riga nella legenda per vedere cosa contiene.",
+        perMo: " /mese",
+        smoothed: "al mese, spalmato",
+        perMonth: " / mese"
+      },
+      months: ["lug", "ago", "set", "ott", "nov", "dic", "gen", "feb", "mar", "apr", "mag", "giu"],
+      hero: {
+        all: ["In scadenza questo mese", "poi CHF 2674.09 ad agosto"],
+        bour: ["A Boursorama servono", "niente altro questo mese, entro il 31 lug"],
+        post: ["A PostFinance servono", "entro il 31 lug"],
+        neon: ["A Neon servono", "entro il 31 lug"]
+      },
+      windows: [
+        {
+          label: "lug 2025 · giu 2026",
+          totals: [651, 651, 651, 651, 651, 1170, 651, 651, 3491, 2645, 2734, 2734],
+          spikes: { 5: true, 8: true },
+          now: -1,
+          details: {
+            5: { title: "Dicembre 2025", rows: [["Metà-prezzo", "CHF 120", "paid"], ["MagicPass", "CHF 399", "paid"]], note: "Il primo dicembre: entrambi gli abbonamenti comprati." },
+            8: { title: "Marzo 2026", rows: [["Inizia l'affitto", "CHF 1620", "paid"], ["CSS, SERAFE, TPG, TCS", "≈ CHF 1220", "paid"]], note: "Il mese del trasloco: cinque impegni partiti insieme." }
+          },
+          fallback: { rows: [["La base degli inizi", "prestito, canoni, cloud", "paid"]], note: "Prima di marzo 2026 poco era ricorrente." }
+        },
+        {
+          label: "lug 2026 · giu 2027",
+          totals: [2841, 2797, 2752, 2752, 2752, 3271, 2752, 2752, 3870, 2752, 2752, 2752],
+          spikes: { 5: true, 8: true },
+          now: 0,
+          details: {
+            0: {
+              title: "Luglio 2026 · ora",
+              rows: [["Salt Home", "CHF 39.95", "paid"], ["Assicurazione CSS", "CHF 289.40", "over"], ["AirPods · 3 di 4", "44,75 €", "due"], ["Affitto", "CHF 1620", "due"], ["Tastiera · ultima", "44,42 €", "due"]],
+              note: "Il mese in corso: uno pagato, uno in ritardo, il resto in arrivo."
+            },
+            5: { title: "Dicembre 2026", rows: [["Metà-prezzo", "CHF 120", "due"], ["MagicPass", "CHF 399", "due"]], note: "L'imboscata di dicembre, visibile già da luglio. L'ultima stagione del MagicPass." },
+            8: { title: "Marzo 2027", rows: [["SERAFE", "CHF 312", "due"], ["Abbonamento TPG", "CHF 730", "due"], ["TCS", "CHF 76", "due"]], note: "Tre rinnovi nello stesso mese, ogni cambio di prezzo già agli atti." }
+          },
+          fallback: { rows: [["Affitto", "CHF 1620", "due"], ["Prestito auto", "645,30 €", "due"], ["Assicurazione CSS", "CHF 289.40", "due"], ["Basefit + Salt", "CHF 98.95", "due"], ["Il digitale", "≈ CHF 28", "due"]], note: "Il mese tranquillo: la base ricorrente, nient'altro." }
+        },
+        {
+          label: "lug 2027 · giu 2028",
+          totals: [2681, 2681, 2681, 2681, 2681, 2871, 2681, 2681, 3799, 2681, 2681, 2681],
+          spikes: { 5: true, 8: true },
+          now: -1,
+          details: {
+            5: { title: "Dicembre 2027", rows: [["Metà-prezzo", "CHF 190", "due"]], note: "Il nuovo prezzo, noto dal primo giorno. Niente più MagicPass: finito nel 2026." },
+            8: { title: "Marzo 2028", rows: [["SERAFE", "CHF 312", "due"], ["Abbonamento TPG", "CHF 730", "due"], ["TCS", "CHF 76", "due"]], note: "Il marzo dell'anno dopo, già messo in conto." }
+          },
+          fallback: { rows: [["La base assestata", "≈ CHF 2681 / mese", "due"]], note: "Le rate sono finite; restano da tenere d'occhio i picchi annuali." }
+        }
+      ],
+      slices: [
+        ["Casa e utenze", 1648, "#7FB8B0", [
+          ["Affitto", "", "CHF 1620"],
+          ["SERAFE", "CHF 335 all'anno", "CHF 28"]
+        ]],
+        ["Finanza", 599, "#6C8EBF", [
+          ["Prestito auto", "645,30 € al mese", "CHF 597"],
+          ["Canone conto", "2 € · primo giovedì", "CHF 1.85"]
+        ]],
+        ["Assicurazione", 289, "#B56576", [
+          ["Assicurazione CSS", "", "CHF 289.40"]
+        ]],
+        ["Telecom e sport", 99, "#8FBC94", [
+          ["Basefit", "", "CHF 59"],
+          ["Salt Home", "", "CHF 39.95"]
+        ]],
+        ["Trasporti e tessere", 93, "#C9A66B", [
+          ["Abbonamento TPG", "CHF 500 all'anno", "CHF 42"],
+          ["MagicPass", "CHF 399 all'anno", "CHF 33"],
+          ["Metà-prezzo", "CHF 120 all'anno", "CHF 10"],
+          ["TCS", "CHF 96 all'anno", "CHF 8"]
+        ]],
+        ["Software", 25, "#9C8FC7", [
+          ["ChatGPT Plus", "", "CHF 21.55"],
+          ["Google One", "due conti", "CHF 3.83"]
+        ]]
+      ]
+    };
+  </script>
+  <script src="../script.js"></script>
+</body>
+</html>
