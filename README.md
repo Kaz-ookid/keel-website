@@ -1,24 +1,60 @@
-# keel-website
+```
+██╗  ██╗███████╗███████╗██╗
+██║ ██╔╝██╔════╝██╔════╝██║
+█████╔╝ █████╗  █████╗  ██║
+██╔═██╗ ██╔══╝  ██╔══╝  ██║
+██║  ██╗███████╗███████╗███████╗
+╚═╝  ╚═╝╚══════╝╚══════╝╚══════╝
+   subscriptions · bills · split payments · one calm place
+```
 
-The one-page site for Keel, the subscription and split-payment tracker for
-iPhone. Plain HTML, CSS and a little vanilla JS: no framework, no build
-step, nothing to maintain.
+The marketing site for **Keel**, live at **[keel-app.ch](https://keel-app.ch)**.
 
-## Languages
+## What Keel is
 
-English lives at the root; full localized pages live in `fr/`, `de/`,
-`pl/` and `it/` (linked via the header switcher + `hreflang` tags). All
-pages share `styles.css` and `script.js`; the strings that script.js
-GENERATES (tour totals, chart windows, donut slices…) come from an inline
-`window.KEEL_I18N` object each localized page defines before loading the
-script — English is the built-in fallback. When copy changes at the root,
-carry the change into the four localized pages (and their `KEEL_I18N`
-block if it's a generated string). Legal pages stay English for now; the
-localized footers label them "(EN)".
+An iPhone app that tracks what actually leaves your accounts: subscriptions,
+bills, and the pay-in-4 you forgot about. It knows what is due, from which
+account, and what it truly costs once the yearly renewals are smoothed across
+the months. Private by architecture: no account, no server, nothing to breach.
 
-## Run locally
+This repo is just the website. The app lives elsewhere.
 
-Open `index.html` in a browser, or serve the folder:
+## What this repo is
+
+A single page, hand-built. No framework, no build step, no dependencies:
+plain HTML, one stylesheet, one script. It clones to a folder and runs.
+
+A few things worth a look if you opened this out of curiosity:
+
+- **An interactive tour** that imports a messy list and walks it through four
+  real screens (upcoming, months, categories). It runs on a demo dataset shaped
+  exactly like a real one, different entities, same patterns, verified through
+  the app's own parser so the numbers actually add up.
+- **An ambient aura** drawn entirely in CSS: layered glows that drift, breathe,
+  and get stirred by scroll velocity, no canvas, no library. Freezes flat under
+  `prefers-reduced-motion`.
+- **Five languages** (en · fr · de · pl · it) written to read native, not
+  translated. Shared stylesheet and script; each localized page hands the script
+  its strings through an inline `window.KEEL_I18N` object, English as fallback.
+- **Theme-aware and accessible**: honours light/dark, reduced motion, and
+  keyboard focus throughout.
+
+## Layout
+
+```
+index.html          English (root)
+fr/  de/  pl/  it/   localized pages
+styles.css          one stylesheet, shared
+script.js           reveals, tour logic, the aura's scroll drift
+assets/             icon, social card, screenshots
+privacy.html        legal texts
+terms.html
+CNAME               custom domain
+```
+
+## Run it
+
+Open `index.html`, or serve the folder for correct relative paths:
 
 ```sh
 python -m http.server 8080
@@ -26,20 +62,16 @@ python -m http.server 8080
 
 ## Deploy
 
-GitHub Pages, serving `main` at the repository root
-(Settings > Pages > Deploy from a branch > `main` / `/ (root)`).
-`.nojekyll` keeps Pages from running the files through Jekyll.
+GitHub Pages from `main` at the repository root, custom domain `keel-app.ch`
+(`CNAME`). `.nojekyll` keeps Pages from touching the files. Push to ship.
 
-## Before launch
+## Working on it
 
-- Drop the real images into `assets/` with these exact names (the pages
-  pick them up automatically; until then a labelled placeholder shows):
-  - `screen-upcoming.png` — the Payments/Upcoming screenshot (hero device)
-  - `screen-harbor.png` — the harbor screenshot (feature card)
-  - `maker.jpg` — the maker photo (About section)
-  - `og.png` — the social card (a generated one exists; replace at will)
-- Swap the styled store badge for the official App Store badge asset and
-  the real listing URL (`TODO(launch)` markers).
-- Custom domain: DONE — `keel-app.ch` (`CNAME` file here; DNS at
-  Infomaniak: four A records on `@` to the GitHub Pages IPs + `www`
-  CNAME to `kaz-ookid.github.io`; HTTPS enforced in the Pages settings).
+- **Copy changes** made at the root carry into the four localized pages, and
+  into their `KEEL_I18N` block when the string is one the script generates
+  (tour totals, chart windows, donut slices).
+- **Assets** in `assets/` are picked up by filename; a labelled placeholder
+  shows until each one lands (`screen-upcoming.png`, `screen-harbor.png`,
+  `maker.jpg`, `og.png`).
+- **At launch**: swap the styled store badge for the official App Store asset
+  and real listing URL (`TODO(launch)` markers).
