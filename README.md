@@ -23,6 +23,12 @@ bills, and the pay-in-4 you forgot about. It knows what is due, from which
 account, and what it truly costs once the yearly renewals are smoothed across
 the months. Private by architecture: no account, no server, nothing to breach.
 
+Keel is designed from its first iteration around getting started easily,
+cutting the setup friction that usually kills a tracker before it earns its
+place. It takes you by the hand: pick from known services, or fill things in
+by hand, and it stays smooth on its own. AI import is there when you want it
+even smoother, always a choice, never the price of entry.
+
 This repo is just the website: a single hand-built page, no framework, no build
 step, no dependencies. Plain HTML, one stylesheet, one script.
 
