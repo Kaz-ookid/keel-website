@@ -18,34 +18,13 @@ The marketing site for <strong>Keel</strong>, live at <a href="https://keel-app.
 
 <br />
 
-## What Keel is
-
 An iPhone app that tracks what actually leaves your accounts: subscriptions,
 bills, and the pay-in-4 you forgot about. It knows what is due, from which
 account, and what it truly costs once the yearly renewals are smoothed across
 the months. Private by architecture: no account, no server, nothing to breach.
 
-This repo is just the website. The app lives elsewhere.
-
-## What this repo is
-
-A single page, hand-built. No framework, no build step, no dependencies:
-plain HTML, one stylesheet, one script. It clones to a folder and runs.
-
-A few things worth a look if you opened this out of curiosity:
-
-- **An interactive tour** that imports a messy list and walks it through four
-  real screens (upcoming, months, categories). It runs on a demo dataset shaped
-  exactly like a real one, different entities, same patterns, verified through
-  the app's own parser so the numbers actually add up.
-- **An ambient aura** drawn entirely in CSS: layered glows that drift, breathe,
-  and get stirred by scroll velocity, no canvas, no library. Freezes flat under
-  `prefers-reduced-motion`.
-- **Five languages** (en · fr · de · pl · it) written to read native, not
-  translated. Shared stylesheet and script; each localized page hands the script
-  its strings through an inline `window.KEEL_I18N` object, English as fallback.
-- **Theme-aware and accessible**: honours light/dark, reduced motion, and
-  keyboard focus throughout.
+This repo is just the website: a single hand-built page, no framework, no build
+step, no dependencies. Plain HTML, one stylesheet, one script.
 
 ## Layout
 
