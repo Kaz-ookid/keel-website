@@ -40,4 +40,6 @@ GitHub Pages, serving `main` at the repository root
   - `og.png` — the social card (a generated one exists; replace at will)
 - Swap the styled store badge for the official App Store badge asset and
   the real listing URL (`TODO(launch)` markers).
-- Add the custom domain: a `CNAME` file here + DNS at the registrar.
+- Custom domain: DONE — `keel-app.ch` (`CNAME` file here; DNS at
+  Infomaniak: four A records on `@` to the GitHub Pages IPs + `www`
+  CNAME to `kaz-ookid.github.io`; HTTPS enforced in the Pages settings).
