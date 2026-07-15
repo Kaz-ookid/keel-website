@@ -1,14 +1,22 @@
-```
+<div align="center">
+<pre>
 ██╗  ██╗███████╗███████╗██╗
 ██║ ██╔╝██╔════╝██╔════╝██║
 █████╔╝ █████╗  █████╗  ██║
 ██╔═██╗ ██╔══╝  ██╔══╝  ██║
 ██║  ██╗███████╗███████╗███████╗
 ╚═╝  ╚═╝╚══════╝╚══════╝╚══════╝
-   subscriptions · bills · split payments · one calm place
-```
+</pre>
 
-The marketing site for **Keel**, live at **[keel-app.ch](https://keel-app.ch)**.
+<strong>subscriptions · bills · split payments · one calm place</strong>
+
+<br />
+
+The marketing site for <strong>Keel</strong>, live at <a href="https://keel-app.ch">keel-app.ch</a>.
+
+</div>
+
+<br />
 
 ## What Keel is
 
