@@ -338,6 +338,10 @@ a { color: inherit; text-decoration: none; }
 }
 
 /* A real image covers the placeholder; onerror removes it when missing. */
+/* With a real image in place the dashed placeholder rim must go; if the
+   image fails and removes itself, :has() turns false and the labelled
+   placeholder look returns on its own. */
+.ph:has(img) { border-color: transparent; }
 .ph img {
   position: absolute; inset: 0;
   width: 100%; height: 100%;
@@ -1240,9 +1244,49 @@ a { color: inherit; text-decoration: none; }
 @media (max-width: 880px) {
   .hero { grid-template-columns: 1fr; padding-top: 32px; text-align: center; }
   .hero-copy { display: flex; flex-direction: column; align-items: center; }
+  /* When the badge and the note wrap onto two lines, keep both centered. */
+  .hero-actions { justify-content: center; }
+  .hero-note { text-align: center; }
   .trust-inner { grid-template-columns: 1fr; gap: 20px; }
-  .story-cols { grid-template-columns: 1fr; gap: 34px; }
-  .bento { grid-template-columns: 1fr; }
+  /* On the phone the two stories swipe side to side instead of stacking
+     into one long read; the next card peeks in from the edge to say so. */
+  .story-cols {
+    grid-template-columns: none;
+    grid-auto-flow: column;
+    grid-auto-columns: 82%;
+    gap: 14px;
+    max-width: none;
+    margin: 0 -24px;
+    padding: 4px 24px 16px;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+  .story-cols::-webkit-scrollbar { display: none; }
+  .story-cols article {
+    scroll-snap-align: center;
+    background: var(--glass);
+    border: 1px solid var(--hairline);
+    border-radius: var(--radius-sm);
+    padding: 22px 20px;
+  }
+  /* The payment cards swipe sideways too, one card mostly in view and
+     the next peeking in, instead of four cards of vertical scroll. */
+  .bento {
+    grid-template-columns: none;
+    grid-auto-flow: column;
+    grid-auto-columns: 85%;
+    gap: 14px;
+    margin: 0 -24px;
+    padding: 4px 24px 16px;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+  .bento::-webkit-scrollbar { display: none; }
+  .bento > * { scroll-snap-align: center; }
   .card-wide, .card-full { grid-column: span 1; grid-template-columns: 1fr; }
   .tour-import, .tour-chart { grid-template-columns: 1fr; }
   .tour-donut { grid-template-columns: 1fr; justify-items: center; }
