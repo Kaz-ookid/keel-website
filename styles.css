@@ -1287,6 +1287,13 @@ a { color: inherit; text-decoration: none; }
   }
   .bento::-webkit-scrollbar { display: none; }
   .bento > * { scroll-snap-align: center; }
+  /* Carousel cards scroll off to the side, so the reveal observer never
+     fires for them and they stay invisible: show them outright. The lift
+     on hover is meaningless on touch, so the accent contour just stays on. */
+  .story-cols [data-reveal],
+  .bento [data-reveal] { opacity: 1; transform: none; transition: none; }
+  .card:hover { transform: none; }
+  .bento .card { border-color: rgba(127, 184, 176, 0.3); }
   .card-wide, .card-full { grid-column: span 1; grid-template-columns: 1fr; }
   .tour-import, .tour-chart { grid-template-columns: 1fr; }
   .tour-donut { grid-template-columns: 1fr; justify-items: center; }
