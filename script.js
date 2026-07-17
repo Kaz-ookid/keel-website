@@ -72,8 +72,8 @@
     var swayRaf = null;
     var lastY = window.scrollY;
     var swayStep = function () {
-      swayTarget *= 0.88; // the stir dies down on its own
-      sway += (swayTarget - sway) * 0.1;
+      swayTarget *= 0.965; // the stir glides out instead of stopping dead
+      sway += (swayTarget - sway) * 0.055;
       if (Math.abs(sway) < 0.05 && Math.abs(swayTarget) < 0.05) {
         sway = 0;
         swayRaf = null;
@@ -541,4 +541,248 @@
 
     paintDonut();
   }
+})();
+
+/* ------------------------ Caustics (WebGL aura) ------------------------ */
+// Real refracted light for the stage. A fixed canvas behind the content
+// paints sun caustics on the sea floor: bright and crisp at the top of the
+// page, dimming as the page dives, with a faint shimmer at the bottom
+// where the floor waits. The CSS glows above stay in the markup as the
+// fallback: no WebGL, reduced motion, or any failure and the site looks
+// exactly as it did before.
+
+(function () {
+  var reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  if (reduced) return;
+  var aura = document.querySelector(".aura");
+  if (!aura) return;
+
+  var canvas = document.createElement("canvas");
+  canvas.className = "caustics";
+  canvas.setAttribute("aria-hidden", "true");
+  var gl = canvas.getContext("webgl", {
+    alpha: false,
+    depth: false,
+    stencil: false,
+    antialias: false,
+    powerPreference: "low-power"
+  });
+  if (!gl) return;
+
+  var VERT = [
+    "attribute vec2 a_pos;",
+    "void main() { gl_Position = vec4(a_pos, 0.0, 1.0); }"
+  ].join("\n");
+
+  // Two drifting Voronoi nets, warped and overlaid: the bright filaments
+  // are the cell borders, the way real caustics trace the folds of the
+  // surface. Everything is in page space, so scrolling moves past the
+  // pattern instead of dragging it along.
+  var FRAG = [
+    "precision highp float;",
+    "uniform vec2 u_css;",
+    "uniform vec2 u_res;",
+    "uniform float u_time;",
+    "uniform float u_scroll;",
+    "uniform float u_doc;",
+    "uniform vec2 u_mouse;",
+    "",
+    "vec2 hash2(vec2 p) {",
+    "  p = vec2(dot(p, vec2(127.1, 311.7)), dot(p, vec2(269.5, 183.3)));",
+    "  return fract(sin(p) * 43758.5453);",
+    "}",
+    "",
+    "float breathe(vec2 w, float t) {",
+    "  return sin(w.y * 0.0016 + t * 0.10) * sin(w.x * 0.0013 - t * 0.08);",
+    "}",
+    "",
+    "float motes(vec2 css, float t) {",
+    "  float m = 0.0;",
+    "  for (int i = 0; i < 3; i++) {",
+    "    float fi = float(i);",
+    "    float depth = fi * 0.5;",
+    "    float cell = 120.0 + 60.0 * fi;",
+    "    float par = 0.8 + 0.3 * fi;",
+    "    vec2 w = vec2(css.x, css.y + u_scroll * par);",
+    "    w += u_mouse * (10.0 + 30.0 * depth);",
+    "    vec2 p = w / cell;",
+    "    p.y -= t * (0.014 + 0.014 * depth);",
+    "    p.x += 0.12 * sin(t * 0.05 + fi * 2.1 + p.y * 0.4);",
+    "    vec2 g = floor(p);",
+    "    vec2 f = fract(p);",
+    "    vec2 h = hash2(g + fi * 13.7);",
+    "    if (h.x < 0.38 - 0.05 * fi) {",
+    "      vec2 c = 0.25 + 0.5 * hash2(g + 7.3 + fi * 5.1);",
+    "      float d = length(f - c);",
+    "      float r = 0.015 + 0.025 * h.y;",
+    "      m += smoothstep(r, r * 0.35, d) * (0.35 + 0.65 * depth);",
+    "    }",
+    "  }",
+    "  return m;",
+    "}",
+    "",
+    "float ridge(vec2 p, float t) {",
+    "  vec2 g = floor(p);",
+    "  vec2 f = fract(p);",
+    "  float f1 = 8.0;",
+    "  float f2 = 8.0;",
+    "  for (int y = -1; y <= 1; y++) {",
+    "    for (int x = -1; x <= 1; x++) {",
+    "      vec2 o = vec2(float(x), float(y));",
+    "      vec2 h = hash2(g + o);",
+    "      vec2 site = o + 0.5 + 0.42 * sin(t + 6.2831 * h) - f;",
+    "      float d = dot(site, site);",
+    "      if (d < f1) { f2 = f1; f1 = d; }",
+    "      else if (d < f2) { f2 = d; }",
+    "    }",
+    "  }",
+    "  float edge = sqrt(f2) - sqrt(f1);",
+    "  return 1.0 - smoothstep(0.0, 0.34, edge);",
+    "}",
+    "",
+    "float caustic(vec2 p, float t) {",
+    "  p += 0.22 * vec2(sin(p.y * 1.7 + t * 0.7), sin(p.x * 1.6 - t * 0.6));",
+    "  float a = ridge(p, t);",
+    "  float b = ridge(p * 1.93 + 31.7, t * 1.19 + 2.0);",
+    "  return a * 0.70 + b * 0.32;",
+    "}",
+    "",
+    "void main() {",
+    "  vec2 v = gl_FragCoord.xy / u_res;",
+    "  vec2 css = vec2(v.x * u_css.x, (1.0 - v.y) * u_css.y);",
+    "  vec2 world = vec2(css.x, css.y + u_scroll);",
+    "  float dive = clamp(world.y / max(u_doc, 1.0), 0.0, 1.0);",
+    "",
+    "  // Symmetric descent: the same quiet shimmer at the surface and at",
+    "  // the floor, the darkest water in between.",
+    "  float ends = smoothstep(0.14, 0.0, dive) + smoothstep(0.86, 1.0, dive);",
+    "",
+    "  float t = u_time * 0.38;",
+    "  float c = caustic(world / 240.0, t);",
+    "  float net = pow(clamp(c, 0.0, 1.0), 1.2);",
+    "",
+    "  vec3 col = vec3(0.024, 0.047, 0.100);",
+    "  col += vec3(0.498, 0.722, 0.690) * net * 0.055 * ends;",
+    "  col += vec3(0.329, 0.510, 0.620) * 0.06 * ends;",
+    "",
+    "  // The abyss is not still: marine snow sinking through the dark, and",
+    "  // a slow swell of luminance so the deep water never reads as paint.",
+    "  float deep = 1.0 - min(ends, 1.0);",
+    "  col += vec3(0.62, 0.76, 0.78) * motes(css, u_time) * 0.05 * deep;",
+    "  col += vec3(0.10, 0.16, 0.20) * (0.5 + 0.5 * breathe(world, u_time)) * 0.018 * deep;",
+    "",
+    "  float grain = fract(sin(dot(gl_FragCoord.xy, vec2(12.9898, 78.233))) * 43758.5453);",
+    "  col += (grain - 0.5) * (1.5 / 255.0);",
+    "",
+    "  gl_FragColor = vec4(col, 1.0);",
+    "}"
+  ].join("\n");
+
+  function compile(type, src) {
+    var s = gl.createShader(type);
+    gl.shaderSource(s, src);
+    gl.compileShader(s);
+    return gl.getShaderParameter(s, gl.COMPILE_STATUS) ? s : null;
+  }
+  var vs = compile(gl.VERTEX_SHADER, VERT);
+  var fs = compile(gl.FRAGMENT_SHADER, FRAG);
+  if (!vs || !fs) return;
+  var prog = gl.createProgram();
+  gl.attachShader(prog, vs);
+  gl.attachShader(prog, fs);
+  gl.linkProgram(prog);
+  if (!gl.getProgramParameter(prog, gl.LINK_STATUS)) return;
+  gl.useProgram(prog);
+
+  var buf = gl.createBuffer();
+  gl.bindBuffer(gl.ARRAY_BUFFER, buf);
+  gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1, -1, 3, -1, -1, 3]), gl.STATIC_DRAW);
+  var aPos = gl.getAttribLocation(prog, "a_pos");
+  gl.enableVertexAttribArray(aPos);
+  gl.vertexAttribPointer(aPos, 2, gl.FLOAT, false, 0, 0);
+
+  var uCss = gl.getUniformLocation(prog, "u_css");
+  var uRes = gl.getUniformLocation(prog, "u_res");
+  var uTime = gl.getUniformLocation(prog, "u_time");
+  var uScroll = gl.getUniformLocation(prog, "u_scroll");
+  var uDoc = gl.getUniformLocation(prog, "u_doc");
+  var uMouse = gl.getUniformLocation(prog, "u_mouse");
+
+  // The pointer stirs the snow: eased hard, so the push arrives and
+  // settles like something moving through water, never twitchy.
+  var mx = 0;
+  var my = 0;
+  var mtx = 0;
+  var mty = 0;
+  window.addEventListener("pointermove", function (e) {
+    mtx = e.clientX / window.innerWidth - 0.5;
+    mty = e.clientY / window.innerHeight - 0.5;
+  }, { passive: true });
+
+  var docH = 1;
+  function measure() {
+    docH = Math.max(document.documentElement.scrollHeight, 1);
+  }
+
+  function resize() {
+    var w = window.innerWidth;
+    var h = window.innerHeight;
+    // Caustics are soft: render inside a pixel budget and upscale.
+    var s = Math.min(window.devicePixelRatio || 1, Math.sqrt(1150000 / (w * h)));
+    s = Math.max(0.45, s);
+    canvas.width = Math.round(w * s);
+    canvas.height = Math.round(h * s);
+    gl.viewport(0, 0, canvas.width, canvas.height);
+    gl.uniform2f(uCss, w, h);
+    gl.uniform2f(uRes, canvas.width, canvas.height);
+    measure();
+  }
+
+  var raf = null;
+  var last = 0;
+  var live = false;
+  var tick = 0;
+  var t0 = performance.now();
+  function frame(now) {
+    raf = requestAnimationFrame(frame);
+    if (now - last < 31) return; // ~32fps is plenty for calm water
+    last = now;
+    tick += 1;
+    if (tick % 64 === 0) measure(); // late images stretch the page
+    gl.uniform1f(uTime, (now - t0) / 1000);
+    gl.uniform1f(uScroll, window.scrollY || 0);
+    mx += (mtx - mx) * 0.05;
+    my += (mty - my) * 0.05;
+    gl.uniform2f(uMouse, mx * 2.0, my * 2.0);
+    gl.uniform1f(uDoc, docH);
+    gl.drawArrays(gl.TRIANGLES, 0, 3);
+    if (!live) {
+      live = true;
+      aura.classList.add("gl");
+      document.documentElement.classList.add("gl");
+    }
+  }
+
+  window.addEventListener("resize", resize);
+  window.addEventListener("load", measure);
+  document.addEventListener("visibilitychange", function () {
+    if (document.hidden) {
+      if (raf) { cancelAnimationFrame(raf); raf = null; }
+    } else if (!raf) {
+      last = 0;
+      raf = requestAnimationFrame(frame);
+    }
+  });
+  canvas.addEventListener("webglcontextlost", function (e) {
+    e.preventDefault();
+    if (raf) { cancelAnimationFrame(raf); raf = null; }
+    aura.classList.remove("gl");
+    if (canvas.parentNode) canvas.parentNode.removeChild(canvas);
+  });
+
+  // First child: the shader paints under the glows, which keep the
+  // dark middle of the dive alive above it.
+  aura.insertBefore(canvas, aura.firstChild);
+  resize();
+  raf = requestAnimationFrame(frame);
 })();

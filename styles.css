@@ -63,7 +63,11 @@ a { color: inherit; text-decoration: none; }
 .glow {
   position: absolute;
   will-change: transform;
-  transform: translate3d(0, calc(var(--sway, 0px) * var(--f, 1)), 0);
+  transform: translate3d(
+    calc(var(--sway, 0px) * var(--fx, 0)),
+    calc(var(--sway, 0px) * var(--f, 1)),
+    0
+  );
 }
 .glow::before {
   content: "";
@@ -88,31 +92,31 @@ a { color: inherit; text-decoration: none; }
   animation: wander-a 38s ease-in-out infinite alternate, breathe-a 9s ease-in-out infinite;
 }
 
-.g2 { --f: -0.6; width: 460px; height: 460px; left: -160px; top: 14%; }
+.g2 { --f: -0.6; --fx: 0.5; width: 460px; height: 460px; left: 6%; top: 14%; }
 .g2::before {
   background: radial-gradient(circle, rgba(127, 184, 176, 0.18), transparent 65%);
   animation: wander-b 46s ease-in-out infinite alternate, breathe-b 13s ease-in-out infinite;
 }
 
-.g3 { --f: 1.3; width: 380px; height: 380px; right: -120px; top: 28%; }
+.g3 { --f: 1.3; --fx: -0.4; width: 380px; height: 380px; right: -60px; top: 28%; }
 .g3::before {
   background: radial-gradient(circle, rgba(232, 115, 90, 0.10), transparent 65%);
   animation: wander-c 52s ease-in-out infinite alternate, breathe-c 17s ease-in-out infinite;
 }
 
-.g4 { --f: -0.8; width: 520px; height: 520px; left: 58%; top: 42%; }
+.g4 { --f: -0.8; --fx: 0.7; width: 520px; height: 520px; left: 58%; top: 42%; }
 .g4::before {
   background: radial-gradient(circle, rgba(127, 184, 176, 0.22), transparent 65%);
   animation: wander-b 41s ease-in-out infinite alternate-reverse, breathe-c 11s ease-in-out -4s infinite;
 }
 
-.g5 { --f: 1.1; width: 440px; height: 440px; left: -150px; top: 57%; }
+.g5 { --f: 1.1; --fx: -0.6; width: 440px; height: 440px; left: 5%; top: 57%; }
 .g5::before {
   background: radial-gradient(circle, rgba(127, 184, 176, 0.16), transparent 65%);
   animation: wander-a 49s ease-in-out -20s infinite alternate, breathe-b 15s ease-in-out -7s infinite;
 }
 
-.g6 { --f: -0.5; width: 360px; height: 360px; right: -110px; top: 70%; }
+.g6 { --f: -0.5; --fx: 0.45; width: 360px; height: 360px; right: -70px; top: 70%; }
 .g6::before {
   background: radial-gradient(circle, rgba(232, 115, 90, 0.08), transparent 65%);
   animation: wander-c 44s ease-in-out -15s infinite alternate-reverse, breathe-a 12s ease-in-out -3s infinite;
@@ -134,19 +138,19 @@ a { color: inherit; text-decoration: none; }
 /* Long, slightly lopsided paths with a soft change of shape. */
 @keyframes wander-a {
   0%   { transform: translate(0, 0) scale(1); border-radius: 50%; }
-  40%  { transform: translate(-60px, 45px) scale(1.07); border-radius: 46% 54% 52% 48% / 56% 44% 54% 46%; }
-  75%  { transform: translate(-90px, 85px) scale(0.97); border-radius: 55% 45% 47% 53% / 46% 54% 46% 54%; }
-  100% { transform: translate(-45px, 120px) scale(1.1); border-radius: 50%; }
+  40%  { transform: translate(-115px, 45px) scale(1.07); border-radius: 46% 54% 52% 48% / 56% 44% 54% 46%; }
+  75%  { transform: translate(-175px, 85px) scale(0.97); border-radius: 55% 45% 47% 53% / 46% 54% 46% 54%; }
+  100% { transform: translate(-85px, 120px) scale(1.1); border-radius: 50%; }
 }
 @keyframes wander-b {
   0%   { transform: translate(0, 0) scale(1); border-radius: 50%; }
-  45%  { transform: translate(70px, -55px) scale(1.06); border-radius: 53% 47% 45% 55% / 48% 52% 48% 52%; }
-  100% { transform: translate(35px, -100px) scale(1.09); border-radius: 47% 53% 55% 45% / 53% 47% 53% 47%; }
+  45%  { transform: translate(135px, -55px) scale(1.06); border-radius: 53% 47% 45% 55% / 48% 52% 48% 52%; }
+  100% { transform: translate(65px, -100px) scale(1.09); border-radius: 47% 53% 55% 45% / 53% 47% 53% 47%; }
 }
 @keyframes wander-c {
   0%   { transform: translate(0, 0) scale(1); border-radius: 50%; }
-  50%  { transform: translate(-55px, -45px) scale(1.1); border-radius: 45% 55% 50% 50% / 55% 45% 50% 50%; }
-  100% { transform: translate(-80px, -85px) scale(1.02); border-radius: 50%; }
+  50%  { transform: translate(-105px, -45px) scale(1.1); border-radius: 45% 55% 50% 50% / 55% 45% 50% 50%; }
+  100% { transform: translate(-155px, -85px) scale(1.02); border-radius: 50%; }
 }
 @keyframes sway-surface {
   0%   { transform: translateX(0) scaleY(1); }
@@ -159,6 +163,24 @@ a { color: inherit; text-decoration: none; }
 @keyframes breathe-c { 0%, 100% { opacity: 0.48; } 45% { opacity: 0.6; } }
 @keyframes breathe-surface { 0%, 100% { opacity: 0.42; } 50% { opacity: 0.58; } }
 @keyframes breathe-floor { 0%, 100% { opacity: 0.5; } 50% { opacity: 0.68; } }
+
+/* Real caustics: when WebGL is available, script.js slips a fixed canvas
+   under the glows and the shader paints the water and the dive: the same
+   quiet shimmer at the surface and the floor, darkest in between. The
+   glows share the work; the ones at the two ends retire (the shader owns
+   that light now) while the mid-page ones keep the dark stretch alive.
+   Without WebGL (or with reduced motion) everything carries on as before. */
+.aura .caustics { position: fixed; inset: 0; width: 100%; height: 100%; }
+.aura.gl .glow-surface,
+.aura.gl .g1,
+.aura.gl .g7,
+.aura.gl .glow-floor { display: none; }
+
+/* With real top-down light, the drawn side-view waves read as a clash:
+   the shader's own darkening now marks the descent, so the waterline
+   keeps its height (the rhythm between sections) but not its waves.
+   In fallback mode they come back with the glows. */
+.gl .waterline svg { display: none; }
 
 /* ------------------------------- Header ------------------------------- */
 
