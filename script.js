@@ -576,8 +576,9 @@
 
   // Two drifting Voronoi nets, warped and overlaid: the bright filaments
   // are the cell borders, the way real caustics trace the folds of the
-  // surface. Everything is in page space, so scrolling moves past the
-  // pattern instead of dragging it along.
+  // surface. The pattern is viewport-anchored and only its own slow wobble
+  // moves it; the scroll drives nothing but the eased depth, so scrolling
+  // never drags or stutters the water.
   var FRAG = [
     "precision highp float;",
     "uniform vec2 u_css;",
@@ -602,9 +603,7 @@
     "    float fi = float(i);",
     "    float depth = fi * 0.5;",
     "    float cell = 120.0 + 60.0 * fi;",
-    "    float par = 0.8 + 0.3 * fi;",
-    "    vec2 w = vec2(css.x, css.y + u_scroll * par);",
-    "    w += u_mouse * (10.0 + 30.0 * depth);",
+    "    vec2 w = css + u_mouse * (10.0 + 30.0 * depth);",
     "    vec2 p = w / cell;",
     "    p.y -= t * (0.014 + 0.014 * depth);",
     "    p.x += 0.12 * sin(t * 0.05 + fi * 2.1 + p.y * 0.4);",
@@ -650,15 +649,14 @@
     "void main() {",
     "  vec2 v = gl_FragCoord.xy / u_res;",
     "  vec2 css = vec2(v.x * u_css.x, (1.0 - v.y) * u_css.y);",
-    "  vec2 world = vec2(css.x, css.y + u_scroll);",
-    "  float dive = clamp(world.y / max(u_doc, 1.0), 0.0, 1.0);",
+    "  float dive = clamp((css.y + u_scroll) / max(u_doc, 1.0), 0.0, 1.0);",
     "",
     "  // Symmetric descent: the same quiet shimmer at the surface and at",
     "  // the floor, the darkest water in between.",
-    "  float ends = smoothstep(0.14, 0.0, dive) + smoothstep(0.86, 1.0, dive);",
+    "  float ends = smoothstep(0.14, 0.0, dive) + smoothstep(0.78, 0.96, dive);",
     "",
     "  float t = u_time * 0.38;",
-    "  float c = caustic(world / 240.0, t);",
+    "  float c = caustic(css / 240.0, t);",
     "  float net = pow(clamp(c, 0.0, 1.0), 1.2);",
     "",
     "  vec3 col = vec3(0.024, 0.047, 0.100);",
@@ -669,7 +667,7 @@
     "  // a slow swell of luminance so the deep water never reads as paint.",
     "  float deep = 1.0 - min(ends, 1.0);",
     "  col += vec3(0.62, 0.76, 0.78) * motes(css, u_time) * 0.05 * deep;",
-    "  col += vec3(0.10, 0.16, 0.20) * (0.5 + 0.5 * breathe(world, u_time)) * 0.018 * deep;",
+    "  col += vec3(0.10, 0.16, 0.20) * (0.5 + 0.5 * breathe(css, u_time)) * 0.018 * deep;",
     "",
     "  float grain = fract(sin(dot(gl_FragCoord.xy, vec2(12.9898, 78.233))) * 43758.5453);",
     "  col += (grain - 0.5) * (1.5 / 255.0);",
@@ -742,6 +740,7 @@
   var last = 0;
   var live = false;
   var tick = 0;
+  var scrollEased = window.scrollY || 0;
   var t0 = performance.now();
   function frame(now) {
     raf = requestAnimationFrame(frame);
@@ -750,10 +749,11 @@
     tick += 1;
     if (tick % 64 === 0) measure(); // late images stretch the page
     gl.uniform1f(uTime, (now - t0) / 1000);
-    gl.uniform1f(uScroll, window.scrollY || 0);
+    gl.uniform1f(uScroll, scrollEased);
     mx += (mtx - mx) * 0.05;
     my += (mty - my) * 0.05;
     gl.uniform2f(uMouse, mx * 2.0, my * 2.0);
+    scrollEased += ((window.scrollY || 0) - scrollEased) * 0.12;
     gl.uniform1f(uDoc, docH);
     gl.drawArrays(gl.TRIANGLES, 0, 3);
     if (!live) {
