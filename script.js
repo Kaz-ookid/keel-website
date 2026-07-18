@@ -587,6 +587,7 @@
     "uniform float u_scroll;",
     "uniform float u_doc;",
     "uniform vec2 u_mouse;",
+    "uniform float u_swirl;",
     "",
     "vec2 hash2(vec2 p) {",
     "  p = vec2(dot(p, vec2(127.1, 311.7)), dot(p, vec2(269.5, 183.3)));",
@@ -604,6 +605,7 @@
     "    float depth = fi * 0.5;",
     "    float cell = 120.0 + 60.0 * fi;",
     "    vec2 w = css + u_mouse * (10.0 + 30.0 * depth);",
+    "    w.y += u_swirl * (0.35 + 0.55 * depth);",
     "    vec2 p = w / cell;",
     "    p.y -= t * (0.014 + 0.014 * depth);",
     "    p.x += 0.12 * sin(t * 0.05 + fi * 2.1 + p.y * 0.4);",
@@ -705,6 +707,7 @@
   var uScroll = gl.getUniformLocation(prog, "u_scroll");
   var uDoc = gl.getUniformLocation(prog, "u_doc");
   var uMouse = gl.getUniformLocation(prog, "u_mouse");
+  var uSwirl = gl.getUniformLocation(prog, "u_swirl");
 
   // The pointer stirs the snow: eased hard, so the push arrives and
   // settles like something moving through water, never twitchy.
@@ -712,6 +715,14 @@
   var my = 0;
   var mtx = 0;
   var mty = 0;
+  var swirl = 0;
+  var swirlTarget = 0;
+  var lastScrollY = window.scrollY || 0;
+  window.addEventListener("scroll", function () {
+    var y = window.scrollY || 0;
+    swirlTarget = Math.max(-48, Math.min(48, swirlTarget + (y - lastScrollY) * 0.18));
+    lastScrollY = y;
+  }, { passive: true });
   window.addEventListener("pointermove", function (e) {
     mtx = e.clientX / window.innerWidth - 0.5;
     mty = e.clientY / window.innerHeight - 0.5;
@@ -753,6 +764,9 @@
     mx += (mtx - mx) * 0.05;
     my += (mty - my) * 0.05;
     gl.uniform2f(uMouse, mx * 2.0, my * 2.0);
+    swirlTarget *= 0.95; // the push dies out on its own
+    swirl += (swirlTarget - swirl) * 0.07;
+    gl.uniform1f(uSwirl, swirl);
     scrollEased += ((window.scrollY || 0) - scrollEased) * 0.12;
     gl.uniform1f(uDoc, docH);
     gl.drawArrays(gl.TRIANGLES, 0, 3);
