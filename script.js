@@ -723,7 +723,7 @@
   var lastScrollY = window.scrollY || 0;
   window.addEventListener("scroll", function () {
     var y = window.scrollY || 0;
-    swirlTarget = Math.max(-48, Math.min(48, swirlTarget + (y - lastScrollY) * 0.18));
+    swirlTarget = Math.max(-150, Math.min(150, swirlTarget + (y - lastScrollY) * 0.22));
     lastScrollY = y;
   }, { passive: true });
   window.addEventListener("pointermove", function (e) {
@@ -767,7 +767,7 @@
     mx += (mtx - mx) * 0.05;
     my += (mty - my) * 0.05;
     gl.uniform2f(uMouse, mx * 2.0, my * 2.0);
-    swirlTarget *= 0.95; // the push dies out on its own
+    swirlTarget *= 0.965; // the push dies out on its own
     swirl += (swirlTarget - swirl) * 0.07;
     gl.uniform1f(uSwirl, swirl);
     scrollEased += ((window.scrollY || 0) - scrollEased) * 0.12;
