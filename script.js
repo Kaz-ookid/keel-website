@@ -576,9 +576,10 @@
 
   // Two drifting Voronoi nets, warped and overlaid: the bright filaments
   // are the cell borders, the way real caustics trace the folds of the
-  // surface. The pattern is viewport-anchored and only its own slow wobble
-  // moves it; the scroll drives nothing but the eased depth, so scrolling
-  // never drags or stutters the water.
+  // surface. The caustic pattern is viewport-anchored (only its own slow
+  // wobble moves it) and the eased depth is all the scroll drives there.
+  // The marine snow is the exception: it is pinned to the PAGE, so
+  // scrolling sails past the motes like features in the water.
   var FRAG = [
     "precision highp float;",
     "uniform vec2 u_css;",
@@ -587,6 +588,7 @@
     "uniform float u_scroll;",
     "uniform float u_doc;",
     "uniform vec2 u_mouse;",
+    "uniform float u_page;",
     "",
     "vec2 hash2(vec2 p) {",
     "  p = vec2(dot(p, vec2(127.1, 311.7)), dot(p, vec2(269.5, 183.3)));",
@@ -603,7 +605,7 @@
     "    float fi = float(i);",
     "    float depth = fi * 0.5;",
     "    float cell = 120.0 + 60.0 * fi;",
-    "    vec2 w = css + u_mouse * (10.0 + 30.0 * depth);",
+    "    vec2 w = vec2(css.x, css.y + u_page) + u_mouse * (10.0 + 30.0 * depth);",
     "    vec2 p = w / cell;",
     "    p.y -= t * (0.014 + 0.014 * depth);",
     "    p.x += 0.12 * sin(t * 0.05 + fi * 2.1 + p.y * 0.4);",
@@ -705,6 +707,7 @@
   var uScroll = gl.getUniformLocation(prog, "u_scroll");
   var uDoc = gl.getUniformLocation(prog, "u_doc");
   var uMouse = gl.getUniformLocation(prog, "u_mouse");
+  var uPage = gl.getUniformLocation(prog, "u_page");
 
   // The pointer stirs the snow: eased hard, so the push arrives and
   // settles like something moving through water, never twitchy.
@@ -742,9 +745,16 @@
   var tick = 0;
   var scrollEased = window.scrollY || 0;
   var t0 = performance.now();
+  var lastScrollAt = 0;
+  window.addEventListener("scroll", function () {
+    lastScrollAt = performance.now();
+  }, { passive: true });
+
   function frame(now) {
     raf = requestAnimationFrame(frame);
-    if (now - last < 31) return; // ~32fps is plenty for calm water
+    // Calm water idles at ~32fps; while the page scrolls, render every
+    // frame so the page-anchored snow tracks the content without steps.
+    if (now - lastScrollAt > 250 && now - last < 31) return;
     last = now;
     tick += 1;
     if (tick % 64 === 0) measure(); // late images stretch the page
@@ -754,6 +764,7 @@
     my += (mty - my) * 0.05;
     gl.uniform2f(uMouse, mx * 2.0, my * 2.0);
     scrollEased += ((window.scrollY || 0) - scrollEased) * 0.12;
+    gl.uniform1f(uPage, window.scrollY || 0);
     gl.uniform1f(uDoc, docH);
     gl.drawArrays(gl.TRIANGLES, 0, 3);
     if (!live) {
