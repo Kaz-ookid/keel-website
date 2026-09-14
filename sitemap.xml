@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  <url>
+    <loc>https://keel-app.ch/</loc>
+    <lastmod>2026-09-14</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://keel-app.ch/" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://keel-app.ch/fr/" />
+    <xhtml:link rel="alternate" hreflang="de" href="https://keel-app.ch/de/" />
+    <xhtml:link rel="alternate" hreflang="it" href="https://keel-app.ch/it/" />
+    <xhtml:link rel="alternate" hreflang="pl" href="https://keel-app.ch/pl/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://keel-app.ch/" />
+  </url>
+  <url>
+    <loc>https://keel-app.ch/fr/</loc>
+    <lastmod>2026-09-14</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://keel-app.ch/" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://keel-app.ch/fr/" />
+    <xhtml:link rel="alternate" hreflang="de" href="https://keel-app.ch/de/" />
+    <xhtml:link rel="alternate" hreflang="it" href="https://keel-app.ch/it/" />
+    <xhtml:link rel="alternate" hreflang="pl" href="https://keel-app.ch/pl/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://keel-app.ch/" />
+  </url>
+  <url>
+    <loc>https://keel-app.ch/de/</loc>
+    <lastmod>2026-09-14</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://keel-app.ch/" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://keel-app.ch/fr/" />
+    <xhtml:link rel="alternate" hreflang="de" href="https://keel-app.ch/de/" />
+    <xhtml:link rel="alternate" hreflang="it" href="https://keel-app.ch/it/" />
+    <xhtml:link rel="alternate" hreflang="pl" href="https://keel-app.ch/pl/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://keel-app.ch/" />
+  </url>
+  <url>
+    <loc>https://keel-app.ch/it/</loc>
+    <lastmod>2026-09-14</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://keel-app.ch/" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://keel-app.ch/fr/" />
+    <xhtml:link rel="alternate" hreflang="de" href="https://keel-app.ch/de/" />
+    <xhtml:link rel="alternate" hreflang="it" href="https://keel-app.ch/it/" />
+    <xhtml:link rel="alternate" hreflang="pl" href="https://keel-app.ch/pl/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://keel-app.ch/" />
+  </url>
+  <url>
+    <loc>https://keel-app.ch/pl/</loc>
+    <lastmod>2026-09-14</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://keel-app.ch/" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://keel-app.ch/fr/" />
+    <xhtml:link rel="alternate" hreflang="de" href="https://keel-app.ch/de/" />
+    <xhtml:link rel="alternate" hreflang="it" href="https://keel-app.ch/it/" />
+    <xhtml:link rel="alternate" hreflang="pl" href="https://keel-app.ch/pl/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://keel-app.ch/" />
+  </url>
+</urlset>
