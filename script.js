@@ -23,23 +23,81 @@
     revealed.forEach(function (el) { el.classList.add("revealed"); });
   }
 
-  // Hero device: a small tilt following the pointer, desktop only.
+  // Hero device: a small tilt following the pointer, desktop only. The
+  // pointer works from anywhere on the page: the tilt is driven by the
+  // pointer's position relative to the device, and its influence fades
+  // out smoothly once the pointer wanders far away (or the hero scrolls
+  // off), so the phone settles instead of staying cranked.
   var device = document.getElementById("tilt-device");
   if (device && !reduced && window.matchMedia("(pointer: fine)").matches) {
-    var hero = device.closest(".hero");
-    hero.addEventListener("pointermove", function (e) {
+    window.addEventListener("pointermove", function (e) {
       var rect = device.getBoundingClientRect();
-      var dx = (e.clientX - rect.left - rect.width / 2) / rect.width;
-      var dy = (e.clientY - rect.top - rect.height / 2) / rect.height;
-      var clampedX = Math.max(-0.6, Math.min(0.6, dx));
-      var clampedY = Math.max(-0.6, Math.min(0.6, dy));
+      var dx = (e.clientX - rect.left - rect.width / 2) / (rect.width * 1.6);
+      var dy = (e.clientY - rect.top - rect.height / 2) / (rect.height * 1.6);
+      var dist = Math.sqrt(dx * dx + dy * dy);
+      var fade = dist < 1.1 ? 1 : Math.max(0, 1 - (dist - 1.1) / 0.7);
+      if (fade === 0) {
+        device.style.transform = "";
+        return;
+      }
+      var clampedX = Math.max(-0.6, Math.min(0.6, dx)) * fade;
+      var clampedY = Math.max(-0.6, Math.min(0.6, dy)) * fade;
       device.style.transform =
         "perspective(900px) rotateY(" + (clampedX * 7).toFixed(2) + "deg)" +
         " rotateX(" + (-clampedY * 5).toFixed(2) + "deg)";
     });
-    hero.addEventListener("pointerleave", function () {
+    document.documentElement.addEventListener("pointerleave", function () {
       device.style.transform = "";
     });
+  }
+
+  // The App Store slideshow: a centered coverflow. The middle slide is
+  // the selected one; arrows and side slides step, swipe works on touch,
+  // arrow keys work when focused, and the ends block.
+  var slideStage = document.getElementById("slide-stage");
+  if (slideStage) {
+    var slides = Array.prototype.slice.call(slideStage.children);
+    var slidePrev = document.getElementById("slide-prev");
+    var slideNext = document.getElementById("slide-next");
+    var slideCurrent = 0;
+    var renderSlides = function () {
+      slides.forEach(function (el, i) {
+        var d = i - slideCurrent;
+        var abs = Math.abs(d);
+        el.style.transform =
+          "translateX(" + d * 58 + "%) scale(" + Math.max(0.5, 1 - abs * 0.13) + ")";
+        el.style.zIndex = String(100 - abs);
+        el.style.opacity = abs > 3 ? "0" : String(1 - abs * 0.22);
+        el.style.pointerEvents = abs > 3 ? "none" : "";
+        el.classList.toggle("slide-current", d === 0);
+      });
+      slidePrev.disabled = slideCurrent === 0;
+      slideNext.disabled = slideCurrent === slides.length - 1;
+    };
+    var goSlide = function (i) {
+      slideCurrent = Math.max(0, Math.min(slides.length - 1, i));
+      renderSlides();
+    };
+    slidePrev.addEventListener("click", function () { goSlide(slideCurrent - 1); });
+    slideNext.addEventListener("click", function () { goSlide(slideCurrent + 1); });
+    slides.forEach(function (el, i) {
+      el.addEventListener("click", function () { goSlide(i); });
+    });
+    var swipeX = null;
+    slideStage.addEventListener("touchstart", function (e) {
+      swipeX = e.touches[0].clientX;
+    }, { passive: true });
+    slideStage.addEventListener("touchend", function (e) {
+      if (swipeX === null) return;
+      var dx = e.changedTouches[0].clientX - swipeX;
+      if (Math.abs(dx) > 40) goSlide(slideCurrent + (dx < 0 ? 1 : -1));
+      swipeX = null;
+    }, { passive: true });
+    document.getElementById("slideshow").addEventListener("keydown", function (e) {
+      if (e.key === "ArrowLeft") { goSlide(slideCurrent - 1); e.preventDefault(); }
+      if (e.key === "ArrowRight") { goSlide(slideCurrent + 1); e.preventDefault(); }
+    });
+    renderSlides();
   }
 
   // Scrolling stirs the water: the glows get dragged a touch with the
