@@ -23,27 +23,6 @@
     revealed.forEach(function (el) { el.classList.add("revealed"); });
   }
 
-  // Analytics vignette: grow the bars when the card shows up.
-  var chart = document.querySelector(".chart-vignette");
-  if (chart) {
-    if ("IntersectionObserver" in window && !reduced) {
-      var chartIo = new IntersectionObserver(
-        function (entries) {
-          entries.forEach(function (entry) {
-            if (entry.isIntersecting) {
-              chart.classList.add("grown");
-              chartIo.disconnect();
-            }
-          });
-        },
-        { threshold: 0.4 }
-      );
-      chartIo.observe(chart);
-    } else {
-      chart.classList.add("grown");
-    }
-  }
-
   // Hero device: a small tilt following the pointer, desktop only.
   var device = document.getElementById("tilt-device");
   if (device && !reduced && window.matchMedia("(pointer: fine)").matches) {

@@ -5,11 +5,20 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Keel: subscriptions, bills and split payments in one calm place</title>
   <meta name="description" content="Keel tracks subscriptions, bills and split payments: what leaves, from which account, and what it really costs. Private by architecture. Free for 45 days, then one purchase. Nothing renews." />
-  <meta property="og:title" content="Keel" />
+  <meta property="og:title" content="Keel: every payment, one calm place." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://keel-app.ch/" />
+  <meta property="og:site_name" content="Keel" />
+  <meta property="og:locale" content="en" />
   <meta property="og:description" content="Every payment, one calm place. Private by architecture." />
   <meta property="og:image" content="https://keel-app.ch/assets/og.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Keel: every payment, one calm place." />
+  <meta name="twitter:description" content="Every payment, one calm place. Private by architecture." />
+  <meta name="twitter:image" content="https://keel-app.ch/assets/og.png" />
   <link rel="icon" href="assets/icon.png" />
   <link rel="apple-touch-icon" href="assets/icon.png" />
+  <link rel="canonical" href="https://keel-app.ch/" />
   <link rel="alternate" hreflang="en" href="https://keel-app.ch/" />
   <link rel="alternate" hreflang="fr" href="https://keel-app.ch/fr/" />
   <link rel="alternate" hreflang="de" href="https://keel-app.ch/de/" />
@@ -17,6 +26,21 @@
   <link rel="alternate" hreflang="it" href="https://keel-app.ch/it/" />
   <link rel="alternate" hreflang="x-default" href="https://keel-app.ch/" />
   <link rel="stylesheet" href="styles.css" />
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "MobileApplication",
+    "name": "Keel",
+    "url": "https://keel-app.ch/",
+    "inLanguage": "en",
+    "operatingSystem": "iOS",
+    "applicationCategory": "FinanceApplication",
+    "description": "Keel tracks subscriptions, bills and split payments: what leaves, from which account, and what it really costs. Private by architecture. Free for 45 days, then one purchase. Nothing renews.",
+    "image": "https://keel-app.ch/assets/og.png",
+    "author": { "@type": "Person", "name": "Maxime Teuber" },
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "CHF" }
+  }
+  </script>
 </head>
 <body>
 
@@ -344,21 +368,9 @@ neon (chf): google one 1.99 the 4th. airpods pay-in-4 179&euro; via paypal from 
               account it leaves from.
             </p>
           </div>
-          <div class="vignette split-vignette" aria-hidden="true">
-            <div class="mini-row">
-              <span class="mini-dot" style="background:#E8735A"></span>
-              <span class="mini-name">AirPods · PayPal</span>
-              <span class="mini-amount">89,50 &euro; left · 2 of 4</span>
-            </div>
-            <div class="mini-progress"><i style="width:50%"></i></div>
-            <div class="mini-sub">next 20.07 · Neon · done in September</div>
-            <div class="mini-row" style="margin-top:8px">
-              <span class="mini-dot" style="background:#C9A66B"></span>
-              <span class="mini-name">Custom keyboard</span>
-              <span class="mini-amount">44,42 &euro; left · 3 of 4</span>
-            </div>
-            <div class="mini-progress"><i style="width:75%"></i></div>
-            <div class="mini-sub">last one 29.07 · Neon · 1560 HKD noted</div>
+          <div class="ph ph-shot">
+            <img src="assets/feature-split.png" alt="A split purchase in Keel: every installment with its date, account and progress" loading="lazy" onerror="this.remove()" />
+            <span class="ph-label">screenshot<br/>Split payment</span>
           </div>
         </article>
 
@@ -366,22 +378,19 @@ neon (chf): google one 1.99 the 4th. airpods pay-in-4 179&euro; via paypal from 
         <article class="card" data-reveal>
           <h3>Price changes,<br />kept on file.</h3>
           <p>A rise or a drop is recorded ahead, applied on its exact day, and Insights shows how far your month has drifted.</p>
-          <div class="vignette" aria-hidden="true">
-            <div class="mini-row"><span class="mini-dot" style="background:#B56576"></span><span class="mini-name">SERAFE</span><span class="mini-amount">335 &#8594; <b style="color:#4bc98a">312</b> · Mar 2027</span></div>
-            <div class="mini-row"><span class="mini-dot" style="background:#C9A66B"></span><span class="mini-name">TPG annual</span><span class="mini-amount">500 &#8594; <b style="color:#f0b35c">730</b> · Mar 2027</span></div>
-            <div class="mini-row"><span class="mini-dot" style="background:#EB0000"></span><span class="mini-name">Half-fare</span><span class="mini-amount">120 &#8594; <b style="color:#f0b35c">190</b> · Dec 2027</span></div>
+          <div class="ph ph-shot">
+            <img src="assets/feature-prices.png" alt="A scheduled price change, recorded ahead of its date" loading="lazy" onerror="this.remove()" />
+            <span class="ph-label">screenshot<br/>Price changes</span>
           </div>
         </article>
 
         <!-- Reminders -->
         <article class="card" data-reveal data-reveal-delay="1">
           <h3>Reminders<br />that respect you.</h3>
-          <p>One default lead and hour for everything, adjustable per commitment. Trials and price changes warn before they charge.</p>
-          <div class="vignette" aria-hidden="true">
-            <div class="mini-row"><span class="mini-dot" style="background:#B56576"></span><span class="mini-name">CSS Assurance</span><span class="mini-amount">CHF 289.40 due Jul 25</span></div>
-            <div class="mini-sub">rings Jul 24 at 09:00 · your default, this one's choice</div>
-            <div class="mini-row" style="margin-top:8px"><span class="mini-dot" style="background:#EB0000"></span><span class="mini-name">Half-fare card</span><span class="mini-amount">190 from Dec 26</span></div>
-            <div class="mini-sub">price change announced ahead</div>
+          <p>A default lead and hour for everything; each commitment can carry its own reminders, up to three, at any lead. Trials and price changes warn before they charge.</p>
+          <div class="ph ph-shot">
+            <img src="assets/feature-reminders.png" alt="Reminder settings for one commitment" loading="lazy" onerror="this.remove()" />
+            <span class="ph-label">screenshot<br/>Reminders</span>
           </div>
         </article>
 
@@ -395,12 +404,9 @@ neon (chf): google one 1.99 the 4th. airpods pay-in-4 179&euro; via paypal from 
               everything is one money.
             </p>
           </div>
-          <div class="vignette" aria-hidden="true">
-            <div class="mini-row"><span class="mini-name">CHF</span><span class="mini-amount">2366,35 CHF</span></div>
-            <div class="mini-row"><span class="mini-name">EUR</span><span class="mini-amount">693,28 &euro;</span></div>
-            <div class="mini-row"><span class="mini-name">HKD</span><span class="mini-amount">noted at 177,70 &euro;</span></div>
-            <div class="ai-arrow">&#8595;</div>
-            <div class="mini-row"><span class="mini-name"><b>August, merged</b></span><span class="mini-amount"><b>3222,00 CHF</b></span></div>
+          <div class="ph ph-shot">
+            <img src="assets/feature-currencies.png" alt="Totals in several currencies merged into one" loading="lazy" onerror="this.remove()" />
+            <span class="ph-label">screenshot<br/>Multi-currency</span>
           </div>
         </article>
 
@@ -415,11 +421,9 @@ neon (chf): google one 1.99 the 4th. airpods pay-in-4 179&euro; via paypal from 
               stops being a feeling and becomes a number.
             </p>
           </div>
-          <div class="vignette" aria-hidden="true">
-            <div class="mini-row"><span class="mini-dot" style="background:#74AA9C"></span><span class="mini-name">ChatGPT Plus</span><span class="mini-amount">21.55 /mo · <b style="color:#edf1f5">CHF 258.60 a year</b></span></div>
-            <div class="mini-row"><span class="mini-dot" style="background:#8FBC94"></span><span class="mini-name">Basefit</span><span class="mini-amount">59 /mo · <b style="color:#edf1f5">CHF 708 a year</b></span></div>
-            <div class="mini-row"><span class="mini-dot" style="background:#9C8FC7"></span><span class="mini-name">Salt Home</span><span class="mini-amount">39.95 /mo · <b style="color:#edf1f5">CHF 479.40 a year</b></span></div>
-            <div class="mini-sub">monthly is how they stay invisible; the yearly column is where you decide</div>
+          <div class="ph ph-shot">
+            <img src="assets/feature-insights.png" alt="Spending by category with yearly totals" loading="lazy" onerror="this.remove()" />
+            <span class="ph-label">screenshot<br/>Insights &middot; yearly</span>
           </div>
         </article>
 
@@ -456,7 +460,7 @@ neon (chf): google one 1.99 the 4th. airpods pay-in-4 179&euro; via paypal from 
         reminders, widgets and the AI tools come back with
         <strong>Full Keel</strong>: <strong>12 CHF if you decide during
         your trial</strong>, 15 CHF after. Once, for good, shared with your
-        Apple Family, up to 5 people. Prices in other currencies follow the
+        Apple Family, up to six people. Prices in other currencies follow the
         App Store and can vary slightly.
       </p>
       <ul class="chips" data-reveal>
@@ -550,5 +554,6 @@ neon (chf): google one 1.99 the 4th. airpods pay-in-4 179&euro; via paypal from 
   </footer>
 
   <script src="script.js"></script>
+  <script data-goatcounter="https://keel-app.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 </body>
 </html>
