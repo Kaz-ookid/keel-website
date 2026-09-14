@@ -83,16 +83,9 @@
     slides.forEach(function (el, i) {
       el.addEventListener("click", function () { goSlide(i); });
     });
-    var swipeX = null;
-    slideStage.addEventListener("touchstart", function (e) {
-      swipeX = e.touches[0].clientX;
-    }, { passive: true });
-    slideStage.addEventListener("touchend", function (e) {
-      if (swipeX === null) return;
-      var dx = e.changedTouches[0].clientX - swipeX;
-      if (Math.abs(dx) > 40) goSlide(slideCurrent + (dx < 0 ? 1 : -1));
-      swipeX = null;
-    }, { passive: true });
+    // Deliberately no swipe gesture: on touch, stepping is taps only
+    // (arrows and side slides), so pinch-zooming a slide never fights
+    // the carousel.
     document.getElementById("slideshow").addEventListener("keydown", function (e) {
       if (e.key === "ArrowLeft") { goSlide(slideCurrent - 1); e.preventDefault(); }
       if (e.key === "ArrowRight") { goSlide(slideCurrent + 1); e.preventDefault(); }
