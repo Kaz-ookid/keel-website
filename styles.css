@@ -1230,8 +1230,8 @@ a { color: inherit; text-decoration: none; }
     border-radius: var(--radius-sm);
     padding: 22px 20px;
   }
-  /* Touch: the arrows shrink out of the thumbs' way (swiping does the
-     stepping) but stay visible as an affordance. */
+  /* Touch: the arrows do the stepping (no swipe gesture, so pinch-zoom
+     never fights the carousel); they only shrink a little. */
   .slide-nav { width: 38px; height: 38px; font-size: 22px; }
   .story-cols [data-reveal] { opacity: 1; transform: none; transition: none; }
   .tour-import, .tour-chart { grid-template-columns: 1fr; }
