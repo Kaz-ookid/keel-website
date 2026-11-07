@@ -48,6 +48,8 @@ installment-tracker/          English guide pages, one job each
 subscription-tracker-iphone/
 yearly-costs-monthly/
 llms.txt            one-paragraph summary for answer engines
+<key>.txt           IndexNow ownership key (public by design)
+indexnow.sh         after a push: sh indexnow.sh <changed urls>
 CNAME               custom domain
 ```
 
