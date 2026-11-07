@@ -1,0 +1,22 @@
+# Keel
+
+> Keel is an iPhone app that tracks subscriptions, bills and pay-in-X installment purchases, each assigned to the bank account it leaves from. It has no account, no server and no tracking. It is free for 45 days, then a one-time purchase: 12 CHF during the trial, 15 CHF after, shared with up to six people through Apple Family Sharing. Made in Switzerland by Maxime Teuber.
+
+Keel differs from other subscription trackers in three ways. Installment purchases (pay in 3, pay in 4, pay in 12) are tracked as first-class items with their provider, remaining balance and end date. Every payment is tied to a specific bank account, so the app shows what leaves which account and when. Yearly and irregular costs are smoothed into a monthly view.
+
+Keel can read subscriptions from screenshots, PDF statements or a rough typed list. The reading runs on Apple's Private Cloud Compute, is off until the user turns it on, and strips card numbers, IBANs and references on the phone first. Every line is reviewed before it is saved. The user can instead paste the list into their own AI with Keel's instructions, or switch AI off entirely. Keel speaks English, French, German, Italian and Polish and needs iOS 16.4 or later.
+
+## Product
+- [Homepage](https://keel-app.ch/): features, pricing, privacy model
+- [App Store listing](https://apps.apple.com/app/id6792831014): "Keel: Subscription Tracker", iOS, Finance
+- [Privacy policy](https://keel-app.ch/privacy.html)
+- [Terms of use](https://keel-app.ch/terms.html)
+
+## Other languages
+- [Français](https://keel-app.ch/fr/)
+- [Deutsch](https://keel-app.ch/de/)
+- [Italiano](https://keel-app.ch/it/)
+- [Polski](https://keel-app.ch/pl/)
+
+## Optional
+- [Maxime Teuber on LinkedIn](https://www.linkedin.com/in/maxime-teuber-ba18732b0/)

@@ -9,15 +9,17 @@
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://keel-app.ch/de/" />
   <meta property="og:site_name" content="Keel" />
-  <meta property="og:locale" content="de" />
+  <meta property="og:locale" content="de_DE" />
   <meta property="og:description" content="Jede Zahlung, ein ruhiger Ort. Privat durch Architektur." />
   <meta property="og:image" content="https://keel-app.ch/assets/og.png" />
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="Keel: Jede Zahlung, ein ruhiger Ort." />
   <meta name="twitter:description" content="Jede Zahlung, ein ruhiger Ort. Privat durch Architektur." />
   <meta name="twitter:image" content="https://keel-app.ch/assets/og.png" />
-  <link rel="icon" href="../assets/icon.png" />
-  <link rel="apple-touch-icon" href="../assets/icon.png" />
+  <link rel="icon" href="../assets/icon-96.png" sizes="96x96" />
+  <link rel="apple-touch-icon" href="../assets/icon-180.png" />
+  <meta name="apple-itunes-app" content="app-id=6792831014, app-argument=https://keel-app.ch/de/" />
+  <link rel="preload" as="image" href="../assets/screen-upcoming.webp" fetchpriority="high" />
   <link rel="canonical" href="https://keel-app.ch/de/" />
   <link rel="alternate" hreflang="en" href="https://keel-app.ch/" />
   <link rel="alternate" hreflang="fr" href="https://keel-app.ch/fr/" />
@@ -29,16 +31,102 @@
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
-    "@type": "MobileApplication",
-    "name": "Keel",
-    "url": "https://keel-app.ch/de/",
-    "inLanguage": "de",
-    "operatingSystem": "iOS",
-    "applicationCategory": "FinanceApplication",
-    "description": "Keel behält Abos, Rechnungen und Ratenzahlungen im Blick: was abgeht, von welchem Konto, und was es wirklich kostet. Kein Konto, kein Server. 45 Tage gratis, danach ein einmaliger Kauf.",
-    "image": "https://keel-app.ch/assets/og.png",
-    "author": { "@type": "Person", "name": "Maxime Teuber" },
-    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "CHF" }
+    "@graph": [
+      {
+        "@type": "MobileApplication",
+        "@id": "https://keel-app.ch/#app",
+        "name": "Keel",
+        "alternateName": "Keel: Subscription Tracker",
+        "url": "https://keel-app.ch/de/",
+        "sameAs": "https://apps.apple.com/app/id6792831014",
+        "installUrl": "https://apps.apple.com/app/id6792831014",
+        "inLanguage": [
+          "en",
+          "fr",
+          "de",
+          "it",
+          "pl"
+        ],
+        "operatingSystem": "iOS 16.4 or later",
+        "applicationCategory": "FinanceApplication",
+        "description": "Keel behält Abos, Rechnungen und Ratenzahlungen im Blick: was abgeht, von welchem Konto, und was es wirklich kostet. Kein Konto, kein Server. 45 Tage gratis, danach ein einmaliger Kauf.",
+        "image": "https://keel-app.ch/assets/og.png",
+        "author": {
+          "@id": "https://keel-app.ch/#maxime"
+        },
+        "publisher": {
+          "@id": "https://keel-app.ch/#org"
+        },
+        "offers": [
+          {
+            "@type": "Offer",
+            "name": "Free for 45 days",
+            "price": "0",
+            "priceCurrency": "CHF"
+          },
+          {
+            "@type": "Offer",
+            "name": "Full Keel, during the trial",
+            "price": "12",
+            "priceCurrency": "CHF"
+          },
+          {
+            "@type": "Offer",
+            "name": "Full Keel",
+            "price": "15",
+            "priceCurrency": "CHF"
+          }
+        ]
+      },
+      {
+        "@type": "Organization",
+        "@id": "https://keel-app.ch/#org",
+        "name": "Keel",
+        "url": "https://keel-app.ch/",
+        "logo": "https://keel-app.ch/assets/icon-180.png",
+        "email": "contactkeel@protonmail.com",
+        "foundingLocation": {
+          "@type": "Country",
+          "name": "Switzerland"
+        },
+        "founder": {
+          "@id": "https://keel-app.ch/#maxime"
+        },
+        "sameAs": [
+          "https://apps.apple.com/app/id6792831014",
+          "https://www.linkedin.com/in/maxime-teuber-ba18732b0/"
+        ]
+      },
+      {
+        "@type": "Person",
+        "@id": "https://keel-app.ch/#maxime",
+        "name": "Maxime Teuber",
+        "jobTitle": "Cybersecurity engineer",
+        "alumniOf": [
+          {
+            "@type": "CollegeOrUniversity",
+            "name": "EPFL"
+          },
+          {
+            "@type": "CollegeOrUniversity",
+            "name": "ETH Zürich"
+          }
+        ],
+        "sameAs": [
+          "https://www.linkedin.com/in/maxime-teuber-ba18732b0/"
+        ]
+      },
+      {
+        "@type": "WebSite",
+        "@id": "https://keel-app.ch/#site",
+        "url": "https://keel-app.ch/",
+        "name": "Keel",
+        "inLanguage": "de",
+        "publisher": {
+          "@id": "https://keel-app.ch/#org"
+        }
+      }
+    ]
   }
   </script>
 </head>
@@ -59,7 +147,7 @@
 
   <header class="top">
     <a class="brand" href="#top">
-      <img src="../assets/icon.png" alt="" width="34" height="34" />
+      <img src="../assets/icon-96.png" alt="" width="34" height="34" />
       <span>Keel</span>
     </a>
     <div class="top-right">
@@ -99,7 +187,7 @@
         <div class="device" id="tilt-device">
           <div class="device-notch" aria-hidden="true"></div>
           <div class="device-screen ph">
-            <img src="../assets/screen-upcoming.webp" fetchpriority="high" alt="Keels Zeitachse der anstehenden Zahlungen" onerror="this.remove()" />
+            <img src="../assets/screen-upcoming.webp" fetchpriority="high" width="640" height="1391" alt="Keels Zeitachse der anstehenden Zahlungen" onerror="this.remove()" />
             <span class="ph-label">Screenshot<br/>Zahlungen · Anstehend</span>
           </div>
         </div>
@@ -425,7 +513,7 @@ neon (chf): google one 1.99 am 4. airpods in 4 raten 179&euro; via paypal ab 20.
     <!-- ============================= MAKER ============================= -->
     <section class="maker">
       <div class="maker-avatar ph" data-reveal>
-        <img src="../assets/maker.jpg" alt="" onerror="this.remove()" />
+        <img src="../assets/maker.jpg" alt="Maxime Teuber" width="256" height="256" onerror="this.remove()" />
         <span class="ph-label">Foto</span>
       </div>
       <p class="eyebrow" data-reveal>Der Mensch dahinter</p>
@@ -477,7 +565,7 @@ neon (chf): google one 1.99 am 4. airpods in 4 raten 179&euro; via paypal ab 20.
 
   <footer class="footer">
     <div class="footer-brand">
-      <img src="../assets/icon.png" alt="" width="28" height="28" />
+      <img src="../assets/icon-96.png" alt="" width="28" height="28" />
       <span>Keel</span>
     </div>
     <nav class="footer-links">
