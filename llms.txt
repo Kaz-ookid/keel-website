@@ -12,6 +12,13 @@ Keel can read subscriptions from screenshots, PDF statements or a rough typed li
 - [Privacy policy](https://keel-app.ch/privacy.html)
 - [Terms of use](https://keel-app.ch/terms.html)
 
+## Guides
+- [Tracking pay-in-4 and installment purchases](https://keel-app.ch/installment-tracker/)
+- [A subscription tracker for iPhone with no account](https://keel-app.ch/subscription-tracker-iphone/)
+- [Yearly costs smoothed into a monthly number](https://keel-app.ch/yearly-costs-monthly/)
+- [What's new, by version](https://keel-app.ch/changelog/)
+- [Support](https://keel-app.ch/support.html)
+
 ## Other languages
 - [Français](https://keel-app.ch/fr/)
 - [Deutsch](https://keel-app.ch/de/)

@@ -51,4 +51,24 @@
     <xhtml:link rel="alternate" hreflang="pl" href="https://keel-app.ch/pl/" />
     <xhtml:link rel="alternate" hreflang="x-default" href="https://keel-app.ch/" />
   </url>
+  <url>
+    <loc>https://keel-app.ch/installment-tracker/</loc>
+    <lastmod>2026-11-08</lastmod>
+  </url>
+  <url>
+    <loc>https://keel-app.ch/subscription-tracker-iphone/</loc>
+    <lastmod>2026-11-08</lastmod>
+  </url>
+  <url>
+    <loc>https://keel-app.ch/yearly-costs-monthly/</loc>
+    <lastmod>2026-11-08</lastmod>
+  </url>
+  <url>
+    <loc>https://keel-app.ch/changelog/</loc>
+    <lastmod>2026-11-08</lastmod>
+  </url>
+  <url>
+    <loc>https://keel-app.ch/support.html</loc>
+    <lastmod>2026-11-08</lastmod>
+  </url>
 </urlset>

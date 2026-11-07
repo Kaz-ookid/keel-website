@@ -29,7 +29,7 @@ place. It takes you by the hand: pick from known services, or fill things in
 by hand, and it stays smooth on its own. AI import is there when you want it
 even smoother, always a choice, never the price of entry.
 
-This repo is just the website: a single hand-built page, no framework, no build
+This repo is just the website: hand-built pages, no framework, no build
 step, no dependencies. Plain HTML, one stylesheet, one script.
 
 ## Layout
@@ -42,6 +42,12 @@ script.js           reveals, tour logic, the aura's scroll drift
 assets/             icon, social card, screenshots
 privacy.html        legal texts
 terms.html
+support.html        support page (the App Store support URL)
+changelog/          what's new, by version
+installment-tracker/          English guide pages, one job each
+subscription-tracker-iphone/
+yearly-costs-monthly/
+llms.txt            one-paragraph summary for answer engines
 CNAME               custom domain
 ```
 
